@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:chainUseRtl="true"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:id="@+id/llInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:drawableStart="@drawable/create_teacher_info_name"
+            android:hint="שם פרטי"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="17dp"
+            android:tag="name"
+            android:textColor="#FF3817"
+            tools:text="שרה" />
+
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:drawableStart="@drawable/create_teacher_info_name"
+            android:hint="שם משפחה"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="17dp"
+            android:tag="lastName"
+            android:textColor="#FF3817" />
+
+        <EditText
+            android:id="@+id/etMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:drawableStart="@drawable/create_teacher_info_mail"
+            android:hint="כתובת מייל"
+            android:inputType="textEmailAddress"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="17dp"
+            android:tag="mail"
+            android:textColor="#FF3817" />
+
+        <EditText
+            android:id="@+id/etBd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:drawableStart="@drawable/create_teacher_info_bd"
+            android:hint="תאריך לידה"
+            android:inputType="date"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="17dp"
+            android:tag="birthday"
+            android:textColor="#FF3817" />
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:drawableStart="@drawable/create_teacher_info_location"
+            android:hint="כתובת מלאה"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="17dp"
+            android:tag="address"
+            android:textColor="#FF3817" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

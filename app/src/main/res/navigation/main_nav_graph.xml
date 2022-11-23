@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.our.app.features.phase_one.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_pickMemberTypeFragment"
+            app:destination="@id/pickMemberTypeFragment"
+            app:popUpTo="@id/main_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickMemberTypeFragment"
+        android:name="com.our.app.features.phase_one.PickMemberTypeFragment"
+        android:label="fragment_pick_member_type"
+        tools:layout="@layout/fragment_pick_member_type">
+        <action
+            android:id="@+id/action_pickMemberTypeFragment_to_studentLobbyFragment"
+            app:destination="@id/studentLobbyFragment" />
+        <action
+            android:id="@+id/action_pickMemberTypeFragment_to_teacherLobbyFragment"
+            app:destination="@id/teacherLobbyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentLobbyFragment"
+        android:name="com.our.app.features.phase_one.studentlobby.StudentLobbyFragment"
+        android:label="fragment_student_lobby"
+        tools:layout="@layout/fragment_student_lobby" >
+        <action
+            android:id="@+id/action_studentLobbyFragment_to_studentFindLessonResultFragment"
+            app:destination="@id/studentFindLessonResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherLobbyFragment"
+        android:name="com.our.app.features.phase_one.teacherlobby.TeacherLobbyFragment"
+        android:label="fragment_teacher_lobby"
+        tools:layout="@layout/fragment_teacher_lobby" />
+    <fragment
+        android:id="@+id/studentFindLessonResultFragment"
+        android:name="com.our.app.features.phase_one.studentlobby.StudentFindLessonResultFragment"
+        android:label="fragment_student_find_lesson_result"
+        tools:layout="@layout/fragment_student_find_lesson_result" />
+</navigation>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OurApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="student_lobby_header_caption">בוא נחפש לך שיעור</string>
+    <string name="teacher_lobby_header_caption">בוא ניצור לך חשבון מורה</string>
+</resources>
