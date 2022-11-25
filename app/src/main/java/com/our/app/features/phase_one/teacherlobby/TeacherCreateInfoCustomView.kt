@@ -5,13 +5,13 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
-import androidx.cardview.widget.CardView
+import android.widget.FrameLayout
 import androidx.core.view.get
 import com.our.app.R
 import com.our.app.databinding.CvCrateTeacherInfoBinding
 
 class TeacherCreateInfoCustomView(context: Context, attrs: AttributeSet?) :
-    CardView(context, attrs) {
+    FrameLayout(context, attrs) {
 
     private val view: View = LayoutInflater.from(context)
         .inflate(R.layout.cv_crate_teacher_info, this, true)
