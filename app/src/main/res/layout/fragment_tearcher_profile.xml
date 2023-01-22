@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".features.phase_one.teacherlobby.TeacherProfileFragment">
 
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -40,4 +39,69 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvTeacherName"
         app:layout_constraintTop_toBottomOf="@+id/tvTeacherName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTeacherSubjects"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubjects"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_teacher_subject" />
+
+    <TextView
+        android:id="@+id/tvTeacherPhotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvTeacherSubjects"
+        tools:text="תמונות וסירטונים" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTeacherPhotos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTeacherPhotos"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_imageview" />
+
+    <TextView
+        android:id="@+id/tvTeacherReviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvTeacherPhotos"
+        tools:text="ביקורות" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTeacherReviews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTeacherReviews"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_teacher_review" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

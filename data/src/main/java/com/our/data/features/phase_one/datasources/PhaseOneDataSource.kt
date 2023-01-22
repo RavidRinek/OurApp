@@ -7,4 +7,5 @@ interface PhaseOneDataSource {
     suspend fun getSubjects(): Result<BaseResponse>
     suspend fun getSubjectBranches(subjectId: Int): Result<BaseResponse>
     suspend fun getLessons(subjectBranchId: Int): Result<BaseResponse>
+    suspend fun getTeacherById(teacherId: Int): Result<BaseResponse>
 }

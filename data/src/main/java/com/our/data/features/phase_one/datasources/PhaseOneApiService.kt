@@ -22,5 +22,6 @@ interface PhaseOneApiService {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
         const val GET_LESSONS_END_POINT: String = "get-lessons-by-subject-branch-id"
+        const val GET_TEACHER_BY_ID: String = "get-teacher-by-id"
     }
 }
