@@ -7,6 +7,7 @@ import com.our.domain.features.phase_one.models.local.GotStudentLobbyResponseSea
 import com.our.domain.features.phase_one.usecases.GetLessonsUseCase
 import com.our.domain.features.phase_one.usecases.GetSubjectBranchesUseCase
 import com.our.domain.features.phase_one.usecases.GetSubjectsUseCase
+import com.our.domain.features.phase_one.usecases.GetTeacherByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,13 +16,15 @@ abstract class StudentLobbyViewModel : BaseViewModelImpl() {
     abstract fun getSubjects()
     abstract fun getSubjectBranches(subjectId: Int)
     abstract fun getLessons(subjectBranchId: Int)
+    abstract fun getTeacherProfile(teacherId: Int)
 }
 
 @HiltViewModel
 class StudentLobbyViewModelImpl @Inject constructor(
     private val getSubjectsUseCase: GetSubjectsUseCase,
     private val getSubjectBranchesUseCase: GetSubjectBranchesUseCase,
-    private val getLessonsUseCase: GetLessonsUseCase
+    private val getLessonsUseCase: GetLessonsUseCase,
+    private val getTeacherByIdUseCase: GetTeacherByIdUseCase
 ) : StudentLobbyViewModel() {
 
     override val studentLobbyResponseLiveData = MutableLiveData<GotStudentLobbyResponseSealed>()
@@ -41,6 +44,12 @@ class StudentLobbyViewModelImpl @Inject constructor(
     override fun getLessons(subjectBranchId: Int) {
         launch {
             studentLobbyResponseLiveData.postValue(getLessonsUseCase.invoke(subjectBranchId))
+        }
+    }
+
+    override fun getTeacherProfile(teacherId: Int) {
+        launch {
+            studentLobbyResponseLiveData.postValue(getTeacherByIdUseCase.invoke(teacherId))
         }
     }
 }

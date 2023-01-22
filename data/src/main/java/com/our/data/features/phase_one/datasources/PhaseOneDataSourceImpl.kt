@@ -26,7 +26,9 @@ class PhaseOneDataSourceImpl @Inject constructor(private val api: PhaseOneApiSer
             errorMessage = "Cant find any lessons by this branch id"
         )
 
-    override suspend fun getTeacherById(teacherId: Int): Result<BaseResponse> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getTeacherById(teacherId: Int): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.getTeacherById(teacherId) },
+            errorMessage = "Cant get any teacher by id: $teacherId"
+        )
 }

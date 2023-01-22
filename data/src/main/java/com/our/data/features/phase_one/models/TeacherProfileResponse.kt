@@ -2,6 +2,8 @@ package com.our.data.features.phase_one.models
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.our.data.base.models.BaseResponse
+import com.our.domain.features.phase_one.models.remote.TeacherProfile
 
 @Keep
 data class TeacherProfileResponse(
@@ -11,8 +13,6 @@ data class TeacherProfileResponse(
     val teacherAvatar: String? = null,
     @SerializedName("teacherBirthday")
     val teacherBirthday: Int? = null,
-    @SerializedName("teacherCreatedDate")
-    val teacherCreatedDate: String? = null,
     @SerializedName("teacherId")
     val teacherId: Int? = null,
     @SerializedName("teacherLastName")
@@ -23,14 +23,31 @@ data class TeacherProfileResponse(
     val teacherName: String? = null,
     @SerializedName("teacherPhone")
     val teacherPhone: String? = null,
-    @SerializedName("teacherRate")
-    val teacherRate: Int? = null,
     @SerializedName("teacherRating")
     val teacherRating: Int? = null,
     @SerializedName("teacherSecondPhone")
     val teacherSecondPhone: String? = null,
     @SerializedName("teacherSex")
     val teacherSex: Int? = null,
-    @SerializedName("teacherUpdateDate")
-    val teacherUpdateDate: String? = null
-)
+    @SerializedName("reviews")
+    val reviews: List<ReviewResponse>? = null,
+    @SerializedName("subjects")
+    val subjects: List<SubjectResponse>? = null
+) : BaseResponse()
+
+fun TeacherProfileResponse.toDomain(): TeacherProfile =
+    TeacherProfile(
+        teacherAddress = teacherAddress ?: 0,
+        teacherAvatar = teacherAvatar ?: "",
+        teacherBirthday = teacherBirthday ?: 0,
+        teacherId = teacherId ?: 0,
+        teacherMail = teacherMail ?: "",
+        teacherLastName = teacherLastName ?: "",
+        teacherName = teacherName ?: "",
+        teacherPhone = teacherPhone ?: "",
+        teacherRating = teacherRating ?: 0,
+        teacherSecondPhone = teacherSecondPhone ?: "",
+        teacherSex = teacherSex ?: 0,
+        reviews = (reviews ?: listOf()).map { it.toDomain() },
+        subjects = (subjects ?: listOf()).map { it.toDomain() }
+    )
