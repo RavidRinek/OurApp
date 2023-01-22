@@ -9,6 +9,7 @@ import com.our.app.databinding.FragmentStudentFindLessonResultBinding
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.domain.features.phase_one.models.remote.Lesson
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 const val LESSONS: String = "lessons"
 
@@ -29,6 +30,15 @@ class StudentFindLessonResultFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lessons?.let { binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(it) }
+        lessons?.let {
+            binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(it,
+                object : StudentFindLessonResultAdapter.OnStudentFindLessonResultAdapterListener {
+                    override fun showTeacherProfilerBtnClicked() {
+                    }
+
+                    override fun orderALessonBtnClicked() {
+                    }
+                })
+        }
     }
 }

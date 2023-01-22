@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@android:color/white"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <TextView
             android:id="@+id/tvSubjectName"
@@ -89,15 +89,45 @@
             app:layout_constraintTop_toTopOf="@+id/tvTeacherNameKey"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <TextView
+            android:id="@+id/tvTeacherProfile"
+            android:layout_width="136dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rec_9c9c9c_rad_55"
+            android:gravity="center"
+            android:layout_marginEnd="12dp"
+            android:text="לעמוד מורה"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/tvOrderLesson"
+            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTeacherAvatar" />
+
+        <TextView
+            android:id="@+id/tvOrderLesson"
+            android:layout_width="136dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="52dp"
+            android:background="@drawable/rec_ff3817_rad_55"
+            android:gravity="center"
+            android:text="הזמן שיעור"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTeacherAvatar" />
+
         <View
             android:id="@+id/viewBorder"
             android:layout_width="match_parent"
-            android:layout_height="0.2dp"
+            android:layout_height="0.7dp"
             android:layout_marginTop="14dp"
             android:background="#2BE4D7D7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivTeacherAvatar" />
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderLesson" />
 
         <TextView
             android:id="@+id/tvLessonDateKey"
@@ -117,7 +147,7 @@
             android:id="@+id/tvLessonDateVal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="6dp"
             android:text="15:00"
             android:textColor="@android:color/holo_red_light"
             android:textSize="17sp"
@@ -130,7 +160,7 @@
             android:id="@+id/tvLessonRatingKey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="17dp"
             android:text="דירוג:"
             android:textColor="@android:color/black"
             android:textSize="17sp"
@@ -144,12 +174,27 @@
             style="?android:attr/ratingBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="6dp"
             android:progressTint="#FFC107"
             android:rating="3.5"
             app:layout_constraintBottom_toBottomOf="@+id/tvLessonRatingKey"
             app:layout_constraintEnd_toStartOf="@+id/tvLessonRatingKey"
             app:layout_constraintTop_toTopOf="@+id/tvLessonRatingKey" />
+
+        <TextView
+            android:id="@+id/tvDuringInMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rec_ff3817_rad_6"
+            android:gravity="center"
+            android:paddingHorizontal="7dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/rbLessonRatingVal"
+            app:layout_constraintEnd_toStartOf="@+id/rbLessonRatingVal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rbLessonRatingVal"
+            tools:text="40 דק׳" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

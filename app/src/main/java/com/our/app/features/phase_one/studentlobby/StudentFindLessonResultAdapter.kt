@@ -9,8 +9,16 @@ import com.our.app.R
 import com.our.app.databinding.ItemFindLessonResultBinding
 import com.our.domain.features.phase_one.models.remote.Lesson
 
-class StudentFindLessonResultAdapter(private val lessons: List<Lesson>) :
+class StudentFindLessonResultAdapter(
+    private val lessons: List<Lesson>,
+    private val listener: OnStudentFindLessonResultAdapterListener
+) :
     RecyclerView.Adapter<StudentFindLessonResultAdapter.LessonResultViewHolder>() {
+
+    interface OnStudentFindLessonResultAdapterListener {
+        fun showTeacherProfilerBtnClicked()
+        fun orderALessonBtnClicked()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonResultViewHolder =
         LessonResultViewHolder(
@@ -26,7 +34,7 @@ class StudentFindLessonResultAdapter(private val lessons: List<Lesson>) :
         holder.bind(lessons[position])
     }
 
-    class LessonResultViewHolder(private val binding: ItemFindLessonResultBinding) :
+    inner class LessonResultViewHolder(private val binding: ItemFindLessonResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(lesson: Lesson) {
@@ -37,6 +45,9 @@ class StudentFindLessonResultAdapter(private val lessons: List<Lesson>) :
                     tvTeacherPriceVal.text = price.toString()
                     tvLessonDateVal.text = time
                     rbLessonRatingVal.rating = ratingInPercentage.toFloat()
+                    tvDuringInMin.text = " דק׳${durationInMin}"
+                    tvTeacherProfile.setOnClickListener { listener.showTeacherProfilerBtnClicked() }
+                    tvOrderLesson.setOnClickListener { listener.orderALessonBtnClicked() }
                 }
             }
         }
