@@ -34,4 +34,9 @@ class PhaseOneRepositoryImpl @Inject constructor(
         phaseOneDataSource.getTeacherById(teacherId).map {
             (it as TeacherProfileResponse).toDomain()
         }
+
+    override suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile> =
+        phaseOneDataSource.postTeacherCreateInfo(teacherInfo).map {
+            (it as TeacherProfileResponse).toDomain()
+        }
 }

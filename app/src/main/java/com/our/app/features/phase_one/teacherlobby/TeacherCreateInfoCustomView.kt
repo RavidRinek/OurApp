@@ -23,11 +23,13 @@ class TeacherCreateInfoCustomView(context: Context, attrs: AttributeSet?) :
     }
 
     fun getTeachInfo(): HashMap<String, String> {
-        for (i in 0..viewBinding.llInfoContainer.childCount) {
+        for (i in 0 until viewBinding.llInfoContainer.childCount) {
             (viewBinding.llInfoContainer[i] as EditText).apply {
-                teachInfoHashMap[tag as String] = text.toString()
+                teachInfoHashMap[tag as String] = "text.toString()"
             }
         }
+        teachInfoHashMap["birthday"] = (504613830).toString()
+        teachInfoHashMap["teacherPhone"] = System.currentTimeMillis().toString()
         return teachInfoHashMap
     }
 }

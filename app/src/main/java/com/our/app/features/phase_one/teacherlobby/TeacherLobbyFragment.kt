@@ -6,58 +6,52 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
 import com.our.app.R
+import com.our.app.base.BaseFragment
+import com.our.app.databinding.FragmentStudentLobbyBinding
+import com.our.app.databinding.FragmentTeacherLobbyBinding
+import com.our.app.features.phase_one.studentlobby.StudentLobbyViewModel
+import com.our.app.features.phase_one.studentlobby.StudentLobbyViewModelImpl
+import com.our.app.utilities.bindingDelegates.viewBinding
+import com.our.domain.features.phase_one.models.local.GotTeacherCreateInfo
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TeacherLobbyFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class TeacherLobbyFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+@AndroidEntryPoint
+class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_teacher_lobby) {
+
+    override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
+    private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
 
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnTeacherCreateInfo.setOnClickListener {
+//            it.isEnabled = false
+            viewModel.postTeacherCreateInfo(binding.cvTeacherCreateInfo.getTeachInfo())
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_teacher_lobby, container, false)
+    override fun observeData() {
+        super.observeData()
+        viewModel.teacherLobbyResponseLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is GotTeacherCreateInfo -> {
+//                    binding.btnTeacherCreateInfo.isEnabled = true
+                    println("it.teacherProfile: ${it.teacherProfile}")
+                }
+                else -> Unit
+            }
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TeacherLobbyFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TeacherLobbyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = TeacherLobbyFragment()
     }
 }

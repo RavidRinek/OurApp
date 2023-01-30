@@ -5,8 +5,7 @@ import com.our.data.features.phase_one.models.SubjectBranchesResponse
 import com.our.data.features.phase_one.models.SubjectsResponse
 import com.our.data.features.phase_one.models.TeacherProfileResponse
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface PhaseOneApiService {
 
@@ -22,10 +21,17 @@ interface PhaseOneApiService {
     @GET(GET_TEACHER_BY_ID)
     suspend fun getTeacherById(@Query("getTeacherById") teacherId: Int): Response<TeacherProfileResponse>
 
+    @POST(POST_TEACHER_CREATE_INFO)
+    suspend fun postTeacherCreateInfo(
+        @Header("Content-Type") fsd: String = "application/json",
+        @FieldMap createInfo: Map<String, String>
+    ): Response<TeacherProfileResponse>
+
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
         const val GET_LESSONS_END_POINT: String = "get-lessons-by-subject-branch-id"
         const val GET_TEACHER_BY_ID: String = "get-teacher-by-id"
+        const val POST_TEACHER_CREATE_INFO: String = "create-teacher"
     }
 }

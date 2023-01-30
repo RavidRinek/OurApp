@@ -2,7 +2,7 @@ package com.our.domain.features.phase_one.usecases
 
 import com.our.domain.base.models.Result
 import com.our.domain.base.usecases.BaseSuspendedUseCase
-import com.our.domain.features.phase_one.models.local.GotError
+import com.our.domain.features.phase_one.models.local.GotStudentError
 import com.our.domain.features.phase_one.models.local.GotLessons
 import com.our.domain.features.phase_one.models.local.GotStudentLobbyResponseSealed
 import com.our.domain.features.phase_one.repositories.PhaseOneRepository
@@ -16,11 +16,11 @@ class GetLessonsUseCase @Inject constructor(
         when (val res = phaseOneRepository.getLessons(param)) {
             is Result.Success -> {
                 if (res.data.isEmpty()) {
-                    GotError
+                    GotStudentError
                 } else {
                     GotLessons(res.data)
                 }
             }
-            is Result.Error -> GotError
+            is Result.Error -> GotStudentError
         }
 }

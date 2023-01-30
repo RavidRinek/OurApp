@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.our.app.features.phase_one.teacherlobby.TeacherCreateInfoCustomView
+        android:id="@+id/cvTeacherCreateInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -27,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cvLogoHeaderUtil" />
 
     <TextView
-        android:id="@+id/btnStudentFindLesson"
+        android:id="@+id/btnTeacherCreateInfo"
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_marginStart="12dp"

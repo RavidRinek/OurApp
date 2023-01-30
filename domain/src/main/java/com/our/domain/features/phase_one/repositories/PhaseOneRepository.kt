@@ -11,4 +11,5 @@ interface PhaseOneRepository {
     suspend fun getSubjectBranches(subjectId: Int): Result<List<SubjectBranch>>
     suspend fun getLessons(subjectBranchId: Int): Result<List<Lesson>>
     suspend fun getTeacherById(teacherId: Int): Result<TeacherProfile>
+    suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile>
 }

@@ -7,7 +7,7 @@ import com.our.domain.features.phase_one.models.remote.TeacherProfile
 
 sealed class GotStudentLobbyResponseSealed
 
-object GotError : GotStudentLobbyResponseSealed()
+object GotStudentError : GotStudentLobbyResponseSealed()
 
 data class GotSubjects(val subjects: List<Subject>) : GotStudentLobbyResponseSealed()
 
