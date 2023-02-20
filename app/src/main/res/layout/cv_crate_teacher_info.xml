@@ -31,7 +31,7 @@
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
-                android:tag="name"
+                android:tag="teacherName"
                 android:textColor="#FF3817"
                 tools:text="שרה" />
 
@@ -47,7 +47,7 @@
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
-                android:tag="lastName"
+                android:tag="teacherLastName"
                 android:textColor="#FF3817" />
 
             <EditText
@@ -62,7 +62,7 @@
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
-                android:tag="mail"
+                android:tag="teacherMail"
                 android:textColor="#FF3817" />
 
             <EditText
@@ -77,7 +77,7 @@
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
-                android:tag="birthday"
+                android:tag="teacherBirthday"
                 android:textColor="#FF3817" />
 
             <EditText

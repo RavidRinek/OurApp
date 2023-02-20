@@ -13,5 +13,6 @@ data class TeacherProfile(
     val teacherSecondPhone: String,
     val teacherSex: Int,
     val reviews: List<Review>,
-    val subjects: List<Subject>
+    val subjects: List<Subject>,
+    val profileGallery: List<TeacherGallery>
 )

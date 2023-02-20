@@ -1,107 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.phase_one.teacherlobby.TeacherProfileFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvTeacherName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        tools:text="טוטו וברמן" />
+        <ImageView
+            android:id="@+id/ivTeacherAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="545px"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvSubjects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="נושאי לימוד"
-        android:textColor="@android:color/black"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tvTeacherName"
-        app:layout_constraintTop_toBottomOf="@+id/tvTeacherName" />
+        <TextView
+            android:id="@+id/tvTeacherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@android:color/black"
+            android:textSize="110px"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivTeacherAvatar"
+            tools:text="טוטו וברמן" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTeacherSubjects"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubjects"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_teacher_subject" />
+        <TextView
+            android:id="@+id/tvSubjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="נושאי לימוד"
+            android:textColor="@android:color/black"
+            android:textSize="50px"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvTeacherName"
+            app:layout_constraintTop_toBottomOf="@+id/tvTeacherName" />
 
-    <TextView
-        android:id="@+id/tvTeacherPhotos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvTeacherSubjects"
-        tools:text="תמונות וסירטונים" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTeacherSubjects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubjects"
+            app:reverseLayout="true"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_teacher_subject" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTeacherPhotos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTeacherPhotos"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_imageview" />
+        <TextView
+            android:id="@+id/tvTeacherPhotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="תמונות וסירטונים"
+            android:textColor="@android:color/black"
+            android:textSize="50px"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvTeacherSubjects" />
 
-    <TextView
-        android:id="@+id/tvTeacherReviews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:textColor="@android:color/black"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvTeacherPhotos"
-        tools:text="ביקורות" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTeacherPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTeacherPhotos"
+            app:reverseLayout="true"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_imageview" />
 
+        <TextView
+            android:id="@+id/tvTeacherReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            android:text="ביקורות"
+            android:textColor="@android:color/black"
+            android:textSize="50px"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvTeacherPhotos" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTeacherReviews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTeacherReviews"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_teacher_review" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTeacherReviews"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvTeacherReviews"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTeacherReviews"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_teacher_review" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

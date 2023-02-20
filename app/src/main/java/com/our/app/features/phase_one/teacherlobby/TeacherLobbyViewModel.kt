@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.our.app.base.BaseViewModelImpl
 import com.our.app.base.DisplayProgressTypes
 import com.our.domain.features.phase_one.models.local.GotTeacherLobbyResponseSealed
+import com.our.domain.features.phase_one.usecases.GetTeacherByIdUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherCreateInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,11 +13,13 @@ import javax.inject.Inject
 abstract class TeacherLobbyViewModel : BaseViewModelImpl() {
     abstract val teacherLobbyResponseLiveData: LiveData<GotTeacherLobbyResponseSealed>
     abstract fun postTeacherCreateInfo(createInfo: Map<String, String>)
+    abstract fun getTeacherById(id: Int)
 }
 
 @HiltViewModel
 class TeacherLobbyViewModelImpl @Inject constructor(
-    private val postTeacherCreateInfoUseCase: PostTeacherCreateInfoUseCase
+    private val postTeacherCreateInfoUseCase: PostTeacherCreateInfoUseCase,
+    private val getTeacherByIdUseCase: GetTeacherByIdUseCase
 ) : TeacherLobbyViewModel() {
     override val teacherLobbyResponseLiveData = MutableLiveData<GotTeacherLobbyResponseSealed>()
 
@@ -25,6 +28,14 @@ class TeacherLobbyViewModelImpl @Inject constructor(
             displayProgressType = DisplayProgressTypes.PROGRESS_BAR
         ) {
             teacherLobbyResponseLiveData.postValue(postTeacherCreateInfoUseCase.invoke(createInfo))
+        }
+    }
+
+    override fun getTeacherById(id: Int) {
+        launch(
+            displayProgressType = DisplayProgressTypes.PROGRESS_BAR
+        ) {
+            teacherLobbyResponseLiveData.postValue(getTeacherByIdUseCase.invoke(id))
         }
     }
 }

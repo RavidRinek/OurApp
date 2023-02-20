@@ -3,9 +3,11 @@ package com.our.app.features.phase_one.studentlobby
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentFindLessonResultBinding
+import com.our.app.features.phase_one.teacherlobby.TeacherProfileFragment
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.domain.features.phase_one.models.remote.Lesson
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,7 +35,13 @@ class StudentFindLessonResultFragment :
         lessons?.let {
             binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(it,
                 object : StudentFindLessonResultAdapter.OnStudentFindLessonResultAdapterListener {
-                    override fun showTeacherProfilerBtnClicked() {
+                    override fun showTeacherProfilerBtnClicked(teacherId: Int) {
+                        findNavController().navigate(
+                            R.id.action_studentFindLessonResultFragment_to_teacherProfileFragment,
+                            Bundle().apply {
+                                putInt("teacherId", teacherId)
+                            }
+                        )
                     }
 
                     override fun orderALessonBtnClicked() {

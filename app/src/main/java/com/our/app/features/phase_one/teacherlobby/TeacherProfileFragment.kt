@@ -1,43 +1,63 @@
 package com.our.app.features.phase_one.teacherlobby
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.our.app.R
+import com.our.app.base.BaseFragment
+import com.our.app.databinding.FragmentTearcherProfileBinding
+import com.our.app.utilities.bindingDelegates.viewBinding
+import com.our.app.utilities.extensions.loadImage
+import com.our.domain.features.phase_one.models.local.GotTeacherInfo
+import com.our.domain.features.phase_one.models.remote.TeacherProfile
+import dagger.hilt.android.AndroidEntryPoint
 
-class TeacherProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+@AndroidEntryPoint
+class TeacherProfileFragment :
+    BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_tearcher_profile) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        arguments?.let {
-//            param1 = it.getString(ARG_PARAM1)
-//            param2 = it.getString(ARG_PARAM2)
-//        }
+    override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
+    private val binding by viewBinding(FragmentTearcherProfileBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        arguments?.apply {
+            viewModel.getTeacherById(getInt("teacherId"))
+        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tearcher_profile, container, false)
+    override fun observeData() {
+        super.observeData()
+        viewModel.teacherLobbyResponseLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is GotTeacherInfo -> handleTeacherProfileResponse(it.teacherProfile)
+                else -> Unit
+            }
+        }
+    }
+
+    private fun handleTeacherProfileResponse(teacherProfile: TeacherProfile) {
+        teacherProfile.apply {
+            binding.apply {
+                ivTeacherAvatar.loadImage(teacherAvatar)
+                tvTeacherName.text = teacherName
+                rvTeacherSubjects.adapter = TeacherProfileSubjectsAdapter().also {
+                    it.submitList(teacherProfile.subjects)
+                }
+                rvTeacherPhotos.adapter = TeacherProfileGalleryAdapter().also {
+                    it.submitList(teacherProfile.profileGallery)
+                }
+                rvTeacherReviews.adapter = TeacherProfileReviewsAdapter().also {
+                    println()
+                    it.submitList(teacherProfile.reviews)
+                }
+            }
+        }
     }
 
     companion object {
-/*
         @JvmStatic
-        fun newInstance(teacherId: String) =
-            TeacherProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-*/
+        fun newInstance() =
+            TeacherProfileFragment()
     }
 }
