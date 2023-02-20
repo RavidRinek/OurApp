@@ -16,7 +16,7 @@ class StudentFindLessonResultAdapter(
     RecyclerView.Adapter<StudentFindLessonResultAdapter.LessonResultViewHolder>() {
 
     interface OnStudentFindLessonResultAdapterListener {
-        fun showTeacherProfilerBtnClicked()
+        fun showTeacherProfilerBtnClicked(teacherId: Int)
         fun orderALessonBtnClicked()
     }
 
@@ -46,7 +46,7 @@ class StudentFindLessonResultAdapter(
                     tvLessonDateVal.text = time
                     rbLessonRatingVal.rating = ratingInPercentage.toFloat()
                     tvDuringInMin.text = " דק׳${durationInMin}"
-                    tvTeacherProfile.setOnClickListener { listener.showTeacherProfilerBtnClicked() }
+                    tvTeacherProfile.setOnClickListener { listener.showTeacherProfilerBtnClicked(lesson.teacherId) }
                     tvOrderLesson.setOnClickListener { listener.orderALessonBtnClicked() }
                 }
             }

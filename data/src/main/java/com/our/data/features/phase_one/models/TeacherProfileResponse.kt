@@ -32,9 +32,10 @@ data class TeacherProfileResponse(
     @SerializedName("reviews")
     val reviews: List<ReviewResponse>? = null,
     @SerializedName("subjects")
-    val subjects: List<SubjectResponse>? = null
-)
-: BaseResponse()
+    val subjects: List<SubjectResponse>? = null,
+    @SerializedName("gallery")
+    val profileGallery: List<TeacherGalleryResponse>? = null
+) : BaseResponse()
 
 fun TeacherProfileResponse.toDomain(): TeacherProfile =
     TeacherProfile(
@@ -50,5 +51,6 @@ fun TeacherProfileResponse.toDomain(): TeacherProfile =
         teacherSecondPhone = teacherSecondPhone ?: "",
         teacherSex = teacherSex ?: 0,
         reviews = (reviews ?: listOf()).map { it.toDomain() },
-        subjects = (subjects ?: listOf()).map { it.toDomain() }
+        subjects = (subjects ?: listOf()).map { it.toDomain() },
+        profileGallery = (profileGallery ?: listOf()).map { it.toDomain() }
     )

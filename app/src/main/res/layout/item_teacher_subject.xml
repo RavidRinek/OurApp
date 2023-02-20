@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/ivSubject"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
     </androidx.cardview.widget.CardView>
@@ -27,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
+        android:textSize="30px"
         android:text="אנגלית"
         android:textColor="@android:color/black"
         android:textStyle="bold" />

@@ -19,19 +19,19 @@ interface PhaseOneApiService {
     suspend fun getLessons(@Query("subjectBranchId") subjectBranch: Int): Response<LessonsResponse>
 
     @GET(GET_TEACHER_BY_ID)
-    suspend fun getTeacherById(@Query("getTeacherById") teacherId: Int): Response<TeacherProfileResponse>
+    suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<TeacherProfileResponse>
 
     @POST(POST_TEACHER_CREATE_INFO)
     suspend fun postTeacherCreateInfo(
         @Header("Content-Type") fsd: String = "application/json",
-        @FieldMap createInfo: Map<String, String>
+        @Body createInfo: Map<String, String>
     ): Response<TeacherProfileResponse>
 
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
         const val GET_LESSONS_END_POINT: String = "get-lessons-by-subject-branch-id"
-        const val GET_TEACHER_BY_ID: String = "get-teacher-by-id"
+        const val GET_TEACHER_BY_ID: String = "get-teacher"
         const val POST_TEACHER_CREATE_INFO: String = "create-teacher"
     }
 }

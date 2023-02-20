@@ -15,5 +15,3 @@ data class GotSubjectBranches(val subjectBranches: List<SubjectBranch>) :
     GotStudentLobbyResponseSealed()
 
 data class GotLessons(val lessons: List<Lesson>) : GotStudentLobbyResponseSealed()
-
-data class GotTeacherProfile(val teacherProfile: TeacherProfile): GotStudentLobbyResponseSealed()

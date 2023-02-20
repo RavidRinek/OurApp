@@ -6,4 +6,4 @@ sealed class GotTeacherLobbyResponseSealed
 
 object GotTeacherError : GotTeacherLobbyResponseSealed()
 
-data class GotTeacherCreateInfo(val teacherProfile: TeacherProfile): GotTeacherLobbyResponseSealed()
+data class GotTeacherInfo(val teacherProfile: TeacherProfile): GotTeacherLobbyResponseSealed()

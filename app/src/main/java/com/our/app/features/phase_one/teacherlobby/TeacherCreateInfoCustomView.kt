@@ -28,7 +28,7 @@ class TeacherCreateInfoCustomView(context: Context, attrs: AttributeSet?) :
                 teachInfoHashMap[tag as String] = "text.toString()"
             }
         }
-        teachInfoHashMap["birthday"] = (504613830).toString()
+        teachInfoHashMap["teacherBirthday"] = (504613830).toString()
         teachInfoHashMap["teacherPhone"] = System.currentTimeMillis().toString()
         return teachInfoHashMap
     }

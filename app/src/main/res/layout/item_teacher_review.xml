@@ -3,16 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="7dp">
 
     <TextView
         android:id="@+id/tvRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="5" />
@@ -31,29 +35,33 @@
         app:layout_constraintTop_toTopOf="@+id/tvRating" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvReviewComment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/rbLessonRatingVal"
         app:layout_constraintEnd_toStartOf="@+id/rbLessonRatingVal"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tvLikesAmount"
         app:layout_constraintTop_toTopOf="@+id/rbLessonRatingVal"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="כלחדגיכדלמג יכחלגדי כחלידגחלכ ידחג" />
 
     <TextView
+        android:id="@+id/tvLikesAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:drawablePadding="7dp"
         android:gravity="center_vertical"
         android:textColor="@android:color/black"
         android:textSize="17sp"
         android:textStyle="bold"
         app:drawableStartCompat="@drawable/red_like"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvReviewComment"
         app:layout_constraintHorizontal_bias="0.197"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/tvReviewComment"
         app:layout_constraintVertical_bias="0.142"
         tools:text="25k" />
 </androidx.constraintlayout.widget.ConstraintLayout>
