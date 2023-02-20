@@ -15,31 +15,17 @@
         android:background="@android:color/white">
 
         <TextView
-            android:id="@+id/tvSubjectName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="14dp"
-            android:drawablePadding="12dp"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="21sp"
-            android:textStyle="bold"
-            app:drawableEndCompat="@drawable/ic_student_lesson_price"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="אנגלית" />
-
-        <TextView
             android:id="@+id/tvTeacherNameKey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="64dp"
+            android:layout_marginEnd="60dp"
             android:text="מורה:"
             android:textColor="@android:color/black"
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubjectName" />
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="16dp" />
 
         <TextView
             android:id="@+id/tvTeacherNameVal"
@@ -81,37 +67,39 @@
 
         <ImageView
             android:id="@+id/ivTeacherAvatar"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginStart="64dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="36dp"
             app:layout_constraintBottom_toBottomOf="@+id/tvTeacherPriceKey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvTeacherNameKey"
+            app:layout_constraintVertical_bias="0.0"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tvTeacherProfile"
-            android:layout_width="136dp"
+            android:layout_width="100dp"
             android:layout_height="26dp"
             android:layout_marginTop="12dp"
-            android:background="@drawable/rec_9c9c9c_rad_55"
-            android:gravity="center"
             android:layout_marginEnd="12dp"
+            android:layout_marginStart="80dp"
+            android:background="@drawable/rec_9c9c9c_rad_7"
+            android:gravity="center"
             android:text="לעמוד מורה"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/tvOrderLesson"
-            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintHorizontal_bias="0.805"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivTeacherAvatar" />
 
         <TextView
             android:id="@+id/tvOrderLesson"
-            android:layout_width="136dp"
+            android:layout_width="100dp"
             android:layout_height="26dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="52dp"
-            android:background="@drawable/rec_ff3817_rad_55"
+            android:layout_marginEnd="80dp"
+            android:background="@drawable/rec_ff3817_rad_7"
             android:gravity="center"
             android:text="הזמן שיעור"
             android:textColor="@android:color/white"
@@ -192,8 +180,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/rbLessonRatingVal"
             app:layout_constraintEnd_toStartOf="@+id/rbLessonRatingVal"
+            app:layout_constraintHorizontal_bias="0.202"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rbLessonRatingVal"
+            app:layout_constraintVertical_bias="0.666"
             tools:text="40 דק׳" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
