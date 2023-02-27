@@ -51,6 +51,22 @@
                 android:textColor="#FF3817" />
 
             <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_phone"
+                android:hint="מספר טלפון"
+                android:inputType="phone|number"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherPhoneNumber"
+                android:textColor="#FF3817"
+                android:gravity="right|center|center_vertical"/>
+
+            <EditText
                 android:id="@+id/etMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
