@@ -9,4 +9,5 @@ interface PhaseOneDataSource {
     suspend fun getLessons(subjectBranchId: Int): Result<BaseResponse>
     suspend fun getTeacherById(teacherId: Int): Result<BaseResponse>
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<BaseResponse>
+    suspend fun postCreateToken(firebase: Map<String, String>): Result<BaseResponse>
 }
