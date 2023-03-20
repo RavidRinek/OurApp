@@ -1,9 +1,6 @@
 package com.our.data.features.phase_one.datasources
 
-import com.our.data.features.phase_one.models.LessonsResponse
-import com.our.data.features.phase_one.models.SubjectBranchesResponse
-import com.our.data.features.phase_one.models.SubjectsResponse
-import com.our.data.features.phase_one.models.TeacherProfileResponse
+import com.our.data.features.phase_one.models.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -19,13 +16,13 @@ interface PhaseOneApiService {
     suspend fun getLessons(@Query("subjectBranchId") subjectBranch: Int): Response<LessonsResponse>
 
     @GET(GET_TEACHER_BY_ID)
-    suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<TeacherProfileResponse>
+    suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<GetTeacherResponse>
 
     @POST(POST_TEACHER_CREATE_INFO)
     suspend fun postTeacherCreateInfo(
         @Header("Content-Type") fsd: String = "application/json",
         @Body createInfo: Map<String, String>
-    ): Response<TeacherProfileResponse>
+    ): Response<GetTeacherResponse>
 
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"

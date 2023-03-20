@@ -32,11 +32,11 @@ class PhaseOneRepositoryImpl @Inject constructor(
 
     override suspend fun getTeacherById(teacherId: Int): Result<TeacherProfile> =
         phaseOneDataSource.getTeacherById(teacherId).map {
-            (it as TeacherProfileResponse).toDomain()
+            (it as GetTeacherResponse).toDomain()
         }
 
     override suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile> =
         phaseOneDataSource.postTeacherCreateInfo(teacherInfo).map {
-            (it as TeacherProfileResponse).toDomain()
+            (it as GetTeacherResponse).toDomain()
         }
 }

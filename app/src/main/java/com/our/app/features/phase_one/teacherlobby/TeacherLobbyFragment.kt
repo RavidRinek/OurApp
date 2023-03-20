@@ -22,6 +22,9 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
     override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
 
+    @Inject
+    lateinit var prefs: Prefs
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
@@ -29,20 +32,25 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+        if (prefs.contains(Prefs.MEMBER_ID)) {
+            viewModel.getTeacherById(prefs.getInt(Prefs.MEMBER_ID))
+        }
+    }
+
+    private fun initViews() {
         binding.btnTeacherCreateInfo.setOnClickListener {
             it.isEnabled = false
             viewModel.postTeacherCreateInfo(binding.cvTeacherCreateInfo.getTeachInfo())
         }
     }
 
-    @Inject lateinit var prefs: Prefs
-
     override fun observeData() {
         super.observeData()
         viewModel.teacherLobbyResponseLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is GotTeacherInfo -> {
-                    Toast.makeText(context, prefs.getInt(Prefs.MEMBER_ID).toString(), Toast.LENGTH_SHORT).show()
+                    binding.cvTeacherCreateInfo.initViews(it.teacherProfile)
                 }
                 is GotTeacherError -> {
                     binding.btnTeacherCreateInfo.isEnabled = true

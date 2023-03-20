@@ -9,12 +9,14 @@ import com.our.domain.features.phase_one.models.remote.Subject
 data class SubjectResponse(
     @SerializedName("subjectId") val id: Int? = null,
     @SerializedName("subjectName") val name: String? = null,
-    @SerializedName("urlImage") val imgUrl: String? = null
+    @SerializedName("urlImage") val imgUrl: String? = null,
+    @SerializedName("subjectLevel") val levels: List<SubjectLevelResponse>? = null
 ) : BaseResponse()
 
 fun SubjectResponse.toDomain(): Subject =
     Subject(
         id = id ?: 0,
         name = name ?: "",
-        imgUrl = imgUrl ?: ""
+        imgUrl = imgUrl ?: "",
+        subjectLevel = (levels ?: listOf()).map { it.toDomain() }
     )
