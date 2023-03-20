@@ -32,4 +32,8 @@ class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiSer
     override suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<BaseResponse> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun postCreateToken(firebase: Map<String, String>): Result<BaseResponse> {
+        TODO("Not yet implemented")
+    }
 }

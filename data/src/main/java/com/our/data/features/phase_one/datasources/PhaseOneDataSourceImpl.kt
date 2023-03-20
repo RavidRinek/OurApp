@@ -37,4 +37,10 @@ class PhaseOneDataSourceImpl @Inject constructor(private val api: PhaseOneApiSer
             call = { api.postTeacherCreateInfo(createInfo = teacherInfo) },
             errorMessage = "Cant get any teacher by id: $teacherInfo"
         )
+
+    override suspend fun postCreateToken(firebase: Map<String, String>): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.postCreateToken(firebase = firebase) },
+            errorMessage = "Cant get any teacher by id: $firebase"
+        )
 }
