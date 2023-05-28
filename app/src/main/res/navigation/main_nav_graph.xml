@@ -40,7 +40,11 @@
         android:id="@+id/teacherLobbyFragment"
         android:name="com.our.app.features.phase_one.teacherlobby.TeacherLobbyFragment"
         android:label="fragment_teacher_lobby"
-        tools:layout="@layout/fragment_teacher_lobby" />
+        tools:layout="@layout/fragment_teacher_lobby" >
+        <action
+            android:id="@+id/action_teacherLobbyFragment_to_teacherKnowlageInfoFragment"
+            app:destination="@id/teacherKnowlageInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/studentFindLessonResultFragment"
         android:name="com.our.app.features.phase_one.studentlobby.StudentFindLessonResultFragment"
@@ -55,4 +59,14 @@
         android:name="com.our.app.features.phase_one.teacherlobby.TeacherProfileFragment"
         android:label="fragment_tearcher_profile"
         tools:layout="@layout/fragment_tearcher_profile" />
+    <fragment
+        android:id="@+id/teacherKnowlageInfoFragment"
+        android:name="com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment"
+        android:label="fragment_teacher_knowlage_info"
+        tools:layout="@layout/fragment_teacher_knowlage_info" >
+        <argument
+            android:name="subject"
+            app:argType="com.our.domain.features.phase_one.models.remote.Subject" />
+
+    </fragment>
 </navigation>

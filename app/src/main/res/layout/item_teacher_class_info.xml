@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/rec_white_rad_24_stroke_2a59fe"
+    android:gravity="center_horizontal"
     android:orientation="horizontal"
     android:paddingTop="11dp"
-    android:paddingBottom="11dp"
-    android:gravity="center_horizontal">
+    android:paddingBottom="11dp">
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_gravity="left"
         android:layout_weight="1"
         android:gravity="center"
         android:text="∙ 40 דקות"
-        android:textColor="#000"
-        android:layout_gravity="left" />
+        android:textColor="#000" />
 
     <TextView
         android:layout_width="0dp"
@@ -40,11 +40,11 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="right"
             android:maxLines="2"
             android:text="מתמטיקה"
             android:textColor="#000"
-            android:ellipsize="end"
             android:textStyle="bold"
             app:autoSizeMaxTextSize="15sp"
             app:autoSizeMinTextSize="10sp"
@@ -55,11 +55,11 @@
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:gravity="right|bottom"
             android:text="שון גיטלמן"
             android:textColor="#000"
             android:textSize="10dp"
-            android:ellipsize="end"
             android:textStyle="bold"
             app:autoSizeMaxTextSize="10sp"
             app:autoSizeMinTextSize="10sp"
@@ -70,9 +70,9 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:gravity="right"
-        tools:srcCompat="@tools:sample/avatars"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </LinearLayout>

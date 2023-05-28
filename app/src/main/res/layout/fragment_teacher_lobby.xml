@@ -43,4 +43,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupCreateTeacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="cvLogoHeaderUtil,cvTeacherCreateInfo,btnTeacherCreateInfo" />
+
+    <com.our.app.features.phase_one.teacherlobby.TeacherLobbyCv
+        android:id="@+id/cvTeacherLobbyEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

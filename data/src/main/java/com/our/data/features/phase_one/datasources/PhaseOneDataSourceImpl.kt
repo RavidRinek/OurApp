@@ -3,6 +3,7 @@ package com.our.data.features.phase_one.datasources
 import com.our.data.base.datasources.BaseRemoteDataSource
 import com.our.data.base.models.BaseResponse
 import com.our.domain.base.models.Result
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
 class PhaseOneDataSourceImpl @Inject constructor(private val api: PhaseOneApiService) :
@@ -42,5 +43,11 @@ class PhaseOneDataSourceImpl @Inject constructor(private val api: PhaseOneApiSer
         safeApiCall(
             call = { api.postCreateToken(firebase = firebase) },
             errorMessage = "Cant get any teacher by id: $firebase"
+        )
+
+    override suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.postTeacherInfo(teacherInfo = updateTeacherInfo) },
+            errorMessage = "Cant update teacher info by: $updateTeacherInfo"
         )
 }

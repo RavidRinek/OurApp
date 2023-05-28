@@ -5,7 +5,7 @@ import com.our.data.features.phase_one.models.FireBaseResponse
 import com.our.data.features.phase_one.models.LessonsResponse
 import com.our.data.features.phase_one.models.SubjectBranchesResponse
 import com.our.data.features.phase_one.models.SubjectsResponse
-import com.our.data.features.phase_one.models.TeacherProfileResponse
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -32,7 +32,13 @@ interface PhaseOneApiService {
     @POST(POST_CREATE_TOKEN)
     suspend fun postCreateToken(
         @Header("Content-Type") fsd: String = "application/json",
-        @Body firebase : Map<String, String>
+        @Body firebase: Map<String, String>
+    ): Response<FireBaseResponse>
+
+    @POST(POST_TEACHER_INFO)
+    suspend fun postTeacherInfo(
+        @Header("Content-Type") fsd: String = "application/json",
+        @Body teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo
     ): Response<FireBaseResponse>
 
     companion object {
@@ -42,6 +48,6 @@ interface PhaseOneApiService {
         const val GET_TEACHER_BY_ID: String = "get-teacher"
         const val POST_TEACHER_CREATE_INFO: String = "create-teacher"
         const val POST_CREATE_TOKEN: String = "create-token"
-
+        const val POST_TEACHER_INFO: String = "update-teacher"
     }
 }

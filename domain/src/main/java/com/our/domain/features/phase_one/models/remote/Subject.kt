@@ -5,4 +5,4 @@ data class Subject(
     override val name: String,
     val imgUrl: String,
     val subjectLevel: List<SubjectLevel>
-) : BaseSubject(id, name)
+) : BaseSubject(id, name), java.io.Serializable
