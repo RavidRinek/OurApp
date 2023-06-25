@@ -8,22 +8,46 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import com.google.firebase.firestore.auth.User
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.our.app.MainActivity
+import com.our.app.R
 
 class MyFirebaseMessagingService  : FirebaseMessagingService() {
     // [START receive_message]
+
+    companion object {
+        private const val TAG = "MyFirebaseMsgService"
+        const val ACTION_NOTIFICATION_CLICK = "com.our.app.utilities.service.NOTIFICATION_CLICK"
+    }
+    private fun showToast(title: String) {
+        // Display the title of the notification in a toast
+        Toast.makeText(applicationContext, title, Toast.LENGTH_SHORT).show()
+    }
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: ${remoteMessage.from}")
+
+        //-------------------------------------------------------------//
+        remoteMessage.notification?.let { notification ->
+          //  Log.d(TAG, "Message Notification Body: ${notification.body}")
+            val title = notification.title
+            val message = notification.body
+            if (title != null) {
+                sendNotification(message ?: "", applicationContext)
+            }
+        }
+        //-------------------------------------------------------------//
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
@@ -36,16 +60,19 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
                 // Handle message within 10 seconds
                 handleNow()
             }
-        }
-
-        // Check if message contains a notification payload.
-        remoteMessage.notification?.let {
+        } // Check if message contains a notification payload.
+       /* remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
-        }
+            sendNotification(it.body!!, applicationContext)
+        }*/
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
     }
+
+    //-------------------------------------------//
+
+    //-------------------------------------------//
     // [END receive_message]
 
     // [START on_new_token]
@@ -83,20 +110,39 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
         Log.d(TAG, "sendRegistrationTokenToServer($token)")
     }
 
-    private fun sendNotification(messageBody: String) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_IMMUTABLE)
+    fun getNotificationClickPendingIntent(context: Context): PendingIntent {
+        val intent = Intent(ACTION_NOTIFICATION_CLICK)
+        intent.setClass(context, MainActivity::class.java)
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
+
+    private fun sendNotification(messageBody: String, context: Context) {
+        //val intent = Intent(this, MainActivity::class.java)
+        //intent.action = ACTION_NOTIFICATION_CLICK
+        //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val intent = Intent(context, MainActivity::class.java)
+       // intent.putExtra("fragment", "TeacherLobbyFragment") // Pass the fragment name as an extra
+        print(messageBody)
+
+        intent.putExtra("body", messageBody) // Pass the user object as an extra
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent.action = Intent.ACTION_VIEW
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val channelId = "fcm_default_channel"
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {  setContentIntent(pendingIntent)}
             .setContentTitle("FCM Message")
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
-            .setContentIntent(pendingIntent)
+
+            .setSmallIcon(R.drawable.ic_our_logo)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            //.setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -104,15 +150,12 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId,
                 "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationManager.IMPORTANCE_HIGH)
+            channel.importance = NotificationManager.IMPORTANCE_HIGH
             notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
-    }
-
-    companion object {
-        private const val TAG = "MyFirebaseMsgService"
+        notificationManager.notify(1 /* ID of notification */, notificationBuilder.build())
     }
 
     internal class MyWorker(appContext: Context, workerParams: WorkerParameters) : Worker(appContext, workerParams) {

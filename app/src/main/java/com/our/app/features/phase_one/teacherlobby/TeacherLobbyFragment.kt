@@ -19,12 +19,32 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_teacher_lobby) {
 
+    private var notificationBody: String = ""
+
+    companion object {
+        private const val ARG_NOTIFICATION_BODY = "notificationBody"
+
+        fun newInstance(notificationBody: String): TeacherLobbyFragment {
+            val fragment = TeacherLobbyFragment()
+            val args = Bundle()
+            args.putString(ARG_NOTIFICATION_BODY, notificationBody)
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+
+
     override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+
+        arguments?.let {
+            notificationBody = it.getString(ARG_NOTIFICATION_BODY, "")
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,10 +69,5 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
                 }
             }
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = TeacherLobbyFragment()
     }
 }
