@@ -20,7 +20,6 @@ import com.our.domain.features.phase_one.models.local.GotFcmToken
 import com.our.domain.features.phase_one.models.local.GotSubjectLevelsForTeacherKnowledgeInfo
 import com.our.domain.features.phase_one.models.local.GotTeacherError
 import com.our.domain.features.phase_one.models.local.GotFirstPageInfo
-import com.our.domain.features.phase_one.models.local.GotTeacherUpcomingLessons
 import com.our.domain.features.phase_one.models.local.FirstTeacherDetails
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +48,9 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
         }
         when {
             prefs.getBoolean(Prefs.COMPLETED_TEACHER_REGISTRATION) -> {
-
+                findNavController().navigate(
+                    R.id.action_teacherLobbyFragment_to_teacherLobbyyFragment
+                )
             }
 
             !cameFromPopBackStack && prefs.contains(Prefs.MEMBER_ID) -> {
@@ -74,10 +75,10 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
 
     private fun initViews() {
         binding.btnTeacherCreateInfo.setOnClickListener {
-            val a = binding.cvTeacherCreateInfo.getTeachInfo()
-            if (a.entries.first().value.isNotEmpty()) {
+            val filledInfo = binding.cvTeacherCreateInfo.getTeachInfo()
+            if (filledInfo.entries.first().value.isNotEmpty()) {
                 it.isEnabled = false
-                viewModel.postTeacherCreateInfo(a)
+                viewModel.postTeacherCreateInfo(filledInfo)
             }
         }
     }
@@ -106,22 +107,9 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
 
                 is FirstTeacherDetails -> {
                     prefs.putBooleanAsync(Prefs.COMPLETED_TEACHER_REGISTRATION, true)
-                    binding.groupCreateTeacher.visibility = View.GONE
-                }
-
-                is GotTeacherUpcomingLessons -> {
-                    binding.cvTeacherLobbyEmptyState.initViews(
-                        lessons = it.lessons,
-                        listener = object :
-                            TeacherRegisteredLobbyCv.OnTeacherLobbyEmptyStateCustomViewListener {
-                            override fun updateAvailability(status: Boolean) {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "updateAvailability: status: $status",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        })
+                    findNavController().navigate(
+                        R.id.action_teacherLobbyFragment_to_teacherLobbyyFragment
+                    )
                 }
 
                 is GotTeacherError -> {
