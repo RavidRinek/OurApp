@@ -1,5 +1,6 @@
 package com.our.data.di
 
+import com.our.data.base.datasources.Prefs
 import com.our.data.common.datasources.MockApiService
 import com.our.data.features.phase_one.datasources.MockPhaseOneDataSourceImpl
 import com.our.data.features.phase_one.datasources.PhaseOneApiService
@@ -21,6 +22,9 @@ class DataSourceModule {
 
     @Provides
     @Singleton
-    fun providePhaseOneRemoteDataSource(apiService: PhaseOneApiService): PhaseOneDataSourceImpl =
-        PhaseOneDataSourceImpl(apiService)
+    fun providePhaseOneRemoteDataSource(
+        apiService: PhaseOneApiService,
+        prefs: Prefs
+    ): PhaseOneDataSourceImpl =
+        PhaseOneDataSourceImpl(apiService, prefs)
 }

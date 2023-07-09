@@ -35,7 +35,7 @@ data class TeacherProfileResponse(
     val subjects: List<SubjectResponse>? = null,
     @SerializedName("gallery")
     val profileGallery: List<TeacherGalleryResponse>? = null
-) : BaseResponse()
+): BaseResponse()
 
 fun TeacherProfileResponse.toDomain(): TeacherProfile =
     TeacherProfile(

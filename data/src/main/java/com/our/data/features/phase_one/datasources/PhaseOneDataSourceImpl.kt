@@ -1,11 +1,16 @@
 package com.our.data.features.phase_one.datasources
 
 import com.our.data.base.datasources.BaseRemoteDataSource
+import com.our.data.base.datasources.Prefs
 import com.our.data.base.models.BaseResponse
 import com.our.domain.base.models.Result
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
-class PhaseOneDataSourceImpl @Inject constructor(private val api: PhaseOneApiService) :
+class PhaseOneDataSourceImpl @Inject constructor(
+    private val api: PhaseOneApiService,
+    private val prefs: Prefs
+) :
     BaseRemoteDataSource(), PhaseOneDataSource {
 
     override suspend fun getSubjects(): Result<BaseResponse> =
@@ -38,9 +43,31 @@ class PhaseOneDataSourceImpl @Inject constructor(private val api: PhaseOneApiSer
             errorMessage = "Cant get any teacher by id: $teacherInfo"
         )
 
-    override suspend fun postCreateToken(firebase: Map<String, String>): Result<BaseResponse> =
+    override suspend fun postCreateFcmToken(): Result<BaseResponse> =
         safeApiCall(
-            call = { api.postCreateToken(firebase = firebase) },
-            errorMessage = "Cant get any teacher by id: $firebase"
+            call = {
+/*
+                api.postCreateToken(
+                    token = prefs.getString(Prefs.FCM_TOKEN),
+                    userId = prefs.getInt(Prefs.MEMBER_ID)
+                )
+*/
+                api.postCreateToken(
+                    postToken = PostToken(
+                        token = prefs.getString(Prefs.FCM_TOKEN),
+                        userId = prefs.getInt(Prefs.MEMBER_ID)
+                    )
+
+                )
+            },
+            errorMessage = "Cant post token"
+        )
+
+    override suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.postTeacherInfo(teacherInfo = updateTeacherInfo) },
+            errorMessage = "Cant update teacher info by: $updateTeacherInfo"
         )
 }
+
+data class PostToken(val userId: Int, val token: String)

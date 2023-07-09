@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llInfoContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment">
+
+    <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
+        android:id="@+id/cvLogoHeaderUtil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:caption="@string/teacher_lobby_header_caption" />
+
+    <ImageView
+        android:layout_width="124dp"
+        android:layout_height="124dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="12dp"
+        android:src="@drawable/select_profile_avatar" />
+
+    <com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherSubjectKnowledgeCustomView
+        android:id="@+id/cvTeacherSubjectKnowledge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherLessonInfoCustomView
+        android:id="@+id/cvTeacherLessonInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherDegreeInfoCustomView
+        android:id="@+id/cvTeacherDegreeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/btnCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/rec_ff3817_rad_12"
+        android:gravity="center"
+        android:text="צור חשבון"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -62,7 +62,7 @@
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
-                android:tag="teacherPhoneNumber"
+                android:tag="teacherPhone"
                 android:textColor="#FF3817"
                 android:gravity="right|center|center_vertical"/>
 
@@ -107,7 +107,7 @@
                 android:paddingTop="6dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
-                android:tag="address"
+                android:tag="teacherAddress"
                 android:textColor="#FF3817" />
 
         </LinearLayout>

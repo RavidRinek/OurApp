@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.our.app.R
 import com.our.app.databinding.ItemStudentSubjectBranchSpinnerBinding
 import com.our.app.databinding.ItemStudentSubjectMainSpinnerBinding
+import com.our.app.databinding.ItemSubjectAndLevelChoiceBinding
 import com.our.domain.features.phase_one.models.remote.BaseSubject
 
 class SubjectsSpinnerAdapter(
@@ -27,18 +28,18 @@ class SubjectsSpinnerAdapter(
         return when (viewType) {
             SubjectMode.MAIN.ordinal -> {
                 SubjectMainViewHolder(
-                    ItemStudentSubjectMainSpinnerBinding.bind(
+                    ItemSubjectAndLevelChoiceBinding.bind(
                         LayoutInflater.from(parent.context)
-                            .inflate(R.layout.item_student_subject_main_spinner, parent, false)
+                            .inflate(R.layout.item_subject_and_level_choice, parent, false)
                     ),
                     listener
                 )
             }
             SubjectMode.BRANCH.ordinal -> {
                 SubjectBranchViewHolder(
-                    ItemStudentSubjectBranchSpinnerBinding.bind(
+                    ItemSubjectAndLevelChoiceBinding.bind(
                         LayoutInflater.from(parent.context)
-                            .inflate(R.layout.item_student_subject_branch_spinner, parent, false)
+                            .inflate(R.layout.item_subject_and_level_choice, parent, false)
                     ),
                     listener
                 )

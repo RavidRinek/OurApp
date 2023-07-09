@@ -5,6 +5,7 @@ import com.our.domain.features.phase_one.models.remote.Lesson
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
 import com.our.domain.features.phase_one.models.remote.TeacherProfile
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 
 interface PhaseOneRepository {
     suspend fun getSubjects(): Result<List<Subject>>
@@ -12,4 +13,6 @@ interface PhaseOneRepository {
     suspend fun getLessons(subjectBranchId: Int): Result<List<Lesson>>
     suspend fun getTeacherById(teacherId: Int): Result<TeacherProfile>
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile>
+    suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<Unit>
+    suspend fun postFcmToken(): Result<Unit>
 }
