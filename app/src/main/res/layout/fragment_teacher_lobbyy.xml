@@ -10,7 +10,8 @@
     android:paddingStart="14dp"
     android:paddingTop="11dp"
     android:paddingEnd="14dp"
-    android:paddingBottom="11dp">
+    android:paddingBottom="11dp"
+    tools:context=".features.phase_one.teacherlobby.teacher_lobby.TeacherLobbyyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             android:src="@drawable/ic_our_logo" />
 
         <ImageView
-            android:layout_width="65dp"
+            android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="10"
             android:paddingLeft="220dp"

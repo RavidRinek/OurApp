@@ -13,6 +13,4 @@ data class GotFirstPageInfo(val teacherProfile: TeacherProfile) : GotTeacherLobb
 
 data class GotSubjectLevelsForTeacherKnowledgeInfo(val subjects: List<Subject>) : GotTeacherLobbyResponseSealed()
 
-data class GotTeacherUpcomingLessons(val lessons: List<String>) : GotTeacherLobbyResponseSealed()
-
 object GotFcmToken: GotTeacherLobbyResponseSealed()

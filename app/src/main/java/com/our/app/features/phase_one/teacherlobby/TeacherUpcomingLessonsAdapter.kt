@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.our.app.R
 import com.our.app.databinding.ItemTeacherClassInfoBinding
 
-class TeacherScheduledLessonsAdapter(val lessons: List<String>) :
-    RecyclerView.Adapter<TeacherScheduledLessonsAdapter.ScheduledLessonViewHolder>() {
+class TeacherUpcomingLessonsAdapter(val lessons: List<String>) :
+    RecyclerView.Adapter<TeacherUpcomingLessonsAdapter.ScheduledLessonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduledLessonViewHolder =
         ScheduledLessonViewHolder(

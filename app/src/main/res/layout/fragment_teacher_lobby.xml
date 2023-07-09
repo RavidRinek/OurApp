@@ -50,10 +50,4 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="cvLogoHeaderUtil,cvTeacherCreateInfo,btnTeacherCreateInfo" />
 
-    <com.our.app.features.phase_one.teacherlobby.TeacherRegisteredLobbyCv
-        android:id="@+id/cvTeacherLobbyEmptyState"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
