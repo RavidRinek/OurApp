@@ -1,5 +1,6 @@
 package com.our.data.features.phase_one.datasources
 
+import com.our.data.base.models.BaseResponse
 import com.our.data.features.phase_one.models.*
 import com.our.data.features.phase_one.models.FireBaseResponse
 import com.our.data.features.phase_one.models.LessonsResponse
@@ -32,14 +33,16 @@ interface PhaseOneApiService {
     @POST(POST_CREATE_TOKEN)
     suspend fun postCreateToken(
         @Header("Content-Type") fsd: String = "application/json",
-        @Body firebase: Map<String, String>
+//        @Field("token") token: String,
+//        @Field("userId") userId: Int
+        @Body postToken: PostToken
     ): Response<FireBaseResponse>
 
     @POST(POST_TEACHER_INFO)
     suspend fun postTeacherInfo(
         @Header("Content-Type") fsd: String = "application/json",
         @Body teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo
-    ): Response<FireBaseResponse>
+    ): Response<BaseResponse>
 
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"

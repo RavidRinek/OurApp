@@ -5,12 +5,14 @@ import com.our.domain.features.phase_one.models.remote.TeacherProfile
 
 sealed class GotTeacherLobbyResponseSealed
 
-object NavToTeacherLobby : GotTeacherLobbyResponseSealed()
+object FirstTeacherDetails : GotTeacherLobbyResponseSealed()
 
 object GotTeacherError : GotTeacherLobbyResponseSealed()
 
-data class GotTeacherInfo(val teacherProfile: TeacherProfile) : GotTeacherLobbyResponseSealed()
+data class GotFirstPageInfo(val teacherProfile: TeacherProfile) : GotTeacherLobbyResponseSealed()
 
-data class GotSubjectLevels(val subjects: List<Subject>) : GotTeacherLobbyResponseSealed()
+data class GotSubjectLevelsForTeacherKnowledgeInfo(val subjects: List<Subject>) : GotTeacherLobbyResponseSealed()
 
-data class GotTeacherLessons(val lessons: List<String>) : GotTeacherLobbyResponseSealed()
+data class GotTeacherUpcomingLessons(val lessons: List<String>) : GotTeacherLobbyResponseSealed()
+
+object GotFcmToken: GotTeacherLobbyResponseSealed()

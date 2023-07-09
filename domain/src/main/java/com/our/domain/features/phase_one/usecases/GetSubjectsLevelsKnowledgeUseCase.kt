@@ -12,7 +12,7 @@ class GetSubjectsLevelsKnowledgeUseCase @Inject constructor(
 
     override suspend fun invoke(param: Unit): GotTeacherLobbyResponseSealed =
         when (val res = phaseOneRepository.getSubjects()) {
-            is Result.Success -> GotSubjectLevels(res.data)
+            is Result.Success -> GotSubjectLevelsForTeacherKnowledgeInfo(res.data)
             is Result.Error -> GotTeacherError
         }
 }

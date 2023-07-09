@@ -54,13 +54,20 @@ class TeacherKnowledgeInfoFragment : Fragment() {
             }
 
             btnCreateAccount.setOnClickListener {
-                val selectedItemLevels = cvTeacherSubjectKnowledge.getSelectedItemLevels()
-                val lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
-                val degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
+                var selectedItemLevels = cvTeacherSubjectKnowledge.getSelectedItemLevels()
+                var lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
+                var degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
+                if (selectedItemLevels.isEmpty()) {
+                    selectedItemLevels = HashSet<Int>().apply {
+                        add(1)
+                    }
+                    lessonInfo = TeacherLessonInfoCustomView.LessonInfoData(40,100,true,"fdsfsd")
+                    degreeInfo= TeacherDegreeInfoCustomView.TeacherDegreeDataInfo("fsdfds", "fdsfsdfds")
+                }
 
                 val teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo =
                     PostTeacherInfoUseCase.UpdateTeacherInfo(
-                        memberId = prefs.getInt(Prefs.MEMBER_ID),
+                        teacherId = prefs.getInt(Prefs.MEMBER_ID),
                         teacherSubjectsLevelsId = selectedItemLevels.toList(),
                         lessonInfo = PostTeacherInfoUseCase.LessonInfo(
                             pricePer60m = lessonInfo.pricePer60m,

@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import com.our.app.R
 import com.our.app.databinding.CvTeacherLobbyBinding
 
-class TeacherLobbyCv(context: Context?, attrs: AttributeSet?) :
+class TeacherRegisteredLobbyCv(context: Context?, attrs: AttributeSet?) :
     LinearLayout(context, attrs) {
 
     private val view: View = LayoutInflater.from(context)
@@ -32,5 +32,6 @@ class TeacherLobbyCv(context: Context?, attrs: AttributeSet?) :
             viewBinding.tvNoLessonsTitle.visibility = View.GONE
             viewBinding.rvTeacherLessons.adapter = TeacherScheduledLessonsAdapter(lessons)
         }
+        visibility = View.VISIBLE
     }
 }

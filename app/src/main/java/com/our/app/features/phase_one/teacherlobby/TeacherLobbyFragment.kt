@@ -1,6 +1,8 @@
 package com.our.app.features.phase_one.teacherlobby
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +16,12 @@ import com.our.app.databinding.FragmentTeacherLobbyBinding
 import com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.data.base.datasources.Prefs
-import com.our.domain.features.phase_one.models.local.GotSubjectLevels
+import com.our.domain.features.phase_one.models.local.GotFcmToken
+import com.our.domain.features.phase_one.models.local.GotSubjectLevelsForTeacherKnowledgeInfo
 import com.our.domain.features.phase_one.models.local.GotTeacherError
-import com.our.domain.features.phase_one.models.local.GotTeacherInfo
-import com.our.domain.features.phase_one.models.local.GotTeacherLessons
-import com.our.domain.features.phase_one.models.local.NavToTeacherLobby
+import com.our.domain.features.phase_one.models.local.GotFirstPageInfo
+import com.our.domain.features.phase_one.models.local.GotTeacherUpcomingLessons
+import com.our.domain.features.phase_one.models.local.FirstTeacherDetails
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -38,28 +41,38 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        when {
+            prefs.getBoolean(Prefs.COMPLETED_TEACHER_REGISTRATION) -> {
+
+            }
+
+            !cameFromPopBackStack && prefs.contains(Prefs.MEMBER_ID) -> {
+                viewModel.getTeacherById(prefs.getInt(Prefs.MEMBER_ID))
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
 
-        if (!cameFromPopBackStack && prefs.contains(Prefs.MEMBER_ID)) {
-            viewModel.getTeacherById(prefs.getInt(Prefs.MEMBER_ID))
-        }
-
         setFragmentResultListener(K_TEACHER_INFO_LISTENER) { _, bundle ->
             clearFragmentResultListener(requestKey = K_TEACHER_INFO_LISTENER)
             val teacherInfo =
                 bundle.getParcelable<PostTeacherInfoUseCase.UpdateTeacherInfo>(K_TEACHER_INFO_DATA)
-            teacherInfo?.let { viewModel.postTeacherInfo(it) }
+            Handler(Looper.getMainLooper()).post {
+                teacherInfo?.let { viewModel.postTeacherInfo(it) }
+            }
         }
     }
 
     private fun initViews() {
         binding.btnTeacherCreateInfo.setOnClickListener {
-            it.isEnabled = false
-            viewModel.postTeacherCreateInfo(binding.cvTeacherCreateInfo.getTeachInfo())
+            val a = binding.cvTeacherCreateInfo.getTeachInfo()
+            if (a.entries.first().value.isNotEmpty()) {
+                it.isEnabled = false
+                viewModel.postTeacherCreateInfo(a)
+            }
         }
     }
 
@@ -67,22 +80,12 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
         super.observeData()
         viewModel.teacherLobbyResponseLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is NavToTeacherLobby -> {
-                    binding.groupCreateTeacher.visibility = View.GONE
-                    //viewModel.getAheadLessons..
-                }
-
-                is GotTeacherInfo -> {
+                is GotFirstPageInfo -> {
                     binding.cvTeacherCreateInfo.initViews(it.teacherProfile)
-                    viewModel.getSubjectLevels()
+                    viewModel.getSubjectLevelsForTeacherKnowlageInfo()
                 }
 
-                is GotTeacherError -> {
-                    Toast.makeText(requireContext(), "GotTeacherError", Toast.LENGTH_SHORT).show()
-                    binding.btnTeacherCreateInfo.isEnabled = true
-                }
-
-                is GotSubjectLevels -> {
+                is GotSubjectLevelsForTeacherKnowledgeInfo -> {
                     findNavController().navigate(
                         R.id.action_teacherLobbyFragment_to_teacherKnowlageInfoFragment,
                         Bundle().apply {
@@ -94,11 +97,16 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
                     )
                 }
 
-                is GotTeacherLessons -> {
+                is FirstTeacherDetails -> {
+                    prefs.putBooleanAsync(Prefs.COMPLETED_TEACHER_REGISTRATION, true)
+                    binding.groupCreateTeacher.visibility = View.GONE
+                }
+
+                is GotTeacherUpcomingLessons -> {
                     binding.cvTeacherLobbyEmptyState.initViews(
                         lessons = it.lessons,
                         listener = object :
-                            TeacherLobbyCv.OnTeacherLobbyEmptyStateCustomViewListener {
+                            TeacherRegisteredLobbyCv.OnTeacherLobbyEmptyStateCustomViewListener {
                             override fun updateAvailability(status: Boolean) {
                                 Toast.makeText(
                                     requireContext(),
@@ -108,6 +116,13 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
                             }
                         })
                 }
+
+                is GotTeacherError -> {
+                    Toast.makeText(requireContext(), "GotTeacherError", Toast.LENGTH_SHORT).show()
+                    binding.btnTeacherCreateInfo.isEnabled = true
+                }
+
+                GotFcmToken -> TODO()
             }
         }
     }
