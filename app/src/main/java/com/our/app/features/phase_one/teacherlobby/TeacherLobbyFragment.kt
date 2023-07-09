@@ -139,6 +139,8 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
         @JvmStatic
         fun newInstance() = TeacherLobbyFragment()
 
+        const val K_TEACHER_INFO_LISTENER = "teacherInfo_listener"
+        const val K_TEACHER_INFO_DATA = "teacherInfo_data"
         private const val ARG_NOTIFICATION_BODY = "notificationBody"
 
         fun newInstance(notificationBody: String): TeacherLobbyFragment {
