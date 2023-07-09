@@ -25,7 +25,6 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
         super.onViewCreated(view, savedInstanceState)
         binding.clContainer.setOnClickListener {
             binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
-            binding.subjectSpinnerBranch.dismissRvSubjectsVisibility()
         }
         binding.btnStudentFindLesson.setOnClickListener {
             viewModel.getLessons(subjectBranchId)
@@ -41,11 +40,6 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
                     initSpinnerMain(
                         binding.subjectSpinnerMain,
                         it.subjects
-                    )
-                is GotSubjectBranches ->
-                    initSpinnerMain(
-                        binding.subjectSpinnerBranch,
-                        it.subjectBranches
                     )
                 is GotLessons -> {
                     val bundle = Bundle()

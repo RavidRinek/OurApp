@@ -40,7 +40,6 @@ class StudentFindLessonResultAdapter(
         fun bind(lesson: Lesson) {
             lesson.apply {
                 binding.apply {
-                  //  tvSubjectName.text = subjectBranchName
                     tvTeacherNameVal.text = teacherName
                     tvTeacherPriceVal.text = price.toString()
                     tvLessonDateVal.text = time

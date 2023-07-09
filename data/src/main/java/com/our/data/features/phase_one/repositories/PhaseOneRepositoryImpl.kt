@@ -9,6 +9,7 @@ import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
 import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import com.our.domain.features.phase_one.repositories.PhaseOneRepository
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
 class PhaseOneRepositoryImpl @Inject constructor(
@@ -32,11 +33,21 @@ class PhaseOneRepositoryImpl @Inject constructor(
 
     override suspend fun getTeacherById(teacherId: Int): Result<TeacherProfile> =
         phaseOneDataSource.getTeacherById(teacherId).map {
-            (it as TeacherProfileResponse).toDomain()
+            (it as GetTeacherResponse).toDomain()
         }
 
     override suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile> =
         phaseOneDataSource.postTeacherCreateInfo(teacherInfo).map {
-            (it as TeacherProfileResponse).toDomain()
+            (it as GetTeacherResponse).toDomain()
+        }
+
+    override suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<Unit> =
+        phaseOneDataSource.postTeacherInfo(updateTeacherInfo).map {
+            Unit
+        }
+
+    override suspend fun postFcmToken(): Result<Unit> =
+        phaseOneDataSource.postCreateFcmToken().map {
+            Unit
         }
 }

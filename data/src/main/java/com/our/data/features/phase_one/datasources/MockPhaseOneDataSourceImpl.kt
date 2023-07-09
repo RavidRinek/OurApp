@@ -4,6 +4,7 @@ import com.our.data.base.datasources.BaseRemoteDataSource
 import com.our.data.base.models.BaseResponse
 import com.our.data.common.datasources.MockApiService
 import com.our.domain.base.models.Result
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
 class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiService) :
@@ -33,7 +34,11 @@ class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiSer
         TODO("Not yet implemented")
     }
 
-    override suspend fun postCreateToken(firebase: Map<String, String>): Result<BaseResponse> {
+    override suspend fun postCreateFcmToken(): Result<BaseResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<BaseResponse> {
         TODO("Not yet implemented")
     }
 }

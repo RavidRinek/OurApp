@@ -1,10 +1,12 @@
 package com.our.data.features.phase_one.datasources
 
+import com.our.data.base.models.BaseResponse
+import com.our.data.features.phase_one.models.*
 import com.our.data.features.phase_one.models.FireBaseResponse
 import com.our.data.features.phase_one.models.LessonsResponse
 import com.our.data.features.phase_one.models.SubjectBranchesResponse
 import com.our.data.features.phase_one.models.SubjectsResponse
-import com.our.data.features.phase_one.models.TeacherProfileResponse
+import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -20,19 +22,27 @@ interface PhaseOneApiService {
     suspend fun getLessons(@Query("subjectBranchId") subjectBranch: Int): Response<LessonsResponse>
 
     @GET(GET_TEACHER_BY_ID)
-    suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<TeacherProfileResponse>
+    suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<GetTeacherResponse>
 
     @POST(POST_TEACHER_CREATE_INFO)
     suspend fun postTeacherCreateInfo(
         @Header("Content-Type") fsd: String = "application/json",
         @Body createInfo: Map<String, String>
-    ): Response<TeacherProfileResponse>
+    ): Response<GetTeacherResponse>
 
     @POST(POST_CREATE_TOKEN)
     suspend fun postCreateToken(
         @Header("Content-Type") fsd: String = "application/json",
-        @Body firebase : Map<String, String>
+//        @Field("token") token: String,
+//        @Field("userId") userId: Int
+        @Body postToken: PostToken
     ): Response<FireBaseResponse>
+
+    @POST(POST_TEACHER_INFO)
+    suspend fun postTeacherInfo(
+        @Header("Content-Type") fsd: String = "application/json",
+        @Body teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo
+    ): Response<BaseResponse>
 
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
@@ -41,6 +51,6 @@ interface PhaseOneApiService {
         const val GET_TEACHER_BY_ID: String = "get-teacher"
         const val POST_TEACHER_CREATE_INFO: String = "create-teacher"
         const val POST_CREATE_TOKEN: String = "create-token"
-
+        const val POST_TEACHER_INFO: String = "update-teacher"
     }
 }

@@ -8,7 +8,7 @@ import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTearcherProfileBinding
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.app.utilities.extensions.loadImage
-import com.our.domain.features.phase_one.models.local.GotTeacherInfo
+import com.our.domain.features.phase_one.models.local.GotFirstPageInfo
 import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +30,7 @@ class TeacherProfileFragment :
         super.observeData()
         viewModel.teacherLobbyResponseLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is GotTeacherInfo -> handleTeacherProfileResponse(it.teacherProfile)
+                is GotFirstPageInfo -> handleTeacherProfileResponse(it.teacherProfile)
                 else -> Unit
             }
         }
