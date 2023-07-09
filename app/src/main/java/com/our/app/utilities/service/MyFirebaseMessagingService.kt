@@ -10,13 +10,11 @@ import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.app.TaskStackBuilder
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.google.firebase.firestore.auth.User
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.our.app.MainActivity
@@ -45,6 +43,7 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
             val message = notification.body
             if (title != null) {
                 sendNotification(message ?: "", applicationContext)
+                scheduleJob()
             }
         }
         //-------------------------------------------------------------//
@@ -52,7 +51,8 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-
+            var message = remoteMessage.data.get("body") as String
+            sendNotification(message!! , applicationContext)
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
                 scheduleJob()
@@ -113,7 +113,7 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
     fun getNotificationClickPendingIntent(context: Context): PendingIntent {
         val intent = Intent(ACTION_NOTIFICATION_CLICK)
         intent.setClass(context, MainActivity::class.java)
-        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return PendingIntent.getBroadcast(context, 0, intent,   PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
     private fun sendNotification(messageBody: String, context: Context) {
@@ -126,15 +126,20 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
         print(messageBody)
 
         intent.putExtra("body", messageBody) // Pass the user object as an extra
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-        intent.action = Intent.ACTION_VIEW
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+       // intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+      //  intent.action = Intent.ACTION_VIEW
+
+
+
+
+
+
+              val pendingIntent = PendingIntent.getActivity(context, 0, intent,  PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         val channelId = "fcm_default_channel"
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(context, channelId).apply {  setContentIntent(pendingIntent)}
-            .setContentTitle("FCM Message")
+        val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setContentText(messageBody)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
@@ -142,7 +147,7 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.ic_our_logo)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_CALL)
-            //.setContentIntent(pendingIntent)
+            .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

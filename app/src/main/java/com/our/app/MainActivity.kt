@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         print(intent)
         val body = intent.getStringExtra("body")
-
+        if(body!=null) {
+            Log.d("Test", body!!)
+        }
         if (fragmentName != null && fragmentName == "TeacherLobbyFragment") {
             if (body != null) {
                 print(body)
@@ -39,6 +41,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val body = intent!!.getStringExtra("body")
+
+        if(body!=null) {
+            Log.d("Test", body!!)
+        }
+    }
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         setIntent(intent)
