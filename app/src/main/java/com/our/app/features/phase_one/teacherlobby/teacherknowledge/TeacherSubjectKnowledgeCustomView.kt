@@ -8,7 +8,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.our.app.R
 import com.our.app.databinding.CvTeacherSubjectsKnowledgeBinding
-import com.our.app.features.phase_one.teacherlobby.TeacherSubjectLevelsAdapter
+import com.our.app.features.phase_one.teacherlobby.create.TeacherSubjectLevelsAdapter
 import com.our.domain.features.phase_one.models.remote.Subject
 
 class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) :

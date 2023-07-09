@@ -1,4 +1,4 @@
-package com.our.app.features.phase_one.teacherlobby
+package com.our.app.features.phase_one.teacherlobby.container
 
 import android.os.Bundle
 import android.os.Handler
@@ -12,7 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
-import com.our.app.databinding.FragmentTeacherLobbyBinding
+import com.our.app.databinding.FragmentTeacherContainerBinding
 import com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.data.base.datasources.Prefs
@@ -27,12 +27,12 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_teacher_lobby) {
+class TeacherContainerFragment : BaseFragment<TeacherContainerViewModel>(R.layout.fragment_teacher_container) {
 
     private var notificationBody: String = ""
 
-    override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
-    private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
+    override val viewModel: TeacherContainerViewModel by viewModels<TeacherContainerViewModelImpl>()
+    private val binding by viewBinding(FragmentTeacherContainerBinding::bind)
 
     @Inject
     lateinit var prefs: Prefs
@@ -125,14 +125,14 @@ class TeacherLobbyFragment : BaseFragment<TeacherLobbyViewModel>(R.layout.fragme
 
     companion object {
         @JvmStatic
-        fun newInstance() = TeacherLobbyFragment()
+        fun newInstance() = TeacherContainerFragment()
 
         const val K_TEACHER_INFO_LISTENER = "teacherInfo_listener"
         const val K_TEACHER_INFO_DATA = "teacherInfo_data"
         private const val ARG_NOTIFICATION_BODY = "notificationBody"
 
-        fun newInstance(notificationBody: String): TeacherLobbyFragment {
-            val fragment = TeacherLobbyFragment()
+        fun newInstance(notificationBody: String): TeacherContainerFragment {
+            val fragment = TeacherContainerFragment()
             val args = Bundle()
             args.putString(ARG_NOTIFICATION_BODY, notificationBody)
             fragment.arguments = args

@@ -5,7 +5,7 @@
     android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.phase_one.teacherlobby.TeacherLobbyFragment">
+    tools:context=".features.phase_one.teacherlobby.container.TeacherContainerFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.our.app.features.phase_one.teacherlobby.TeacherCreateInfoCustomView
+    <com.our.app.features.phase_one.teacherlobby.create.TeacherCreateInfoCustomView
         android:id="@+id/cvTeacherCreateInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

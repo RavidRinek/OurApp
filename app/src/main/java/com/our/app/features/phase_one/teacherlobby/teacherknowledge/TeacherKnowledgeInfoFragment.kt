@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.our.app.databinding.FragmentTeacherKnowlageInfoBinding
-import com.our.app.features.phase_one.teacherlobby.TeacherLobbyFragment
+import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerFragment
 import com.our.data.base.datasources.Prefs
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
@@ -83,8 +83,8 @@ class TeacherKnowledgeInfoFragment : Fragment() {
 
 
                 setFragmentResult(
-                    TeacherLobbyFragment.K_TEACHER_INFO_LISTENER,
-                    bundleOf(TeacherLobbyFragment.K_TEACHER_INFO_DATA to teacherInfo)
+                    TeacherContainerFragment.K_TEACHER_INFO_LISTENER,
+                    bundleOf(TeacherContainerFragment.K_TEACHER_INFO_DATA to teacherInfo)
                 )
                 findNavController().popBackStack()
             }

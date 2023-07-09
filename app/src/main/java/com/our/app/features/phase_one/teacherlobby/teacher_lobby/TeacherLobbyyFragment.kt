@@ -1,16 +1,12 @@
 package com.our.app.features.phase_one.teacherlobby.teacher_lobby
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTeacherLobbyyBinding
-import com.our.app.features.phase_one.teacherlobby.TeacherUpcomingLessonsAdapter
 import com.our.app.utilities.bindingDelegates.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 

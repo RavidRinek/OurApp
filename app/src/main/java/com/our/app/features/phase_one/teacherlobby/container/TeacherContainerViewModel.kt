@@ -1,4 +1,4 @@
-package com.our.app.features.phase_one.teacherlobby
+package com.our.app.features.phase_one.teacherlobby.container
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +15,7 @@ import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-abstract class TeacherLobbyViewModel : BaseViewModelImpl() {
+abstract class TeacherContainerViewModel : BaseViewModelImpl() {
     abstract val teacherLobbyResponseLiveData: LiveData<GotTeacherLobbyResponseSealed>
     abstract fun postTeacherCreateInfo(createInfo: Map<String, String>)
     abstract fun getTeacherById(id: Int)
@@ -24,14 +24,14 @@ abstract class TeacherLobbyViewModel : BaseViewModelImpl() {
 }
 
 @HiltViewModel
-class TeacherLobbyViewModelImpl @Inject constructor(
+class TeacherContainerViewModelImpl @Inject constructor(
     private val prefs: Prefs,
     private val postTeacherCreateInfoUseCase: PostTeacherCreateInfoUseCase,
     private val getTeacherByIdUseCase: GetTeacherByIdUseCase,
     private val getSubjects: GetSubjectsLevelsKnowledgeUseCase,
     private val postTeacherInfoUseCase: PostTeacherInfoUseCase,
     private val postFCMTokenUseCase: PostFCMTokenUseCase
-) : TeacherLobbyViewModel() {
+) : TeacherContainerViewModel() {
     override val teacherLobbyResponseLiveData = MutableLiveData<GotTeacherLobbyResponseSealed>()
 
     var firstTime = true

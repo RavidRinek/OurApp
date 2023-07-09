@@ -1,4 +1,4 @@
-package com.our.app.features.phase_one.teacherlobby
+package com.our.app.features.phase_one.teacherlobby.profile
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,8 @@ import androidx.fragment.app.viewModels
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTearcherProfileBinding
+import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerViewModel
+import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerViewModelImpl
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.app.utilities.extensions.loadImage
 import com.our.domain.features.phase_one.models.local.GotFirstPageInfo
@@ -14,9 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TeacherProfileFragment :
-    BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_tearcher_profile) {
+    BaseFragment<TeacherContainerViewModel>(R.layout.fragment_tearcher_profile) {
 
-    override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
+    override val viewModel: TeacherContainerViewModel by viewModels<TeacherContainerViewModelImpl>()
     private val binding by viewBinding(FragmentTearcherProfileBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
