@@ -1,4 +1,4 @@
-package com.our.app.features.phase_one.teacherlobby
+package com.our.app.features.phase_one.teacherlobby.teacher_lobby
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
