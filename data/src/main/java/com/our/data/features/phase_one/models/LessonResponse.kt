@@ -20,11 +20,13 @@ data class LessonResponse(
     @SerializedName("subjectBranchId")
     val subjectBranchId: Int? = null,
     @SerializedName("subjectName")
-    val subjectBranchName: String? = null,
+    val subjectName: String? = null,
     @SerializedName("teacherId")
     val teacherId: Int? = null,
     @SerializedName("teacherName")
-    val teacherName: String? = null
+    val teacherName: String? = null,
+    @SerializedName("subjectBranchName")
+    val subjectBranchName: String? = null
 ) : BaseResponse()
 
 fun LessonResponse.toDomain(): Lesson =
@@ -35,7 +37,8 @@ fun LessonResponse.toDomain(): Lesson =
         time = time ?: "15:30",
         ratingInPercentage = ratingInPercentage ?: 71,
         subjectBranchId = subjectBranchId ?: 0,
-        subjectBranchName = subjectBranchName ?: "Sponge Bob Square Pants",
+        subjectName = subjectName ?: "Sponge Bob Square Pants",
         teacherId = teacherId ?: 0,
-        teacherName = teacherName ?: "Elroy"
+        teacherName = teacherName ?: "Elroy",
+        subjectBranchName = subjectBranchName ?: "fdsfsd"
     )

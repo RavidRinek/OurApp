@@ -11,7 +11,8 @@ data class Lesson(
     val time: String,
     val ratingInPercentage: Int,
     val subjectBranchId: Int,
-    val subjectBranchName: String,
+    val subjectName: String,
     val teacherId: Int,
-    val teacherName: String
+    val teacherName: String,
+    val subjectBranchName: String
 ) : Parcelable

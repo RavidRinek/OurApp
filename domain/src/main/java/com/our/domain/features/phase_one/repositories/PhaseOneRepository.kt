@@ -15,4 +15,5 @@ interface PhaseOneRepository {
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile>
     suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<Unit>
     suspend fun postFcmToken(): Result<Unit>
+    suspend fun getTeacherOrders(teacherId: Int): Result<Unit>
 }

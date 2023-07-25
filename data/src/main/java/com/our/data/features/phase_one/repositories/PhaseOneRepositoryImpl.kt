@@ -50,4 +50,9 @@ class PhaseOneRepositoryImpl @Inject constructor(
         phaseOneDataSource.postCreateFcmToken().map {
             Unit
         }
+
+    override suspend fun getTeacherOrders(teacherId: Int): Result<Unit> =
+        phaseOneDataSource.getTeacherOrders(teacherId).map {
+            Unit
+        }
 }

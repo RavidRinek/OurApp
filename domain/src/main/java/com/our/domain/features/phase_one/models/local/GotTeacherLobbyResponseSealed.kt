@@ -11,6 +11,9 @@ object GotTeacherError : GotTeacherLobbyResponseSealed()
 
 data class GotFirstPageInfo(val teacherProfile: TeacherProfile) : GotTeacherLobbyResponseSealed()
 
-data class GotSubjectLevelsForTeacherKnowledgeInfo(val subjects: List<Subject>) : GotTeacherLobbyResponseSealed()
+data class GotSubjectLevelsForTeacherKnowledgeInfo(val subjects: List<Subject>) :
+    GotTeacherLobbyResponseSealed()
 
-object GotFcmToken: GotTeacherLobbyResponseSealed()
+object GotFcmToken : GotTeacherLobbyResponseSealed()
+
+object GotTeacherOrders : GotTeacherLobbyResponseSealed()

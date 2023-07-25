@@ -11,7 +11,7 @@
     android:paddingTop="11dp"
     android:paddingEnd="14dp"
     android:paddingBottom="11dp"
-    tools:context=".features.phase_one.teacherlobby.teacher_lobby.TeacherLobbyyFragment">
+    tools:context=".features.phase_one.teacherlobby.teacher_lobby.TeacherLobbyFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
