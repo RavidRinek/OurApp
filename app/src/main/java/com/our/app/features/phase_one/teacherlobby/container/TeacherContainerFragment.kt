@@ -27,7 +27,8 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class TeacherContainerFragment : BaseFragment<TeacherContainerViewModel>(R.layout.fragment_teacher_container) {
+class TeacherContainerFragment :
+    BaseFragment<TeacherContainerViewModel>(R.layout.fragment_teacher_container) {
 
     private var notificationBody: String = ""
 
@@ -118,6 +119,8 @@ class TeacherContainerFragment : BaseFragment<TeacherContainerViewModel>(R.layou
                 }
 
                 GotFcmToken -> TODO()
+
+                else -> Unit
             }
         }
 

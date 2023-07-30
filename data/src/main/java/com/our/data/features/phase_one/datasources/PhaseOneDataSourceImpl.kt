@@ -68,6 +68,12 @@ class PhaseOneDataSourceImpl @Inject constructor(
             call = { api.postTeacherInfo(teacherInfo = updateTeacherInfo) },
             errorMessage = "Cant update teacher info by: $updateTeacherInfo"
         )
+
+    override suspend fun getTeacherOrders(teacherId: Int): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.getTeacherOrders(teacherId) },
+            errorMessage = "Cant get teacher orders by teacherId: $teacherId"
+        )
 }
 
 data class PostToken(val userId: Int, val token: String)

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.our.app.R
 import com.our.app.base.BaseFragment
-import com.our.app.databinding.FragmentTeacherLobbyyBinding
+import com.our.app.databinding.FragmentTeacherLobbyBinding
 import com.our.app.utilities.bindingDelegates.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,11 +15,11 @@ private const val ARG_PARAM2 = "param2"
 
 
 @AndroidEntryPoint
-class TeacherLobbyyFragment :
-    BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_teacher_lobbyy) {
+class TeacherLobbyFragment :
+    BaseFragment<TeacherLobbyViewModel>(R.layout.fragment_teacher_lobby) {
 
     override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
-    private val binding by viewBinding(FragmentTeacherLobbyyBinding::bind)
+    private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
     private val teacherUpcomingLessonsAdapter = TeacherUpcomingLessonsAdapter(listOf())
 
 
@@ -42,7 +42,7 @@ class TeacherLobbyyFragment :
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            TeacherLobbyyFragment().apply {
+            TeacherLobbyFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -44,6 +44,9 @@ interface PhaseOneApiService {
         @Body teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo
     ): Response<BaseResponse>
 
+    @GET(GET_TEACHER_ORDERS)
+    suspend fun getTeacherOrders(@Query("teacherId") teacherId: Int): Response<BaseResponse>
+
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
@@ -52,5 +55,6 @@ interface PhaseOneApiService {
         const val POST_TEACHER_CREATE_INFO: String = "create-teacher"
         const val POST_CREATE_TOKEN: String = "create-token"
         const val POST_TEACHER_INFO: String = "update-teacher"
+        const val GET_TEACHER_ORDERS: String = "get-order"
     }
 }
