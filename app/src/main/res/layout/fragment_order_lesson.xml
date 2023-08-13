@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+    tools:context=".features.phase_one.studentlobby.OrderLessonFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_gravity="center_horizontal" />
-    <!--our app logo ^ -->
 
     <TextView
         android:id="@+id/subjectOfLesson"
@@ -21,7 +22,7 @@
         android:layout_gravity="center_horizontal"
         android:text="אנגלית"
         android:textColor="@color/black"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:textStyle="bold" />
 
     <TextView
@@ -194,7 +195,6 @@
                 android:paddingBottom="17dp"
                 android:tag="teacherName"
                 android:textColor="#FF3817" />
-
 
             <EditText
                 android:id="@+id/etPhone"

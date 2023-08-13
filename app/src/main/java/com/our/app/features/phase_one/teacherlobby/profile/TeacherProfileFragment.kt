@@ -3,9 +3,12 @@ package com.our.app.features.phase_one.teacherlobby.profile
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTearcherProfileBinding
+import com.our.app.features.phase_one.studentlobby.OrderLessonFragment
+import com.our.app.features.phase_one.studentlobby.OrderLessonUi
 import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerViewModel
 import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerViewModelImpl
 import com.our.app.utilities.bindingDelegates.viewBinding
@@ -21,10 +24,27 @@ class TeacherProfileFragment :
     override val viewModel: TeacherContainerViewModel by viewModels<TeacherContainerViewModelImpl>()
     private val binding by viewBinding(FragmentTearcherProfileBinding::bind)
 
+    private lateinit var teacherProfile: TeacherProfile
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.apply {
             viewModel.getTeacherById(getInt("teacherId"))
+        }
+        binding.btnStudentFindLesson.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_teacherProfileFragment_to_orderLessonFragment,
+                Bundle().apply {
+                    putParcelable(
+                        OrderLessonFragment.K_LESSON_INFO, OrderLessonUi(
+                            level = "fsdf",
+                            price = "fdsfsd",
+                            name = "fdsffdsfsddfs",
+                            time = "fdsfsdfsdfdsfsddf"
+                        )
+                    )
+                }
+            )
         }
     }
 
@@ -39,6 +59,7 @@ class TeacherProfileFragment :
     }
 
     private fun handleTeacherProfileResponse(teacherProfile: TeacherProfile) {
+        this.teacherProfile = teacherProfile
         teacherProfile.apply {
             binding.apply {
                 ivTeacherAvatar.loadImage(teacherAvatar)
