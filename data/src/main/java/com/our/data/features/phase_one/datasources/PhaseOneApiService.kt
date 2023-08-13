@@ -45,7 +45,7 @@ interface PhaseOneApiService {
     ): Response<BaseResponse>
 
     @GET(GET_TEACHER_ORDERS)
-    suspend fun getTeacherOrders(@Query("teacherId") teacherId: Int): Response<BaseResponse>
+    suspend fun getTeacherOrders(@Query("teacherId") teacherId: Int): Response<GetTeacherOrdersResponse>
 
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"

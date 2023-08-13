@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTeacherLobbyBinding
+import com.our.app.features.phase_one.teacherlobby.orders.TeacherOrdersFragment
 import com.our.app.utilities.bindingDelegates.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,15 +22,14 @@ class TeacherLobbyFragment :
 
     override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
-    private val teacherUpcomingLessonsAdapter = TeacherUpcomingLessonsAdapter(listOf())
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        viewModel.getTeacherUpcomingLessons()
     }
 
-    private fun initViews(){
+    private fun initViews() {
         binding.switchAvailableForLesson.setOnCheckedChangeListener { _, isChecked ->
             Toast.makeText(
                 requireContext(),
@@ -38,15 +39,33 @@ class TeacherLobbyFragment :
         }
     }
 
+    override fun observeData() {
+        super.observeData()
+        viewModel.teacherLobbyResponseLiveData.observe(viewLifecycleOwner) {
+            when (it.emitType) {
+                EmitType.NONE -> {
+                    println("teacherLobbyResponseLiveData: emitType: NONE")
+                }
+
+                EmitType.TEACHER_ORDERS -> {
+                    findNavController().navigate(
+                        R.id.action_teacherLobbyyFragment_to_teacherOrdersFragment,
+                        Bundle().apply {
+                            putSerializable(
+                                TeacherOrdersFragment.K_ORDERS,
+                                ArrayList(it.uiState.teacherOrders)
+                            )
+                        }
+                    )
+                }
+            }
+        }
+    }
+
     companion object {
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            TeacherLobbyFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+            TeacherLobbyFragment()
     }
 }

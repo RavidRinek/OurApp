@@ -7,6 +7,7 @@ import com.our.domain.base.models.map
 import com.our.domain.features.phase_one.models.remote.Lesson
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
+import com.our.domain.features.phase_one.models.remote.TeacherOrder
 import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import com.our.domain.features.phase_one.repositories.PhaseOneRepository
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
@@ -51,8 +52,8 @@ class PhaseOneRepositoryImpl @Inject constructor(
             Unit
         }
 
-    override suspend fun getTeacherOrders(teacherId: Int): Result<Unit> =
+    override suspend fun getTeacherOrders(teacherId: Int): Result<List<TeacherOrder>> =
         phaseOneDataSource.getTeacherOrders(teacherId).map {
-            Unit
+            (it as GetTeacherOrdersResponse).toDomain()
         }
 }
