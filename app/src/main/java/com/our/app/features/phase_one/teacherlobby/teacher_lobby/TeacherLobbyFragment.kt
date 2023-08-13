@@ -48,15 +48,19 @@ class TeacherLobbyFragment :
                 }
 
                 EmitType.TEACHER_ORDERS -> {
-                    findNavController().navigate(
-                        R.id.action_teacherLobbyyFragment_to_teacherOrdersFragment,
-                        Bundle().apply {
-                            putSerializable(
-                                TeacherOrdersFragment.K_ORDERS,
-                                ArrayList(it.uiState.teacherOrders)
-                            )
-                        }
-                    )
+                    binding.rvTeacherLessons.adapter =
+                        TeacherUpcomingLessonsAdapter(it.uiState.teacherOrders)
+                    /*
+                                        findNavController().navigate(
+                                            R.id.action_teacherLobbyyFragment_to_teacherOrdersFragment,
+                                            Bundle().apply {
+                                                putSerializable(
+                                                    TeacherOrdersFragment.K_ORDERS,
+                                                    ArrayList(it.uiState.teacherOrders)
+                                                )
+                                            }
+                                        )
+                    */
                 }
             }
         }
