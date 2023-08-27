@@ -4,6 +4,8 @@ import com.our.data.base.datasources.BaseRemoteDataSource
 import com.our.data.base.models.BaseResponse
 import com.our.data.common.datasources.MockApiService
 import com.our.domain.base.models.Result
+import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
+import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
@@ -43,6 +45,14 @@ class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiSer
     }
 
     override suspend fun getTeacherOrders(teacherId: Int): Result<BaseResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<BaseResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun postOrderLesson(orderLesson: PostOrderLessonUseCase.OrderInfo): Result<BaseResponse> {
         TODO("Not yet implemented")
     }
 }

@@ -5,11 +5,14 @@ import com.our.data.features.phase_one.models.*
 import com.our.domain.base.models.Result
 import com.our.domain.base.models.map
 import com.our.domain.features.phase_one.models.remote.Lesson
+import com.our.domain.features.phase_one.models.remote.Student
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
 import com.our.domain.features.phase_one.models.remote.TeacherOrder
 import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import com.our.domain.features.phase_one.repositories.PhaseOneRepository
+import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
+import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
@@ -55,5 +58,15 @@ class PhaseOneRepositoryImpl @Inject constructor(
     override suspend fun getTeacherOrders(teacherId: Int): Result<List<TeacherOrder>> =
         phaseOneDataSource.getTeacherOrders(teacherId).map {
             (it as GetTeacherOrdersResponse).toDomain()
+        }
+
+    override suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<Student> =
+        phaseOneDataSource.postStudentCreate(createStudent).map {
+            (it as GetStudentResponse).toDomain()
+        }
+
+    override suspend fun postOrderLesson(orderInfo: PostOrderLessonUseCase.OrderInfo): Result<Unit> =
+        phaseOneDataSource.postOrderLesson(orderInfo).map {
+            Unit
         }
 }

@@ -100,12 +100,12 @@
     </fragment>
     <fragment
         android:id="@+id/orderLessonFragment"
-        android:name="com.our.app.features.phase_one.studentlobby.OrderLessonFragment"
+        android:name="com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonFragment"
         android:label="fragment_order_lesson"
         tools:layout="@layout/fragment_order_lesson">
         <argument
             android:name="orderlessonui"
-            app:argType="com.our.app.features.phase_one.studentlobby.OrderLessonUi" />
+            app:argType="com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonUi" />
 
     </fragment>
 </navigation>

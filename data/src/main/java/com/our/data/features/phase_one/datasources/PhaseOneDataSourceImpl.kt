@@ -4,14 +4,15 @@ import com.our.data.base.datasources.BaseRemoteDataSource
 import com.our.data.base.datasources.Prefs
 import com.our.data.base.models.BaseResponse
 import com.our.domain.base.models.Result
+import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
+import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import javax.inject.Inject
 
 class PhaseOneDataSourceImpl @Inject constructor(
     private val api: PhaseOneApiService,
     private val prefs: Prefs
-) :
-    BaseRemoteDataSource(), PhaseOneDataSource {
+) : BaseRemoteDataSource(), PhaseOneDataSource {
 
     override suspend fun getSubjects(): Result<BaseResponse> =
         safeApiCall(
@@ -73,6 +74,18 @@ class PhaseOneDataSourceImpl @Inject constructor(
         safeApiCall(
             call = { api.getTeacherOrders(teacherId) },
             errorMessage = "Cant get teacher orders by teacherId: $teacherId"
+        )
+
+    override suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.postCreateStudent(student = createStudent) },
+            errorMessage = "Cant create user: $createStudent"
+        )
+
+    override suspend fun postOrderLesson(orderLesson: PostOrderLessonUseCase.OrderInfo): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.postOrderLesson(lesson = orderLesson) },
+            errorMessage = "Cant order lesson: $orderLesson"
         )
 }
 

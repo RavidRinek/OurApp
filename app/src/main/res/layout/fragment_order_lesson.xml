@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".features.phase_one.studentlobby.OrderLessonFragment">
+    tools:context=".features.phase_one.studentlobby.order_lesson.OrderLessonFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"

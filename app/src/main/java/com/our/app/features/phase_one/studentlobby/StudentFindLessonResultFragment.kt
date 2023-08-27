@@ -33,10 +33,11 @@ class StudentFindLessonResultFragment :
         lessons?.let {
             binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(it,
                 object : StudentFindLessonResultAdapter.OnStudentFindLessonResultAdapterListener {
-                    override fun showTeacherProfilerBtnClicked(teacherId: Int) {
+                    override fun showTeacherProfilerBtnClicked(teacherId: Int, lessonId: Int) {
                         findNavController().navigate(
                             R.id.action_studentFindLessonResultFragment_to_teacherProfileFragment,
                             Bundle().apply {
+                                putInt("lessonId", lessonId)
                                 putInt("teacherId", teacherId)
                             }
                         )

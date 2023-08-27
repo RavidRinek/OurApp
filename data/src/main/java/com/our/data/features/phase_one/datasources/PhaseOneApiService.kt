@@ -6,6 +6,8 @@ import com.our.data.features.phase_one.models.FireBaseResponse
 import com.our.data.features.phase_one.models.LessonsResponse
 import com.our.data.features.phase_one.models.SubjectBranchesResponse
 import com.our.data.features.phase_one.models.SubjectsResponse
+import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
+import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import retrofit2.Response
 import retrofit2.http.*
@@ -47,6 +49,18 @@ interface PhaseOneApiService {
     @GET(GET_TEACHER_ORDERS)
     suspend fun getTeacherOrders(@Query("teacherId") teacherId: Int): Response<GetTeacherOrdersResponse>
 
+    @POST(POST_CREATE_STUDENT)
+    suspend fun postCreateStudent(
+        @Header("Content-Type") fsd: String = "application/json",
+        @Body student: PostStudentCreateUseCase.CreateStudent
+    ): Response<GetStudentResponse>
+
+    @POST(POST_ORDER_LESSON)
+    suspend fun postOrderLesson(
+        @Header("Content-Type") fsd: String = "application/json",
+        @Body lesson: PostOrderLessonUseCase.OrderInfo
+    ): Response<BaseResponse>
+
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
@@ -56,5 +70,7 @@ interface PhaseOneApiService {
         const val POST_CREATE_TOKEN: String = "create-token"
         const val POST_TEACHER_INFO: String = "update-teacher"
         const val GET_TEACHER_ORDERS: String = "get-order"
+        const val POST_CREATE_STUDENT: String = "student"
+        const val POST_ORDER_LESSON: String = "new-order"
     }
 }

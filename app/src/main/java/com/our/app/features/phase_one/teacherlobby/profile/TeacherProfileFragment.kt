@@ -7,8 +7,8 @@ import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTearcherProfileBinding
-import com.our.app.features.phase_one.studentlobby.OrderLessonFragment
-import com.our.app.features.phase_one.studentlobby.OrderLessonUi
+import com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonFragment
+import com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonUi
 import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerViewModel
 import com.our.app.features.phase_one.teacherlobby.container.TeacherContainerViewModelImpl
 import com.our.app.utilities.bindingDelegates.viewBinding
@@ -43,6 +43,7 @@ class TeacherProfileFragment :
                             time = "fdsfsdfsdfdsfsddf"
                         )
                     )
+                    putInt("lessonId", arguments?.getInt("lessonId") ?: 0)
                 }
             )
         }
