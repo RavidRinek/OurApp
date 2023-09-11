@@ -6,6 +6,7 @@ import com.our.domain.base.models.Result
 import com.our.domain.base.models.map
 import com.our.domain.features.phase_one.models.remote.Lesson
 import com.our.domain.features.phase_one.models.remote.Student
+import com.our.domain.features.phase_one.models.remote.StudentLessonOffers
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
 import com.our.domain.features.phase_one.models.remote.TeacherOrder
@@ -30,8 +31,8 @@ class PhaseOneRepositoryImpl @Inject constructor(
             (it as SubjectBranchesResponse).toDomain()
         }
 
-    override suspend fun getLessons(subjectBranchId: Int): Result<List<Lesson>> =
-        phaseOneDataSource.getLessons(subjectBranchId).map {
+    override suspend fun getLessons(levels: String): Result<List<StudentLessonOffers>> =
+        phaseOneDataSource.getLessons(levels).map {
             (it as LessonsResponse).toDomain()
         }
 

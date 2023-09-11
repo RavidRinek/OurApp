@@ -10,9 +10,9 @@ import javax.inject.Inject
 
 class GetLessonsUseCase @Inject constructor(
     private val phaseOneRepository: PhaseOneRepository
-) : BaseSuspendedUseCase<Int, GotStudentLobbyResponseSealed>() {
+) : BaseSuspendedUseCase<String, GotStudentLobbyResponseSealed>() {
 
-    override suspend fun invoke(param: Int): GotStudentLobbyResponseSealed =
+    override suspend fun invoke(param: String): GotStudentLobbyResponseSealed =
         when (val res = phaseOneRepository.getLessons(param)) {
             is Result.Success -> {
                 if (res.data.isEmpty()) {

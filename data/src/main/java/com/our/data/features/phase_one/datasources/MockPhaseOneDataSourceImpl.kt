@@ -24,7 +24,7 @@ class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiSer
             errorMessage = "Cant get any subject branches"
         )
 
-    override suspend fun getLessons(subjectBranchId: Int): Result<BaseResponse> {
+    override suspend fun getLessons(levels: String): Result<BaseResponse> {
         TODO("Not yet implemented")
     }
 

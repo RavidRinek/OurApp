@@ -20,8 +20,8 @@ interface PhaseOneApiService {
     @GET(GET_SUBJECT_BRANCHES_END_POINT)
     suspend fun getSubjectBranches(@Query("subjectId") subjectId: Int): Response<SubjectBranchesResponse>
 
-    @GET(GET_LESSONS_END_POINT)
-    suspend fun getLessons(@Query("subjectBranchId") subjectBranch: Int): Response<LessonsResponse>
+    @GET("$GET_LESSONS_END_POINT/{levels}")
+    suspend fun getLessons(@Path("levels") levels: String): Response<LessonsResponse>
 
     @GET(GET_TEACHER_BY_ID)
     suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<GetTeacherResponse>
@@ -64,7 +64,7 @@ interface PhaseOneApiService {
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
-        const val GET_LESSONS_END_POINT: String = "get-lessons-by-subject-branch-id"
+        const val GET_LESSONS_END_POINT: String = "get-lessons-by-subject-id"
         const val GET_TEACHER_BY_ID: String = "get-teacher"
         const val POST_TEACHER_CREATE_INFO: String = "create-teacher"
         const val POST_CREATE_TOKEN: String = "create-token"
@@ -72,5 +72,7 @@ interface PhaseOneApiService {
         const val GET_TEACHER_ORDERS: String = "get-order"
         const val POST_CREATE_STUDENT: String = "student"
         const val POST_ORDER_LESSON: String = "new-order"
+        const val GET_LESSONS_BY_LEVEL_ID: String = "new-order"
+
     }
 }

@@ -25,6 +25,7 @@ class TeacherOrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        println("TeacherOrdersFragment: onViewCreated")
         teacherUpcomingLessonsAdapter =
             TeacherUpcomingLessonsAdapter(arguments?.getSerializable(K_ORDERS) as List<TeacherOrder>)
         binding.rvTeacherLessons.adapter = teacherUpcomingLessonsAdapter

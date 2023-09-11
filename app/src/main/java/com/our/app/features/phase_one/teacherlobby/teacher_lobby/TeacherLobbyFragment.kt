@@ -48,9 +48,9 @@ class TeacherLobbyFragment :
                 }
 
                 EmitType.TEACHER_ORDERS -> {
-                    binding.rvTeacherLessons.adapter =
-                        TeacherUpcomingLessonsAdapter(it.uiState.teacherOrders)
-                    /*
+                    println("teacherLobbyResponseLiveData: emitType: TEACHER_ORDERS")
+//                    binding.rvTeacherLessons.adapter =
+//                        TeacherUpcomingLessonsAdapter(it.uiState.teacherOrders)
                                         findNavController().navigate(
                                             R.id.action_teacherLobbyyFragment_to_teacherOrdersFragment,
                                             Bundle().apply {
@@ -60,7 +60,6 @@ class TeacherLobbyFragment :
                                                 )
                                             }
                                         )
-                    */
                 }
             }
         }

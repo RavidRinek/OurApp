@@ -27,7 +27,7 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
             binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
         }
         binding.btnStudentFindLesson.setOnClickListener {
-            viewModel.getLessons(subjectBranchId)
+            viewModel.getLessons(binding.subjectSpinnerMain.listOfPickedBranchLevels)
         }
         viewModel.getSubjects()
     }
@@ -43,7 +43,8 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
                     )
                 is GotLessons -> {
                     val bundle = Bundle()
-                    bundle.putParcelableArrayList(LESSONS, ArrayList(it.lessons))
+                    val a =it.lessons.map { it.lesson }
+                    bundle.putParcelableArrayList(LESSONS, ArrayList(a))
                     findNavController().navigate(
                         R.id.action_studentLobbyFragment_to_studentFindLessonResultFragment,
                         bundle
@@ -73,6 +74,10 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
                             viewModel.getSubjectBranches(baseSubject.id)
                         }
                     }
+                }
+
+                override fun itemClicked(lessonId: Int) {
+
                 }
             })
     }

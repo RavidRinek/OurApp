@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.our.app.R
 import com.our.app.databinding.CvStudentSubjectsSpinnerBinding
@@ -18,6 +19,7 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
     private val view: View = LayoutInflater.from(context)
         .inflate(R.layout.cv_student_subjects_spinner, this, true)
     private val viewBinding = CvStudentSubjectsSpinnerBinding.bind(view)
+    var listOfPickedBranchLevels = ArrayList<Int>()
     private var listOfPickedBranches: ArrayList<BaseSubject> = ArrayList()
 
     init {
@@ -67,8 +69,13 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
                         handleItemMainClick(baseSubject.name)
                         listener.itemClicked(baseSubject)
                     }
+
                     SubjectsSpinnerAdapter.SubjectMode.BRANCH -> handleItemBranchClick(baseSubject)
                 }
+            }
+
+            override fun itemClicked(lessonId: Int) {
+                handleItemBranchLevelClick(lessonId)
             }
         }
         viewBinding.rvSubjectsSpinner.adapter =
@@ -80,6 +87,14 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
         viewBinding.tvSubjectsSpinnerPick.apply {
             text = subjectName
             isVisible = true
+        }
+    }
+
+    private fun handleItemBranchLevelClick(id: Int) {
+        if (listOfPickedBranchLevels.contains(id)) {
+            listOfPickedBranchLevels.remove(id)
+        } else {
+            listOfPickedBranchLevels.add(id)
         }
     }
 
@@ -97,6 +112,7 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
                     text = listOfPickedBranches.first().name
                     isVisible = true
                 }
+
                 else -> {
                     text = "${listOfPickedBranches.size} נבחרו"
                     isVisible = true

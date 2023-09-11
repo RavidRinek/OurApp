@@ -77,7 +77,10 @@
             app:argType="com.our.domain.features.phase_one.models.remote.Subject" />
         <action
             android:id="@+id/action_teacherKnowlageInfoFragment_to_teacherLobbyyFragment"
-            app:destination="@id/teacherLobbyyFragment" />
+            app:destination="@id/teacherLobbyyFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav_graph"
+            app:popUpToInclusive="true" />
 
     </fragment>
     <fragment

@@ -22,6 +22,7 @@ class SubjectsSpinnerAdapter(
 
     interface OnSubjectsSpinnerAdapterListener {
         fun itemClicked(baseSubject: BaseSubject)
+        fun itemClicked(lessonId: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

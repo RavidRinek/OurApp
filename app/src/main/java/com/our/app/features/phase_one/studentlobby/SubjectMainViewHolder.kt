@@ -33,13 +33,25 @@ class SubjectMainViewHolder(
                     (llLevelContainer.getChildAt(i) as TextView).apply {
                         val subjectLevel = subject.subjectLevel.getOrNull(i)
                         text = subjectLevel?.name
-                        setOnClickListener { it.isSelected = !it.isSelected }
+                        setOnClickListener {
+                            it.isSelected = !it.isSelected
+                            listener.itemClicked(subject.subjectLevel[i].id)
+                        }
                     }
                 }
 
                 cbSelectAll.setOnCheckedChangeListener { _, isChecked ->
+                    if (tvSubjectFirst.isSelected != isChecked) {
+                        listener.itemClicked(subject.subjectLevel[2].id)
+                    }
                     tvSubjectFirst.isSelected = isChecked
+                    if (tvSubjectSecond.isSelected != isChecked) {
+                        listener.itemClicked(subject.subjectLevel[1].id)
+                    }
                     tvSubjectSecond.isSelected = isChecked
+                    if (tvSubjectThird.isSelected != isChecked) {
+                        listener.itemClicked(subject.subjectLevel[0].id)
+                    }
                     tvSubjectThird.isSelected = isChecked
                 }
             }

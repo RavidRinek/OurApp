@@ -14,7 +14,7 @@ abstract class StudentLobbyViewModel : BaseViewModelImpl() {
     abstract val studentLobbyResponseLiveData: LiveData<GotStudentLobbyResponseSealed>
     abstract fun getSubjects()
     abstract fun getSubjectBranches(subjectId: Int)
-    abstract fun getLessons(subjectBranchId: Int)
+    abstract fun getLessons(levels: List<Int>)
 }
 
 @HiltViewModel
@@ -38,9 +38,14 @@ class StudentLobbyViewModelImpl @Inject constructor(
         }
     }
 
-    override fun getLessons(subjectBranchId: Int) {
+    override fun getLessons(levels: List<Int>) {
         launch {
-            studentLobbyResponseLiveData.postValue(getLessonsUseCase.invoke(subjectBranchId))
+            var txt = ""
+            levels.forEach {
+                txt = "$txt$it,"
+            }
+            txt = txt.substring(0, txt.length - 1);
+            studentLobbyResponseLiveData.postValue(getLessonsUseCase.invoke(txt))
         }
     }
 }
