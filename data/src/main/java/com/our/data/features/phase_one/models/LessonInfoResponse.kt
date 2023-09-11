@@ -7,18 +7,18 @@ import com.our.domain.features.phase_one.models.remote.LessonInfo
 @Keep
 data class LessonInfoResponse(
     @SerializedName("id")
-    val id: Int,
+    val id: Int? = null,
     @SerializedName("additionalInfo")
-    val additionalInfo: String,
+    val additionalInfo: String? = null,
     @SerializedName("teacherId")
-    val teacherId: Int,
+    val teacherId: Int? = null,
     @SerializedName("pricePer40m")
-    val pricePer40m: Int,
+    val pricePer40m: Int? = null,
     @SerializedName("pricePer60m")
-    val pricePer60m: Int
+    val pricePer60m: Int? = null
 )
 
 fun LessonInfoResponse.toDomain(): LessonInfo =
     LessonInfo(
-        id, additionalInfo, teacherId, pricePer40m, pricePer60m
+        id ?: 0, additionalInfo ?: "", teacherId ?: 0, pricePer40m ?: 0, pricePer60m ?: 0
     )
