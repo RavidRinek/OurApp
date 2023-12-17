@@ -46,7 +46,10 @@
             app:destination="@id/teacherKnowlageInfoFragment" />
         <action
             android:id="@+id/action_teacherLobbyFragment_to_teacherLobbyyFragment"
-            app:destination="@id/teacherLobbyyFragment" />
+            app:destination="@id/teacherLobbyyFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav_graph"
+            app:popUpToInclusive="true"/>
 
     </fragment>
     <fragment
@@ -90,7 +93,7 @@
         tools:layout="@layout/fragment_teacher_lobby">
         <action
             android:id="@+id/action_teacherLobbyyFragment_to_teacherOrdersFragment"
-            app:destination="@id/teacherOrdersFragment" />
+            app:destination="@id/teacherOrdersFragment"/>
     </fragment>
     <fragment
         android:id="@+id/teacherOrdersFragment"
