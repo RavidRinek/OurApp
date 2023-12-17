@@ -31,7 +31,7 @@ class PickMemberTypeFragment : Fragment() {
         }
 
         binding.btnTeacher.setOnClickListener {
-            findNavController().navigate(R.id.action_pickMemberTypeFragment_to_teacherLobbyFragment)
+            findNavController().navigate(R.id.action_pickMemberTypeFragment_to_teacherContainerFragment)
         }
     }
 

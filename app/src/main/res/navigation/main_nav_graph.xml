@@ -15,6 +15,8 @@
             app:destination="@id/pickMemberTypeFragment"
             app:popUpTo="@id/main_nav_graph" />
     </fragment>
+
+
     <fragment
         android:id="@+id/pickMemberTypeFragment"
         android:name="com.our.app.features.phase_one.PickMemberTypeFragment"
@@ -24,9 +26,11 @@
             android:id="@+id/action_pickMemberTypeFragment_to_studentLobbyFragment"
             app:destination="@id/studentLobbyFragment" />
         <action
-            android:id="@+id/action_pickMemberTypeFragment_to_teacherLobbyFragment"
-            app:destination="@id/teacherLobbyFragment" />
+            android:id="@+id/action_pickMemberTypeFragment_to_teacherContainerFragment"
+            app:destination="@id/teacherContainerFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/studentLobbyFragment"
         android:name="com.our.app.features.phase_one.studentlobby.StudentLobbyFragment"
@@ -36,22 +40,28 @@
             android:id="@+id/action_studentLobbyFragment_to_studentFindLessonResultFragment"
             app:destination="@id/studentFindLessonResultFragment" />
     </fragment>
+
+
     <fragment
-        android:id="@+id/teacherLobbyFragment"
+        android:id="@+id/teacherContainerFragment"
         android:name="com.our.app.features.phase_one.teacherlobby.container.TeacherContainerFragment"
         android:label="fragment_teacher_lobby"
         tools:layout="@layout/fragment_teacher_container">
         <action
-            android:id="@+id/action_teacherLobbyFragment_to_teacherKnowlageInfoFragment"
+            android:id="@+id/action_teacherContainerFragment_to_teacherPersonalInfoFragment"
+            app:destination="@id/teacherPersonalInfoFragment" />
+        <action
+            android:id="@+id/action_teacherContainerFragment_to_teacherKnowlageInfoFragment"
             app:destination="@id/teacherKnowlageInfoFragment" />
         <action
-            android:id="@+id/action_teacherLobbyFragment_to_teacherLobbyyFragment"
-            app:destination="@id/teacherLobbyyFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/main_nav_graph"
-            app:popUpToInclusive="true"/>
-
+            android:id="@+id/action_teacherContainerFragment_to_teacherLobbyFragment"
+            app:destination="@id/teacherLobbyFragment" />
+        <action
+            android:id="@+id/action_teacherContainerFragment_to_teacherLobbyFragment2"
+            app:destination="@id/teacherLobbyFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/studentFindLessonResultFragment"
         android:name="com.our.app.features.phase_one.studentlobby.StudentFindLessonResultFragment"
@@ -61,6 +71,8 @@
             android:id="@+id/action_studentFindLessonResultFragment_to_teacherProfileFragment"
             app:destination="@id/teacherProfileFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/teacherProfileFragment"
         android:name="com.our.app.features.phase_one.teacherlobby.profile.TeacherProfileFragment"
@@ -70,6 +82,8 @@
             android:id="@+id/action_teacherProfileFragment_to_orderLessonFragment"
             app:destination="@id/orderLessonFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/teacherKnowlageInfoFragment"
         android:name="com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment"
@@ -79,31 +93,22 @@
             android:name="subject"
             app:argType="com.our.domain.features.phase_one.models.remote.Subject" />
         <action
-            android:id="@+id/action_teacherKnowlageInfoFragment_to_teacherLobbyyFragment"
-            app:destination="@id/teacherLobbyyFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/main_nav_graph"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_teacherKnowlageInfoFragment_to_teacherLobbyFragment"
+            app:destination="@id/teacherLobbyFragment" />
+        <action
+            android:id="@+id/action_teacherKnowlageInfoFragment_to_teacherPersonalInfoFragment"
+            app:destination="@id/teacherPersonalInfoFragment" />
 
     </fragment>
+
+
     <fragment
-        android:id="@+id/teacherLobbyyFragment"
+        android:id="@+id/teacherLobbyFragment"
         android:name="com.our.app.features.phase_one.teacherlobby.teacher_lobby.TeacherLobbyFragment"
-        android:label="fragment_teacher_lobbyy"
-        tools:layout="@layout/fragment_teacher_lobby">
-        <action
-            android:id="@+id/action_teacherLobbyyFragment_to_teacherOrdersFragment"
-            app:destination="@id/teacherOrdersFragment"/>
-    </fragment>
-    <fragment
-        android:id="@+id/teacherOrdersFragment"
-        android:name="com.our.app.features.phase_one.teacherlobby.orders.TeacherOrdersFragment"
-        android:label="fragment_teacher_orders"
-        tools:layout="@layout/fragment_teacher_orders">
-        <argument
-            android:name="teacherorders"
-            app:argType="com.our.domain.features.phase_one.models.remote.TeacherOrder" />
-    </fragment>
+        android:label="fragment_teacher_lobby"
+        tools:layout="@layout/fragment_teacher_lobby"/>
+
+
     <fragment
         android:id="@+id/orderLessonFragment"
         android:name="com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonFragment"
@@ -114,4 +119,15 @@
             app:argType="com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonUi" />
 
     </fragment>
+    <fragment
+        android:id="@+id/teacherPersonalInfoFragment"
+        android:name="com.our.app.features.phase_one.teacherlobby.personal_info.TeacherPersonalInfoFragment"
+        android:label="fragment_teacher_personal_info"
+        tools:layout="@layout/fragment_teacher_personal_info" >
+        <action
+            android:id="@+id/action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment"
+            app:destination="@id/teacherKnowlageInfoFragment" />
+    </fragment>
+
+
 </navigation>
