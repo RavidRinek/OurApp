@@ -2,10 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.phase_one.teacherlobby.container.TeacherContainerFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/clContainer">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"
@@ -34,7 +42,7 @@
         android:layout_height="47dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="36dp"
+       android:layout_margin="36dp"
         android:background="@drawable/rec_ff3817_rad_12"
         android:gravity="center"
         android:text="שלב הבא!"
@@ -42,12 +50,17 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvTeacherCreateInfo" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupCreateTeacher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="cvLogoHeaderUtil,cvTeacherCreateInfo,btnTeacherCreateInfo" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

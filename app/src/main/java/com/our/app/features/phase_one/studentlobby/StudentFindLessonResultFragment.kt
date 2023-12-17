@@ -2,6 +2,7 @@ package com.our.app.features.phase_one.studentlobby
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
@@ -44,8 +45,16 @@ class StudentFindLessonResultFragment :
                     }
 
                     override fun orderALessonBtnClicked() {
+                        showPopUpClassInfo(childFragmentManager)
+                    }
+
+                    private fun showPopUpClassInfo(supportFragmentManager: Any) {
+                        val popupClassInfo = popUpClassInfo()
+                        popupClassInfo.show(childFragmentManager, "popUpClassInfo")
                     }
                 })
         }
+
+
     }
 }

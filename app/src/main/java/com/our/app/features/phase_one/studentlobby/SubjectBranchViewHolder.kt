@@ -14,13 +14,13 @@ class SubjectBranchViewHolder(
 //    private val cbSpinnerSubBranchResult: CheckBox = itemView.cbSpinnerSubBranchResult
 
     override fun bind(baseSubject: BaseSubject) {
-/*
-        cbSpinnerSubBranchResult.apply {
-            text = baseSubject.name
-            cbSpinnerSubBranchResult.setOnClickListener {
-                listener.itemClicked(baseSubject)
-            }
-        }
-*/
+        /*
+                cbSpinnerSubBranchResult.apply {
+                    text = baseSubject.name
+                    cbSpinnerSubBranchResult.setOnClickListener {
+                        listener.itemClicked(baseSubject)
+                    }
+                }
+        */
     }
 }
