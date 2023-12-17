@@ -99,6 +99,7 @@ class Prefs(context: Context) {
         }
 
         const val MEMBER_ID: String = "memberId"
+        const val STUDENT_ID: String = "studentId"
         const val FCM_TOKEN: String = "firebaseFcmToken"
         const val COMPLETED_TEACHER_REGISTRATION = "completed_both_create_and_update_teacher"
     }

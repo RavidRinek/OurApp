@@ -3,11 +3,13 @@ package com.our.app.features.phase_one.studentlobby.order_lesson
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentOrderLessonBinding
 import com.our.app.utilities.bindingDelegates.viewBinding
+import com.our.data.base.datasources.Prefs
 import com.our.domain.features.phase_one.models.local.GotCreatedStudent
 import com.our.domain.features.phase_one.models.local.GotOrderedLesson
 import com.our.domain.features.phase_one.models.local.GotStudentError
@@ -15,6 +17,7 @@ import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
 import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -24,8 +27,17 @@ class OrderLessonFragment :
     override val viewModel: OrderLessonViewModel by viewModels<OrderLessonViewModelImpl>()
     private val binding by viewBinding(FragmentOrderLessonBinding::bind)
 
+    @Inject
+    lateinit var prefs: Prefs
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (prefs.getInt(Prefs.STUDENT_ID) > 0) {
+            binding.tvStudentHeader.visibility = View.GONE
+            binding.cvStudentContainer.visibility = View.GONE
+            binding.agreement.visibility = View.GONE
+        }
+
         (arguments?.getParcelable(K_LESSON_INFO) as? OrderLessonUi)?.let {
             binding.apply {
                 levelOfClass.text = it.level
@@ -34,13 +46,17 @@ class OrderLessonFragment :
                 lessonDate.text = it.time
 
                 reserveButton.setOnClickListener {
-                    viewModel.createStudent(
-                        PostStudentCreateUseCase.CreateStudent(
-                            studentName = etName.text.toString(),
-                            studentLastName = etMail.text.toString(),
-                            studentPhone = etPhone.text.toString()
+                    if (prefs.getInt(Prefs.STUDENT_ID) > 0) {
+                        orderLesson()
+                    } else {
+                        viewModel.createStudent(
+                            PostStudentCreateUseCase.CreateStudent(
+                                studentName = etName.text.toString(),
+                                studentLastName = etMail.text.toString(),
+                                studentPhone = etPhone.text.toString()
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
@@ -56,14 +72,10 @@ class OrderLessonFragment :
 
                 is GotCreatedStudent -> {
                     println("${OrderLessonFragment::class.java.simpleName} GotCreatedStudent")
-                    arguments?.apply {
-                    viewModel.orderLesson(
-                        PostOrderLessonUseCase.OrderInfo(
-                            studentId = it.student.id,
-                            lessonId = arguments?.getInt("lessonId") ?: 0
-                        )
-                    )
+                    if (it.student.id > 0 && !prefs.contains(Prefs.STUDENT_ID)) {
+                        prefs.putInt(Prefs.STUDENT_ID, it.student.id)
                     }
+                    orderLesson()
                 }
 
                 GotOrderedLesson -> {
@@ -74,6 +86,17 @@ class OrderLessonFragment :
                     println("${OrderLessonFragment::class.java.simpleName} ELSE")
                 }
             }
+        }
+    }
+
+    private fun orderLesson() {
+        arguments?.apply {
+            viewModel.orderLesson(
+                PostOrderLessonUseCase.OrderInfo(
+                    studentId = prefs.getInt(Prefs.STUDENT_ID),
+                    lessonId = arguments?.getInt("lessonId") ?: 0
+                )
+            )
         }
     }
 
