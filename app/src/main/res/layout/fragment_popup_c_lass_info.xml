@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.phase_one.studentlobby.popupCLassInfo">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:elevation="14dp"
+        android:padding="7dp"
+        app:cardCornerRadius="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/tvTeacherNameKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:text="מורה:"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/tvTeacherNameVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="שרה יחיאל"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTeacherNameKey"
+                app:layout_constraintEnd_toStartOf="@+id/tvTeacherNameKey"
+                app:layout_constraintTop_toTopOf="@+id/tvTeacherNameKey" />
+
+            <TextView
+                android:id="@+id/tvTeacherPriceKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:text="מחיר:"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tvTeacherNameKey"
+                app:layout_constraintTop_toBottomOf="@+id/tvTeacherNameKey" />
+
+            <TextView
+                android:id="@+id/tvTeacherPriceVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="40$"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTeacherPriceKey"
+                app:layout_constraintEnd_toStartOf="@+id/tvTeacherPriceKey"
+                app:layout_constraintTop_toTopOf="@+id/tvTeacherPriceKey" />
+
+            <ImageView
+                android:id="@+id/ivTeacherAvatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="36dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTeacherPriceKey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTeacherNameKey"
+                app:layout_constraintVertical_bias="0.0"
+                tools:srcCompat="@tools:sample/avatars" />
+
+
+            <TextView
+                android:id="@+id/tvOrderLesson"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="44dp"
+
+                android:gravity="center"
+                android:text="WWW.TOTOHAGEVER.GOOGLEMEETING.COM"
+                android:textColor="#0000FF"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivTeacherAvatar" />
+
+            <View
+                android:id="@+id/viewBorder"
+                android:layout_width="match_parent"
+                android:layout_height="0.7dp"
+                android:layout_marginTop="14dp"
+                android:background="#2BE4D7D7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOrderLesson" />
+
+            <TextView
+                android:id="@+id/tvLessonDateKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="14dp"
+                android:layout_marginBottom="14dp"
+                android:text="שעה:"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewBorder" />
+
+            <TextView
+                android:id="@+id/tvLessonDateVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="15:00"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLessonDateKey"
+                app:layout_constraintEnd_toStartOf="@+id/tvLessonDateKey"
+                app:layout_constraintTop_toTopOf="@+id/tvLessonDateKey" />
+
+            <TextView
+                android:id="@+id/tvLessonRatingKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="17dp"
+                android:text="דירוג:"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLessonDateVal"
+                app:layout_constraintEnd_toStartOf="@+id/tvLessonDateVal"
+                app:layout_constraintTop_toTopOf="@+id/tvLessonDateVal" />
+
+            <RatingBar
+                android:id="@+id/rbLessonRatingVal"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:progressTint="#FFC107"
+                android:rating="3.5"
+                app:layout_constraintBottom_toBottomOf="@+id/tvLessonRatingKey"
+                app:layout_constraintEnd_toStartOf="@+id/tvLessonRatingKey"
+                app:layout_constraintTop_toTopOf="@+id/tvLessonRatingKey" />
+
+            <TextView
+                android:id="@+id/tvDuringInMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rec_ff3817_rad_6"
+                android:gravity="center"
+                android:paddingHorizontal="7dp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/rbLessonRatingVal"
+                app:layout_constraintEnd_toStartOf="@+id/rbLessonRatingVal"
+                app:layout_constraintHorizontal_bias="0.202"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rbLessonRatingVal"
+                app:layout_constraintVertical_bias="0.666"
+                tools:text="40 דק׳" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>
