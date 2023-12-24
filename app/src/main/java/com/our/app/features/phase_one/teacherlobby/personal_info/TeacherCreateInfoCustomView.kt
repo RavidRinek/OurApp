@@ -1,4 +1,4 @@
-package com.our.app.features.phase_one.teacherlobby.create
+package com.our.app.features.phase_one.teacherlobby.personal_info
 
 import android.content.Context
 import android.util.AttributeSet

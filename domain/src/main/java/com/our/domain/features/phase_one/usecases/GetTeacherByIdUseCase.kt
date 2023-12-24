@@ -12,7 +12,7 @@ class GetTeacherByIdUseCase @Inject constructor(
 
     override suspend fun invoke(param: Int): GotTeacherLobbyResponseSealed =
         when (val res = phaseOneRepository.getTeacherById(param)) {
-            is Result.Success -> GotFirstPageInfo(res.data)
+            is Result.Success -> GotTeacherPersonalInfo(res.data)
             is Result.Error -> GotTeacherError
         }
 }

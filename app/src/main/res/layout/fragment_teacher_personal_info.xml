@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.phase_one.teacherlobby.personal_info.TeacherPersonalInfoFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="6dp"
+        app:chainUseRtl="true">
+
+        <LinearLayout
+            android:id="@+id/llInfoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_name"
+                android:hint="שם פרטי"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherName"
+                android:textColor="#FF3817"
+                tools:text="שרה" />
+
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_name"
+                android:hint="שם משפחה"
+                android:inputType="text"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherLastName"
+                android:textColor="#FF3817" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_phone"
+                android:gravity="right|center|center_vertical"
+                android:hint="מספר טלפון"
+                android:inputType="phone|number"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherPhone"
+                android:textColor="#FF3817" />
+
+            <EditText
+                android:id="@+id/etMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_mail"
+                android:hint="כתובת מייל"
+                android:inputType="textEmailAddress"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherMail"
+                android:textColor="#FF3817" />
+
+            <EditText
+                android:id="@+id/etBd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_bd"
+                android:hint="תאריך לידה"
+                android:inputType="date"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherBirthday"
+                android:textColor="#FF3817" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:drawableStart="@drawable/create_teacher_info_location"
+                android:hint="כתובת מלאה"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="17dp"
+                android:tag="teacherAddress"
+                android:textColor="#FF3817" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/btnTeacherCreateInfo"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/rec_ff3817_rad_12"
+        android:gravity="center"
+        android:text="שלב הבא!"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</FrameLayout>
