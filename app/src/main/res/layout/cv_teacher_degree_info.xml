@@ -68,6 +68,6 @@
             android:hint="שם התואר"
             android:layout_marginTop="12dp"
             android:textColor="@color/black" />
-
     </LinearLayout>
+
 </LinearLayout>
