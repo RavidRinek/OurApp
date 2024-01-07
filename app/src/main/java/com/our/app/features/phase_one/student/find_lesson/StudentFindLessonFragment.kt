@@ -45,10 +45,7 @@ class StudentFindLessonFragment :
             //todo moved subjects IDS to 'StudentFindLessonResultFragment
 //            Toast.makeText(requireContext(), "XXX", Toast.LENGTH_SHORT).show()
             val array = ArrayList<Int>()
-            array.add(5)
-            array.add(5)
-            array.add(5)
-            array.add(5)
+            array.add(11)
             findNavController().navigate(
                 R.id.action_studentFindLessonFragment_to_studentFindLessonResultFragment,
                 Bundle().apply {
