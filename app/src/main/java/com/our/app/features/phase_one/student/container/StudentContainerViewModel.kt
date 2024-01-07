@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import com.our.app.base.BaseViewModelImpl
 import com.our.app.base.DisplayProgressTypes
 import com.our.data.base.datasources.Prefs
-import com.our.domain.features.phase_one.models.local.GotStudentLobbyResponseSealed
+import com.our.domain.features.phase_one.models.local.GotStudentResponseSealed
 import com.our.domain.features.phase_one.models.local.GotStudentPersonalInfo
 import com.our.domain.features.phase_one.usecases.GetStudentByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 abstract class StudentContainerViewModel : BaseViewModelImpl() {
-    abstract val studentLobbyResponseLiveData: LiveData<GotStudentLobbyResponseSealed>
+    abstract val studentLobbyResponseLiveData: LiveData<GotStudentResponseSealed>
     abstract fun getStudentById(studentId: Int)
 }
 
@@ -22,7 +22,7 @@ class StudentContainerViewModelImpl @Inject constructor(
     private val getStudentByIdUseCase: GetStudentByIdUseCase
 ) : StudentContainerViewModel() {
 
-    override val studentLobbyResponseLiveData = MutableLiveData<GotStudentLobbyResponseSealed>()
+    override val studentLobbyResponseLiveData = MutableLiveData<GotStudentResponseSealed>()
 
     override fun getStudentById(studentId: Int) {
         launch(

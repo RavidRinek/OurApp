@@ -76,7 +76,7 @@ class PhaseOneRepositoryImpl @Inject constructor(
         }
 
     override suspend fun getStudentOrders(studentId: Int): Result<List<TeacherOrder>> =
-        phaseOneDataSource.getStudentById(studentId).map {
+        phaseOneDataSource.getStudentOrders(studentId).map {
             (it as GetUpcomingLessons).toDomain()
         }
 }

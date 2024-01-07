@@ -4,13 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.our.app.base.BaseViewModelImpl
 import com.our.data.base.datasources.Prefs
-import com.our.domain.features.phase_one.models.local.GotStudentLobbyResponseSealed
+import com.our.domain.features.phase_one.models.local.GotStudentResponseSealed
 import com.our.domain.features.phase_one.usecases.GetLessonsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 abstract class StudentFindLessonResultViewModel : BaseViewModelImpl() {
-    abstract val studentLobbyResponseLiveData: LiveData<GotStudentLobbyResponseSealed>
+    abstract val studentLobbyResponseLiveData: LiveData<GotStudentResponseSealed>
     abstract fun getLessons(levels: List<Int>)
 }
 
@@ -20,7 +20,7 @@ class StudentFindLessonResultViewModelImpl @Inject constructor(
     private val getLessonsUseCase: GetLessonsUseCase,
 ) : StudentFindLessonResultViewModel() {
 
-    override val studentLobbyResponseLiveData = MutableLiveData<GotStudentLobbyResponseSealed>()
+    override val studentLobbyResponseLiveData = MutableLiveData<GotStudentResponseSealed>()
 
     override fun getLessons(levels: List<Int>) {
         launch {

@@ -79,6 +79,7 @@ class OrderLessonFragment :
                 }
 
                 GotOrderedLesson -> {
+                    prefs.putBoolean(Prefs.COMPLETED_STUDENT_FULL_REGISTRATION, true)
                     findNavController().navigate(R.id.action_orderLessonFragment_to_studentLobbyFragment)
                 }
 
