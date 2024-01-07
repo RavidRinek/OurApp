@@ -18,8 +18,6 @@ class TeacherSubjectLevelsAdapter(
     val listener: OnTeacherSubjectLevelsAdapterListener
 ) : RecyclerView.Adapter<TeacherSubjectLevelsAdapter.SubjectLevelViewHolder>() {
 
-    private val subjectLevel = ArrayList<SubjectLevel>()
-
     interface OnTeacherSubjectLevelsAdapterListener {
         fun clickedItemLevel(ids: List<Int>)
     }
@@ -58,19 +56,12 @@ class TeacherSubjectLevelsAdapter(
                     (llLevelContainer.getChildAt(i) as TextView).apply {
                         val subjectLevel = subject.subjectLevel.getOrNull(i)
                         text = subjectLevel?.name
-//                        subject.subjectLevel.getOrNull(i)?.let {
-//                            text = it.name
-//                            subjectLevel.add(it)
-//                        }
+
                         setOnClickListener {
                             it.isSelected = !it.isSelected
-                            val a = ArrayList<Int>()
-                            a.add(5)
-                            a.add(3)
-                            a.add(1)
-                            a.add(5)
-                            a.add(5)
-                            listener.clickedItemLevel(a)
+                            subject.subjectLevel.getOrNull(i)?.let {
+                                listener.clickedItemLevel(ArrayList<Int>().apply { add(it.id) })
+                            }
                         }
                     }
                 }
@@ -79,6 +70,9 @@ class TeacherSubjectLevelsAdapter(
                     tvSubjectFirst.isSelected = isChecked
                     tvSubjectSecond.isSelected = isChecked
                     tvSubjectThird.isSelected = isChecked
+                    listener.clickedItemLevel(ArrayList<Int>().apply {
+                        addAll(subject.subjectLevel.map { it.id })
+                    })
                 }
             }
         }
