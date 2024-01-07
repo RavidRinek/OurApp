@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import com.our.app.R
 import com.our.app.databinding.CvTeacherSubjectsKnowledgeBinding
 import com.our.app.features.phase_one.teacher.personal_info.TeacherSubjectLevelsAdapter
+import com.our.data.common.gfd
 import com.our.domain.features.phase_one.models.remote.Subject
 
 class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) :
@@ -28,11 +29,14 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
         }
     }
 
+    private val tahat = Tahat()
+
     fun initViews(subject: List<Subject>) {
         viewBinding.apply {
             rvSubjectsSpinner.adapter = TeacherSubjectLevelsAdapter(subject,
                 object : TeacherSubjectLevelsAdapter.OnTeacherSubjectLevelsAdapterListener {
                     override fun clickedItemLevel(ids: List<Int>) {
+                        tahat.aaa(ids)
 //                        id?.let { selectedItemLevelHashSet.add(id) }
                     }
                 })
