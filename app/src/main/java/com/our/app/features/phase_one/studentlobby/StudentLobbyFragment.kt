@@ -13,6 +13,7 @@ import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentLobbyBinding
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.domain.features.phase_one.models.local.GotLessons
+import com.our.domain.features.phase_one.models.local.GotSubjectBranches
 import com.our.domain.features.phase_one.models.local.GotSubjects
 import com.our.domain.features.phase_one.models.remote.BaseSubject
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +42,9 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
 
         binding.clContainer.setOnClickListener {
             binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
+        }
+        binding.btnStudentFindLesson.setOnClickListener {
+            viewModel.getLessons(binding.subjectSpinnerMain.listOfPickedBranchLevels)
         }
 
         binding.layoutLessonTime.tvLessonDate.setOnClickListener {
