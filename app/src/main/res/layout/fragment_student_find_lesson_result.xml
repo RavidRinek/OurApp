@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".features.phase_one.studentlobby.StudentFindLessonResultFragment">
+    tools:context=".features.phase_one.student.find_lesson_res.StudentFindLessonResultFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"

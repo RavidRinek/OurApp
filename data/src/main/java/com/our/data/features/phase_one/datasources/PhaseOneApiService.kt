@@ -61,6 +61,10 @@ interface PhaseOneApiService {
         @Body lesson: PostOrderLessonUseCase.OrderInfo
     ): Response<BaseResponse>
 
+    @GET(GET_STUDENT_BY_ID)
+    suspend fun getStudentById(@Query("studentId") studentId: Int): Response<GetStudentResponse>
+
+
     companion object {
         const val GET_SUBJECTS_END_POINT: String = "get-subjects"
         const val GET_SUBJECT_BRANCHES_END_POINT: String = "get-subject-branches"
@@ -73,6 +77,7 @@ interface PhaseOneApiService {
         const val POST_CREATE_STUDENT: String = "student"
         const val POST_ORDER_LESSON: String = "new-order"
         const val GET_LESSONS_BY_LEVEL_ID: String = "new-order"
+        const val GET_STUDENT_BY_ID: String = "get-student"
 
     }
 }

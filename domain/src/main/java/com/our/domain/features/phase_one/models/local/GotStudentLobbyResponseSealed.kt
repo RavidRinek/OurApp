@@ -20,3 +20,5 @@ data class GotLessons(val lessons: List<StudentLessonOffers>) : GotStudentLobbyR
 data class GotCreatedStudent(val student: Student) : GotStudentLobbyResponseSealed()
 
 object GotOrderedLesson : GotStudentLobbyResponseSealed()
+
+data class GotStudentPersonalInfo(val student: Student): GotStudentLobbyResponseSealed()

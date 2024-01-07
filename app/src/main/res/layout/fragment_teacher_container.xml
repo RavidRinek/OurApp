@@ -5,7 +5,7 @@
     android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.phase_one.teacherlobby.container.TeacherContainerFragment">
+    tools:context=".features.phase_one.teacher.container.TeacherContainerFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"

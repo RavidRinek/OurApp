@@ -23,28 +23,24 @@
         android:label="fragment_pick_member_type"
         tools:layout="@layout/fragment_pick_member_type">
         <action
-            android:id="@+id/action_pickMemberTypeFragment_to_studentLobbyFragment"
-            app:destination="@id/studentLobbyFragment" />
-        <action
             android:id="@+id/action_pickMemberTypeFragment_to_teacherContainerFragment"
             app:destination="@id/teacherContainerFragment" />
+        <action
+            android:id="@+id/action_pickMemberTypeFragment_to_studentContainerFragment"
+            app:destination="@id/studentContainerFragment" />
     </fragment>
 
 
     <fragment
         android:id="@+id/studentLobbyFragment"
-        android:name="com.our.app.features.phase_one.studentlobby.StudentLobbyFragment"
+        android:name="com.our.app.features.phase_one.student.student_lobby.StudentLobbyFragment"
         android:label="fragment_student_lobby"
-        tools:layout="@layout/fragment_student_lobby">
-        <action
-            android:id="@+id/action_studentLobbyFragment_to_studentFindLessonResultFragment"
-            app:destination="@id/studentFindLessonResultFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_student_lobby"/>
 
 
     <fragment
         android:id="@+id/teacherContainerFragment"
-        android:name="com.our.app.features.phase_one.teacherlobby.container.TeacherContainerFragment"
+        android:name="com.our.app.features.phase_one.teacher.container.TeacherContainerFragment"
         android:label="fragment_teacher_lobby"
         tools:layout="@layout/fragment_teacher_container">
         <action
@@ -64,29 +60,38 @@
 
     <fragment
         android:id="@+id/studentFindLessonResultFragment"
-        android:name="com.our.app.features.phase_one.studentlobby.StudentFindLessonResultFragment"
+        android:name="com.our.app.features.phase_one.student.find_lesson_res.StudentFindLessonResultFragment"
         android:label="fragment_student_find_lesson_result"
         tools:layout="@layout/fragment_student_find_lesson_result">
         <action
             android:id="@+id/action_studentFindLessonResultFragment_to_teacherProfileFragment"
             app:destination="@id/teacherProfileFragment" />
+        <action
+            android:id="@+id/action_studentFindLessonResultFragment_to_studentLobbyFragment"
+            app:destination="@id/studentLobbyFragment" />
     </fragment>
 
 
     <fragment
         android:id="@+id/teacherProfileFragment"
-        android:name="com.our.app.features.phase_one.teacherlobby.profile.TeacherProfileFragment"
+        android:name="com.our.app.features.phase_one.teacher.profile.TeacherProfileFragment"
         android:label="fragment_tearcher_profile"
         tools:layout="@layout/fragment_tearcher_profile">
         <action
             android:id="@+id/action_teacherProfileFragment_to_orderLessonFragment"
             app:destination="@id/orderLessonFragment" />
+        <action
+            android:id="@+id/action_teacherProfileFragment_to_studentLobbyFragment"
+            app:destination="@id/studentLobbyFragment" />
+        <action
+            android:id="@+id/action_teacherProfileFragment_to_studentFindLessonResultFragment"
+            app:destination="@id/studentFindLessonResultFragment" />
     </fragment>
 
 
     <fragment
         android:id="@+id/teacherKnowlageInfoFragment"
-        android:name="com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment"
+        android:name="com.our.app.features.phase_one.teacher.teacherknowledge.TeacherKnowledgeInfoFragment"
         android:label="fragment_teacher_knowlage_info"
         tools:layout="@layout/fragment_teacher_knowlage_info">
         <argument
@@ -104,29 +109,53 @@
 
     <fragment
         android:id="@+id/teacherLobbyFragment"
-        android:name="com.our.app.features.phase_one.teacherlobby.teacher_lobby.TeacherLobbyFragment"
+        android:name="com.our.app.features.phase_one.teacher.teacher_lobby.TeacherLobbyFragment"
         android:label="fragment_teacher_lobby"
         tools:layout="@layout/fragment_teacher_lobby"/>
 
 
     <fragment
         android:id="@+id/orderLessonFragment"
-        android:name="com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonFragment"
+        android:name="com.our.app.features.phase_one.student.order_lesson.OrderLessonFragment"
         android:label="fragment_order_lesson"
         tools:layout="@layout/fragment_order_lesson">
         <argument
             android:name="orderlessonui"
-            app:argType="com.our.app.features.phase_one.studentlobby.order_lesson.OrderLessonUi" />
+            app:argType="com.our.app.features.phase_one.student.order_lesson.OrderLessonUi" />
+        <action
+            android:id="@+id/action_orderLessonFragment_to_studentLobbyFragment"
+            app:destination="@id/studentLobbyFragment" />
 
     </fragment>
     <fragment
         android:id="@+id/teacherPersonalInfoFragment"
-        android:name="com.our.app.features.phase_one.teacherlobby.personal_info.TeacherPersonalInfoFragment"
+        android:name="com.our.app.features.phase_one.teacher.personal_info.TeacherPersonalInfoFragment"
         android:label="fragment_teacher_personal_info"
         tools:layout="@layout/fragment_teacher_personal_info" >
         <action
             android:id="@+id/action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment"
             app:destination="@id/teacherKnowlageInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentContainerFragment"
+        android:name="com.our.app.features.phase_one.student.container.StudentContainerFragment"
+        android:label="fragment_student_container"
+        tools:layout="@layout/fragment_student_container" >
+        <action
+            android:id="@+id/action_studentContainerFragment_to_studentFindLessonFragment"
+            app:destination="@id/studentFindLessonFragment" />
+        <action
+            android:id="@+id/action_studentContainerFragment_to_studentLobbyFragment"
+            app:destination="@id/studentLobbyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentFindLessonFragment"
+        android:name="com.our.app.features.phase_one.student.find_lesson.StudentFindLessonFragment"
+        android:label="fragment_student_find_lesson"
+        tools:layout="@layout/fragment_student_find_lesson" >
+        <action
+            android:id="@+id/action_studentFindLessonFragment_to_studentFindLessonResultFragment"
+            app:destination="@id/studentFindLessonResultFragment" />
     </fragment>
 
 

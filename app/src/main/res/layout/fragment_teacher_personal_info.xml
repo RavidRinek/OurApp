@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.phase_one.teacherlobby.personal_info.TeacherPersonalInfoFragment">
+    tools:context=".features.phase_one.teacher.personal_info.TeacherPersonalInfoFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

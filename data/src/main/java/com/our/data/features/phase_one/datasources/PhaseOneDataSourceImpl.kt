@@ -89,6 +89,12 @@ class PhaseOneDataSourceImpl @Inject constructor(
             call = { api.postOrderLesson(lesson = orderLesson) },
             errorMessage = "Cant order lesson: $orderLesson"
         )
+
+    override suspend fun getStudentById(studentId: Int): Result<BaseResponse> =
+        safeApiCall(
+            call = { api.getStudentById(studentId = studentId) },
+            errorMessage = "Cant get student by id: $studentId"
+        )
 }
 
 data class PostToken(val userId: Int, val token: String)

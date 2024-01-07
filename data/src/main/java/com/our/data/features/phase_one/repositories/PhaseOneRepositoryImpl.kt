@@ -70,4 +70,9 @@ class PhaseOneRepositoryImpl @Inject constructor(
         phaseOneDataSource.postOrderLesson(orderInfo).map {
             Unit
         }
+
+    override suspend fun getStudentById(studentId: Int): Result<Student> =
+        phaseOneDataSource.getStudentById(studentId).map {
+            (it as GetStudentResponse).toDomain()
+        }
 }

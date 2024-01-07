@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.phase_one.student.find_lesson.StudentFindLessonFragment">
+
+    <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
+        android:id="@+id/cvLogoHeaderUtil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:caption="@string/student_lobby_header_caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.our.app.features.phase_one.student.find_lesson.StudentSubjectSpinnerCustomView
+        android:id="@+id/subjectSpinnerMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:elevation="3dp"
+        app:icon="@drawable/ic_student_subjects_main"
+        app:layout_constraintTop_toBottomOf="@+id/cvLogoHeaderUtil"
+        app:text="נושאים" />
+
+    <com.our.app.features.phase_one.student.find_lesson.StudentLessonPriceCustomView
+        android:id="@+id/cvLessonPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:layout_marginBottom="24dp"
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="@+id/subjectSpinnerMain" />
+
+    <include
+        android:id="@+id/layoutLessonDate"
+        layout="@layout/layout_student_lesson_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cvLessonPrice" />
+
+    <TextView
+        android:id="@+id/btnStudentFindLesson"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/rec_ff3817_rad_12"
+        android:gravity="center"
+        android:text="מצא שיעור!"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

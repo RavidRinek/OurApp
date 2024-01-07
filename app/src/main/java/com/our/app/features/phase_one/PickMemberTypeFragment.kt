@@ -27,7 +27,7 @@ class PickMemberTypeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnStudent.setOnClickListener {
-            findNavController().navigate(R.id.action_pickMemberTypeFragment_to_studentLobbyFragment)
+//            findNavController().navigate(R.id.action_pickMemberTypeFragment_to_studentLobbyFragment)
         }
 
         binding.btnTeacher.setOnClickListener {

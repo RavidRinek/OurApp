@@ -23,4 +23,5 @@ interface PhaseOneRepository {
     suspend fun getTeacherOrders(teacherId: Int): Result<List<TeacherOrder>>
     suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<Student>
     suspend fun postOrderLesson(orderInfo: PostOrderLessonUseCase.OrderInfo): Result<Unit>
+    suspend fun getStudentById(studentId: Int): Result<Student>
 }

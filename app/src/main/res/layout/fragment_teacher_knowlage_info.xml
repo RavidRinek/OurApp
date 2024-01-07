@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".features.phase_one.teacherlobby.teacherknowledge.TeacherKnowledgeInfoFragment">
+    tools:context=".features.phase_one.teacher.teacherknowledge.TeacherKnowledgeInfoFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"
@@ -22,17 +22,17 @@
         android:layout_margin="12dp"
         android:src="@drawable/select_profile_avatar" />
 
-    <com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherSubjectKnowledgeCustomView
+    <com.our.app.features.phase_one.teacher.teacherknowledge.TeacherSubjectKnowledgeCustomView
         android:id="@+id/cvTeacherSubjectKnowledge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherLessonInfoCustomView
+    <com.our.app.features.phase_one.teacher.teacherknowledge.TeacherLessonInfoCustomView
         android:id="@+id/cvTeacherLessonInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.our.app.features.phase_one.teacherlobby.teacherknowledge.TeacherDegreeInfoCustomView
+    <com.our.app.features.phase_one.teacher.teacherknowledge.TeacherDegreeInfoCustomView
         android:id="@+id/cvTeacherDegreeInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
