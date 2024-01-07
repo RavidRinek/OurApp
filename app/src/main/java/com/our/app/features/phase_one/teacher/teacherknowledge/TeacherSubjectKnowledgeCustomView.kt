@@ -32,8 +32,8 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
         viewBinding.apply {
             rvSubjectsSpinner.adapter = TeacherSubjectLevelsAdapter(subject,
                 object : TeacherSubjectLevelsAdapter.OnTeacherSubjectLevelsAdapterListener {
-                    override fun clickedItemLevel(id: Int?) {
-                        id?.let { selectedItemLevelHashSet.add(id) }
+                    override fun clickedItemLevel(ids: List<Int>) {
+//                        id?.let { selectedItemLevelHashSet.add(id) }
                     }
                 })
         }

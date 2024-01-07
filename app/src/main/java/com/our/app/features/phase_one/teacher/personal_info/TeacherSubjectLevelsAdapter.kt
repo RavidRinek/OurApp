@@ -21,7 +21,7 @@ class TeacherSubjectLevelsAdapter(
     private val subjectLevel = ArrayList<SubjectLevel>()
 
     interface OnTeacherSubjectLevelsAdapterListener {
-        fun clickedItemLevel(id: Int?)
+        fun clickedItemLevel(ids: List<Int>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubjectLevelViewHolder =
@@ -64,7 +64,13 @@ class TeacherSubjectLevelsAdapter(
 //                        }
                         setOnClickListener {
                             it.isSelected = !it.isSelected
-                            listener.clickedItemLevel(subjectLevel?.id)
+                            val a = ArrayList<Int>()
+                            a.add(5)
+                            a.add(3)
+                            a.add(1)
+                            a.add(5)
+                            a.add(5)
+                            listener.clickedItemLevel(a)
                         }
                     }
                 }
