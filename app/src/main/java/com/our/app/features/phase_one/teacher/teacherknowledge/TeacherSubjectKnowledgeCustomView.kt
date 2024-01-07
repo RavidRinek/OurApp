@@ -36,7 +36,7 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
             rvSubjectsSpinner.adapter = TeacherSubjectLevelsAdapter(subject,
                 object : TeacherSubjectLevelsAdapter.OnTeacherSubjectLevelsAdapterListener {
                     override fun clickedItemLevel(ids: List<Int>) {
-                        tahat.aaa(ids)
+                        tahat.getIdsArray(ArrayList<Int>().addAll(ids))
 //                        id?.let { selectedItemLevelHashSet.add(id) }
                     }
                 })
