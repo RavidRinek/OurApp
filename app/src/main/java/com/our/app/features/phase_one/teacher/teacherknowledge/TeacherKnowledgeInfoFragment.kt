@@ -66,7 +66,7 @@ class TeacherKnowledgeInfoFragment :
                 var lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
                 var degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
                 if (selectedItemLevels.isEmpty()) {
-                    selectedItemLevels = HashSet<Int>().apply {
+                    selectedItemLevels = ArrayList<Int>().apply {
                         add(1)
                     }
                     lessonInfo = TeacherLessonInfoCustomView.LessonInfoData(40, 100, true, "fdsfsd")

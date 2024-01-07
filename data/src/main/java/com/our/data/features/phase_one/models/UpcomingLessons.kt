@@ -2,11 +2,10 @@ package com.our.data.features.phase_one.models
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.our.data.base.models.BaseResponse
 import com.our.domain.features.phase_one.models.remote.TeacherOrder
 
 @Keep
-data class TeacherOrderResponse(
+data class UpcomingLessons(
     @SerializedName("id")
     val id: Int? = null,
     @SerializedName("student")
@@ -19,7 +18,7 @@ data class TeacherOrderResponse(
     val subjectResponse: SubjectResponse? = null
 )
 
-fun TeacherOrderResponse.toDomain(): TeacherOrder =
+fun UpcomingLessons.toDomain(): TeacherOrder =
     TeacherOrder(
         id = id ?: 0,
         student = (student ?: StudentResponse()).toDomain(),

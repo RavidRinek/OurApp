@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.our.app.base.BaseViewModelImpl
 import com.our.domain.features.phase_one.models.local.GotStudentLobbyResponseSealed
 import com.our.domain.features.phase_one.usecases.GetLessonsUseCase
+import com.our.domain.features.phase_one.usecases.GetStudentUpcomingLessons
 import com.our.domain.features.phase_one.usecases.GetSubjectBranchesUseCase
 import com.our.domain.features.phase_one.usecases.GetSubjectsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,7 @@ abstract class StudentLobbyViewModel : BaseViewModelImpl() {
 
 @HiltViewModel
 class StudentLobbyViewModelImpl @Inject constructor(
+    private val getStudentUpcomingLessons: GetStudentUpcomingLessons
 ) : StudentLobbyViewModel() {
 
     override val studentLobbyResponseLiveData = MutableLiveData<GotStudentLobbyResponseSealed>()

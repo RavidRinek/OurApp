@@ -19,7 +19,7 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
         .inflate(R.layout.cv_teacher_subjects_knowledge, this, true)
     private val viewBinding = CvTeacherSubjectsKnowledgeBinding.bind(view)
 
-    private val selectedItemLevelHashSet = HashSet<Int>()
+    private var idsList = ArrayList<Int>()
 
     init {
         viewBinding.clSubjectsSpinner.setOnClickListener {
@@ -36,7 +36,10 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
             rvSubjectsSpinner.adapter = TeacherSubjectLevelsAdapter(subject,
                 object : TeacherSubjectLevelsAdapter.OnTeacherSubjectLevelsAdapterListener {
                     override fun clickedItemLevel(ids: List<Int>) {
-                        tahat.getIdsArray(ArrayList<Int>().addAll(ids))
+//                        tahat.getIdsArray(ArrayList<Int>().addAll(ids))
+                        val a = ArrayList<Int>()
+                        a.addAll(ids)
+                        idsList = tahat.getIdsArray(a)
 //                        id?.let { selectedItemLevelHashSet.add(id) }
                     }
                 })
@@ -49,5 +52,5 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
         viewBinding.rvSubjectsSpinner.isVisible = viewBinding.clSubjectsSpinner.isSelected
     }
 
-    fun getSelectedItemLevels() = selectedItemLevelHashSet
+    fun getSelectedItemLevels() = idsList
 }

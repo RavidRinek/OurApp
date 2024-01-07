@@ -6,10 +6,10 @@ import com.our.data.base.models.BaseResponse
 import com.our.domain.features.phase_one.models.remote.TeacherOrder
 
 @Keep
-data class GetTeacherOrdersResponse(
+data class GetUpcomingLessons(
     @SerializedName("orders")
-    val orders: List<TeacherOrderResponse>? = null
+    val orders: List<UpcomingLessons>? = null
 ): BaseResponse()
 
-fun GetTeacherOrdersResponse.toDomain(): List<TeacherOrder> =
+fun GetUpcomingLessons.toDomain(): List<TeacherOrder> =
     (orders ?: listOf()).map { it.toDomain() }

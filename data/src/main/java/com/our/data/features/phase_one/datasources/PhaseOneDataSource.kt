@@ -18,4 +18,5 @@ interface PhaseOneDataSource {
     suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<BaseResponse>
     suspend fun postOrderLesson(orderLesson: PostOrderLessonUseCase.OrderInfo): Result<BaseResponse>
     suspend fun getStudentById(studentId: Int): Result<BaseResponse>
+    suspend fun getStudentOrders(studentId: Int): Result<BaseResponse>
 }

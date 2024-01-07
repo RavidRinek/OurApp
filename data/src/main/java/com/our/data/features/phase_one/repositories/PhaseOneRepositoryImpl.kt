@@ -57,7 +57,7 @@ class PhaseOneRepositoryImpl @Inject constructor(
 
     override suspend fun getTeacherOrders(teacherId: Int): Result<List<TeacherOrder>> =
         phaseOneDataSource.getTeacherOrders(teacherId).map {
-            (it as GetTeacherOrdersResponse).toDomain()
+            (it as GetUpcomingLessons).toDomain()
         }
 
     override suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<Student> =
@@ -73,5 +73,10 @@ class PhaseOneRepositoryImpl @Inject constructor(
     override suspend fun getStudentById(studentId: Int): Result<Student> =
         phaseOneDataSource.getStudentById(studentId).map {
             (it as GetStudentResponse).toDomain()
+        }
+
+    override suspend fun getStudentOrders(studentId: Int): Result<List<TeacherOrder>> =
+        phaseOneDataSource.getStudentById(studentId).map {
+            (it as GetUpcomingLessons).toDomain()
         }
 }

@@ -59,4 +59,8 @@ class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiSer
     override suspend fun getStudentById(studentId: Int): Result<BaseResponse> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getStudentOrders(studentId: Int): Result<BaseResponse> {
+        TODO("Not yet implemented")
+    }
 }
