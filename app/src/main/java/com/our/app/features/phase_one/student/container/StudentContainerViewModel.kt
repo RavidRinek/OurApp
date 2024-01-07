@@ -28,7 +28,7 @@ class StudentContainerViewModelImpl @Inject constructor(
         launch(
             displayProgressType = DisplayProgressTypes.PROGRESS_BAR
         ) {
-            val res = getStudentByIdUseCase.invoke(prefs.getInt(Prefs.MEMBER_ID))
+            val res = getStudentByIdUseCase.invoke(prefs.getInt(Prefs.STUDENT_ID))
             if (res is GotStudentPersonalInfo) {
                 studentLobbyResponseLiveData.postValue(res)
             }

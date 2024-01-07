@@ -36,7 +36,7 @@ class MockPhaseOneDataSourceImpl @Inject constructor(private val api: MockApiSer
         TODO("Not yet implemented")
     }
 
-    override suspend fun postCreateFcmToken(): Result<BaseResponse> {
+    override suspend fun postCreateFcmToken(id: Int): Result<BaseResponse> {
         TODO("Not yet implemented")
     }
 

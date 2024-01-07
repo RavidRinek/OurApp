@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentOrderLessonBinding
@@ -78,7 +79,7 @@ class OrderLessonFragment :
                 }
 
                 GotOrderedLesson -> {
-                    println("${OrderLessonFragment::class.java.simpleName} GotOrderedLesson")
+                    findNavController().navigate(R.id.action_orderLessonFragment_to_studentLobbyFragment)
                 }
 
                 else -> {

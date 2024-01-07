@@ -36,7 +36,7 @@ class TeacherPersonalInfoViewModelImpl @Inject constructor(
         launch(
             displayProgressType = DisplayProgressTypes.PROGRESS_BAR
         ) {
-            val res = getTeacherByIdUseCase.invoke(prefs.getInt(Prefs.MEMBER_ID))
+            val res = getTeacherByIdUseCase.invoke(prefs.getInt(Prefs.TEACHER_ID))
             if (res is GotTeacherPersonalInfo) {
                 teacherPersonalInfoResponseLiveData.postValue(res)
             }
@@ -50,8 +50,8 @@ class TeacherPersonalInfoViewModelImpl @Inject constructor(
             val res = postTeacherCreateInfoUseCase.invoke(createInfo)
             if (res is GotTeacherPersonalInfo) {
                 prefs.putBoolean(Prefs.COMPLETED_TEACHER_PERSONAL_INFO_REGISTRATION, true)
-                prefs.putInt(Prefs.MEMBER_ID, res.teacherProfile.teacherId)
-                postFCMTokenUseCase.invoke(Unit)
+                prefs.putInt(Prefs.TEACHER_ID, res.teacherProfile.teacherId)
+                postFCMTokenUseCase.invoke(res.teacherProfile.teacherId)
                 teacherPersonalInfoResponseLiveData.postValue(res)
             }
         }

@@ -98,10 +98,14 @@ class Prefs(context: Context) {
             }
         }
 
-        const val MEMBER_ID: String = "memberId"
-        const val STUDENT_ID: String = "studentId"
         const val FCM_TOKEN: String = "firebaseFcmToken"
+
+        const val TEACHER_ID: String = "teacherId"
         const val COMPLETED_TEACHER_PERSONAL_INFO_REGISTRATION = "user_already_post_his_personal_info"
         const val COMPLETED_TEACHER_FULL_REGISTRATION = "completed_both_create_and_update_teacher"
+
+        const val STUDENT_ID: String = "studentId"
+        const val COMPLETED_STUDENT_FULL_REGISTRATION = "completed_both_create_and_update_teacher"
+
     }
 }

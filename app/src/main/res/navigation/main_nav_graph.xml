@@ -30,13 +30,11 @@
             app:destination="@id/studentContainerFragment" />
     </fragment>
 
-
     <fragment
         android:id="@+id/studentLobbyFragment"
         android:name="com.our.app.features.phase_one.student.student_lobby.StudentLobbyFragment"
         android:label="fragment_student_lobby"
         tools:layout="@layout/fragment_student_lobby"/>
-
 
     <fragment
         android:id="@+id/teacherContainerFragment"
@@ -63,6 +61,7 @@
         android:name="com.our.app.features.phase_one.student.find_lesson_res.StudentFindLessonResultFragment"
         android:label="fragment_student_find_lesson_result"
         tools:layout="@layout/fragment_student_find_lesson_result">
+
         <action
             android:id="@+id/action_studentFindLessonResultFragment_to_teacherProfileFragment"
             app:destination="@id/teacherProfileFragment" />

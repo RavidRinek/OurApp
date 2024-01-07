@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentFindLessonBinding
@@ -40,7 +42,19 @@ class StudentFindLessonFragment :
             binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
         }
         binding.btnStudentFindLesson.setOnClickListener {
-      //todo moved subjects IDS to 'StudentFindLessonResultFragment
+            //todo moved subjects IDS to 'StudentFindLessonResultFragment
+//            Toast.makeText(requireContext(), "XXX", Toast.LENGTH_SHORT).show()
+            val array = ArrayList<Int>()
+            array.add(5)
+            array.add(5)
+            array.add(5)
+            array.add(5)
+            findNavController().navigate(
+                R.id.action_studentFindLessonFragment_to_studentFindLessonResultFragment,
+                Bundle().apply {
+                    putIntegerArrayList("TAHAT", array)
+                }
+            )
         }
     }
 

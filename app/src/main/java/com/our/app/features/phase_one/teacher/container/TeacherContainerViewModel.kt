@@ -33,7 +33,7 @@ class TeacherContainerViewModelImpl @Inject constructor(
         launch(
             displayProgressType = DisplayProgressTypes.PROGRESS_BAR
         ) {
-            val res = getTeacherByIdUseCase.invoke(prefs.getInt(Prefs.MEMBER_ID))
+            val res = getTeacherByIdUseCase.invoke(teacherId)
             if (res is GotTeacherPersonalInfo) {
                 teacherLobbyResponseLiveData.postValue(res)
             }

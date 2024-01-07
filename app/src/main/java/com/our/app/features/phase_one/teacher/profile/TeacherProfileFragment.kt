@@ -32,7 +32,6 @@ class TeacherProfileFragment :
             viewModel.getTeacherById(getInt("teacherId"))
         }
         binding.btnStudentFindLesson.setOnClickListener {
-/*
             findNavController().navigate(
                 R.id.action_teacherProfileFragment_to_orderLessonFragment,
                 Bundle().apply {
@@ -47,7 +46,6 @@ class TeacherProfileFragment :
                     putInt("lessonId", arguments?.getInt("lessonId") ?: 0)
                 }
             )
-*/
         }
     }
 

@@ -76,7 +76,7 @@ class TeacherKnowledgeInfoFragment :
 
                 val teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo =
                     PostTeacherInfoUseCase.UpdateTeacherInfo(
-                        teacherId = prefs.getInt(Prefs.MEMBER_ID),
+                        teacherId = prefs.getInt(Prefs.TEACHER_ID),
                         teacherSubjectsLevelsId = selectedItemLevels.toList(),
                         lessonInfo = PostTeacherInfoUseCase.LessonInfo(
                             pricePer60m = lessonInfo.pricePer60m,

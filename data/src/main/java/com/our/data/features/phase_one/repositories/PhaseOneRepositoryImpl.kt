@@ -4,7 +4,6 @@ import com.our.data.features.phase_one.datasources.PhaseOneDataSource
 import com.our.data.features.phase_one.models.*
 import com.our.domain.base.models.Result
 import com.our.domain.base.models.map
-import com.our.domain.features.phase_one.models.remote.Lesson
 import com.our.domain.features.phase_one.models.remote.Student
 import com.our.domain.features.phase_one.models.remote.StudentLessonOffers
 import com.our.domain.features.phase_one.models.remote.Subject
@@ -51,8 +50,8 @@ class PhaseOneRepositoryImpl @Inject constructor(
             Unit
         }
 
-    override suspend fun postFcmToken(): Result<Unit> =
-        phaseOneDataSource.postCreateFcmToken().map {
+    override suspend fun postFcmToken(id: Int): Result<Unit> =
+        phaseOneDataSource.postCreateFcmToken(id).map {
             Unit
         }
 

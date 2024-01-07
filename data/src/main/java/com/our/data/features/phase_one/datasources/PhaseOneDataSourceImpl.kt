@@ -46,19 +46,13 @@ class PhaseOneDataSourceImpl @Inject constructor(
             errorMessage = "Cant get any teacher by id: $teacherInfo"
         )
 
-    override suspend fun postCreateFcmToken(): Result<BaseResponse> =
+    override suspend fun postCreateFcmToken(id: Int): Result<BaseResponse> =
         safeApiCall(
             call = {
-/*
-                api.postCreateToken(
-                    token = prefs.getString(Prefs.FCM_TOKEN),
-                    userId = prefs.getInt(Prefs.MEMBER_ID)
-                )
-*/
                 api.postCreateToken(
                     postToken = PostToken(
                         token = prefs.getString(Prefs.FCM_TOKEN),
-                        userId = prefs.getInt(Prefs.MEMBER_ID)
+                        userId = id
                     )
 
                 )

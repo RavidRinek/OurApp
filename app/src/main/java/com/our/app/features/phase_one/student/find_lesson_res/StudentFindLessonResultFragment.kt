@@ -2,6 +2,7 @@ package com.our.app.features.phase_one.student.find_lesson_res
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
@@ -25,12 +26,12 @@ class StudentFindLessonResultFragment :
     override val viewModel: StudentFindLessonResultViewModel by viewModels<StudentFindLessonResultViewModelImpl>()
     private val binding by viewBinding(FragmentStudentFindLessonResultBinding::bind)
 
-    private var lessonsIds: IntArray? = null
+    private var lessonsIds: ArrayList<Int>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
-            lessonsIds = getIntArray(LESSONS_IDS)
+            lessonsIds = getIntegerArrayList("TAHAT")
         }
     }
 
@@ -52,13 +53,13 @@ class StudentFindLessonResultFragment :
                                 teacherId: Int,
                                 lessonId: Int
                             ) {
-                                /*findNavController().navigate(
-                                        R.id.action_studentFindLessonResultFragment_to_teacherProfileFragment,
-                                        Bundle().apply {
-                                            putInt("lessonId", lessonId)
-                                            putInt("teacherId", teacherId)
-                                        }
-                                    )*/
+                                findNavController().navigate(
+                                    R.id.action_studentFindLessonResultFragment_to_teacherProfileFragment,
+                                    Bundle().apply {
+                                        putInt("lessonId", lessonId)
+                                        putInt("teacherId", teacherId)
+                                    }
+                                )
                             }
 
                             override fun orderALessonBtnClicked() {

@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 abstract class StudentFindLessonResultViewModel : BaseViewModelImpl() {
     abstract val studentLobbyResponseLiveData: LiveData<GotStudentLobbyResponseSealed>
-    abstract fun getLessons(levels: IntArray)
+    abstract fun getLessons(levels: List<Int>)
 }
 
 @HiltViewModel
@@ -22,7 +22,7 @@ class StudentFindLessonResultViewModelImpl @Inject constructor(
 
     override val studentLobbyResponseLiveData = MutableLiveData<GotStudentLobbyResponseSealed>()
 
-    override fun getLessons(levels: IntArray) {
+    override fun getLessons(levels: List<Int>) {
         launch {
             var txt = ""
             levels.forEach {

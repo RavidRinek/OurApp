@@ -18,9 +18,16 @@ class MainActivityViewModelImpl @Inject constructor(
 
     override fun postFcmToken(token: String) {
         prefs.putString(Prefs.FCM_TOKEN, token)
-        if (prefs.contains(Prefs.MEMBER_ID)) {
+
+        val id: Int? = if (prefs.contains(Prefs.STUDENT_ID)) {
+            prefs.getInt(Prefs.STUDENT_ID)
+        } else if (prefs.contains(Prefs.TEACHER_ID)) {
+            prefs.getInt(Prefs.TEACHER_ID)
+        } else null
+
+        id?.let {
             launch {
-                postFCMTokenUseCase.invoke(Unit)
+                postFCMTokenUseCase.invoke(it)
             }
         }
     }

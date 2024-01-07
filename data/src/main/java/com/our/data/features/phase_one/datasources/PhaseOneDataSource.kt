@@ -12,7 +12,7 @@ interface PhaseOneDataSource {
     suspend fun getLessons(levels: String): Result<BaseResponse>
     suspend fun getTeacherById(teacherId: Int): Result<BaseResponse>
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<BaseResponse>
-    suspend fun postCreateFcmToken(): Result<BaseResponse>
+    suspend fun postCreateFcmToken(id: Int): Result<BaseResponse>
     suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<BaseResponse>
     suspend fun getTeacherOrders(teacherId: Int): Result<BaseResponse>
     suspend fun postStudentCreate(createStudent: PostStudentCreateUseCase.CreateStudent): Result<BaseResponse>

@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 class PostFCMTokenUseCase @Inject constructor(
     private val phaseOneRepository: PhaseOneRepository
-) : BaseSuspendedUseCase<Unit, GotTeacherLobbyResponseSealed>() {
+) : BaseSuspendedUseCase<Int, GotTeacherLobbyResponseSealed>() {
 
-    override suspend fun invoke(param: Unit): GotTeacherLobbyResponseSealed =
-        when (val res = phaseOneRepository.postFcmToken()) {
+    override suspend fun invoke(param: Int): GotTeacherLobbyResponseSealed =
+        when (val res = phaseOneRepository.postFcmToken(param)) {
             is Result.Success -> GotFcmToken
             is Result.Error -> GotTeacherError
         }
