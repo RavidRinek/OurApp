@@ -42,8 +42,8 @@ class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
 
     fun getLessonInfoData(): LessonInfoData =
         LessonInfoData(
-            pricePer40m = 0,//viewBinding.layoutTeacherPriceInfo.etPricePer40m.text.toString().toInt(),
-            pricePer60m = 0,//viewBinding.layoutTeacherPriceInfo.etPricePer60m.text.toString().toInt(),
+            pricePer40m = viewBinding.layoutTeacherPriceInfo.etPricePer40m.text.toString().toInt(),
+            pricePer60m = viewBinding.layoutTeacherPriceInfo.etPricePer60m.text.toString().toInt(),
             allowFreeFirstLesson = viewBinding.layoutTeacherPriceInfo.cbFreeFirstLesson.isChecked,
             additionalInfo = viewBinding.layoutTeacherPriceInfo.etAdditionalInfo.text.toString()
         )
