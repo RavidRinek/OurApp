@@ -21,7 +21,7 @@ interface PhaseOneApiService {
     suspend fun getSubjectBranches(@Query("subjectId") subjectId: Int): Response<SubjectBranchesResponse>
 
     @GET("$GET_LESSONS_END_POINT/{levels}")
-    suspend fun getLessons(@Path("levels") levels: String): Response<LessonsResponse>
+    suspend fun getLessons(@Path("levels") levels: String, @Query("price") price: Double): Response<LessonsResponse>
 
     @GET(GET_TEACHER_BY_ID)
     suspend fun getTeacherById(@Query("teacherId") teacherId: Int): Response<GetTeacherResponse>

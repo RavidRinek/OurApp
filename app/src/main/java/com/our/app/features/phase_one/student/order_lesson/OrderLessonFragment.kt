@@ -26,6 +26,7 @@ class OrderLessonFragment :
 
     override val viewModel: OrderLessonViewModel by viewModels<OrderLessonViewModelImpl>()
     private val binding by viewBinding(FragmentOrderLessonBinding::bind)
+    private var lessonId: Int = 0
 
     @Inject
     lateinit var prefs: Prefs
@@ -39,11 +40,12 @@ class OrderLessonFragment :
         }
 
         (arguments?.getParcelable(K_LESSON_INFO) as? OrderLessonUi)?.let {
+            lessonId = it.lessonId
             binding.apply {
-                levelOfClass.text = it.lessonId
-                lessonPrice.text = it.price
+                levelOfClass.text = it.lessonId.toString()
+                lessonPrice.text = it.price.toString()
                 teachersName.text = it.name
-                lessonDate.text = it.time
+                lessonDate.text = it.time.toString()
 
                 reserveButton.setOnClickListener {
                     if (prefs.getInt(Prefs.STUDENT_ID) > 0) {
@@ -95,7 +97,7 @@ class OrderLessonFragment :
             viewModel.orderLesson(
                 PostOrderLessonUseCase.OrderInfo(
                     studentId = prefs.getInt(Prefs.STUDENT_ID),
-                    lessonId = arguments?.getInt("lessonId") ?: 0
+                    lessonId = lessonId
                 )
             )
         }
@@ -112,8 +114,8 @@ class OrderLessonFragment :
 
 @Parcelize
 data class OrderLessonUi(
-    val lessonId: String,
-    val price: String,
+    val lessonId: Int,
+    val price: Double,
     val name: String,
-    val time: String,
+    val time: Long,
 ) : Parcelable

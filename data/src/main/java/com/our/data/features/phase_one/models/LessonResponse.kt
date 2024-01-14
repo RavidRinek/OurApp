@@ -26,7 +26,9 @@ data class LessonResponse(
     @SerializedName("teacherName")
     val teacherName: String? = null,
     @SerializedName("subjectBranchName")
-    val subjectBranchName: String? = null
+    val subjectBranchName: String? = null,
+    @SerializedName("lessonTimestamp")
+    val timestamp: Long? = null
 ) : BaseResponse()
 
 fun LessonResponse.toDomain(): Lesson =
@@ -40,5 +42,6 @@ fun LessonResponse.toDomain(): Lesson =
         subjectName = subjectName ?: "Sponge Bob Square Pants",
         teacherId = teacherId ?: 0,
         teacherName = teacherName ?: "Elroy",
-        subjectBranchName = subjectBranchName ?: "fdsfsd"
+        subjectBranchName = subjectBranchName ?: "fdsfsd",
+        timestamp = timestamp ?: 0
     )

@@ -14,5 +14,6 @@ data class Lesson(
     val subjectName: String,
     val teacherId: Int,
     val teacherName: String,
-    val subjectBranchName: String
+    val subjectBranchName: String,
+    val timestamp: Long
 ) : Parcelable

@@ -15,7 +15,7 @@ import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 interface PhaseOneRepository {
     suspend fun getSubjects(): Result<List<Subject>>
     suspend fun getSubjectBranches(subjectId: Int): Result<List<SubjectBranch>>
-    suspend fun getLessons(levels: String): Result<List<StudentLessonOffers>>
+    suspend fun getLessons(levels: String, price: Double): Result<List<StudentLessonOffers>>
     suspend fun getTeacherById(teacherId: Int): Result<TeacherProfile>
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile>
     suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<Unit>

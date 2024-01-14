@@ -46,6 +46,8 @@ class StudentFindLessonFragment :
                 R.id.action_studentFindLessonFragment_to_studentFindLessonResultFragment,
                 Bundle().apply {
                     putIntegerArrayList("TAHAT", binding.subjectSpinnerMain.getSelectedItemLevels())
+                    putLong("TIME_STAMP", 5984736L)
+                    putInt("price", binding.cvLessonPrice.pickedPrice)
                 }
             )
         }

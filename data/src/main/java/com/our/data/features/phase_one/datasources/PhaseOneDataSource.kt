@@ -9,7 +9,7 @@ import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 interface PhaseOneDataSource {
     suspend fun getSubjects(): Result<BaseResponse>
     suspend fun getSubjectBranches(subjectId: Int): Result<BaseResponse>
-    suspend fun getLessons(levels: String): Result<BaseResponse>
+    suspend fun getLessons(levels: String, pricea: Double): Result<BaseResponse>
     suspend fun getTeacherById(teacherId: Int): Result<BaseResponse>
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<BaseResponse>
     suspend fun postCreateFcmToken(id: Int): Result<BaseResponse>

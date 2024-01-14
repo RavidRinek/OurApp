@@ -27,17 +27,19 @@ class StudentFindLessonResultFragment :
     private val binding by viewBinding(FragmentStudentFindLessonResultBinding::bind)
 
     private var lessonsIds: ArrayList<Int>? = null
+    private var mPrice: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
             lessonsIds = getIntegerArrayList("TAHAT")
+            mPrice = getInt("price")
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getLessons(lessonsIds!!)
+        viewModel.getLessons(lessonsIds!!, mPrice)
     }
 
     override fun observeData() {
@@ -58,6 +60,8 @@ class StudentFindLessonResultFragment :
                                     Bundle().apply {
                                         putInt("lessonId", lessonId)
                                         putInt("teacherId", teacherId)
+                                        putDouble("price", mPrice.toDouble())
+                                        putLong("TIME_STAMP", arguments!!.getLong("TIME_STAMP"))
                                     }
                                 )
                             }

@@ -10,10 +10,11 @@ import javax.inject.Inject
 
 class GetLessonsUseCase @Inject constructor(
     private val phaseOneRepository: PhaseOneRepository
-) : BaseSuspendedUseCase<String, GotStudentResponseSealed>() {
+) : BaseSuspendedUseCase<GetLessonsUseCase.GetLessonModel, GotStudentResponseSealed>() {
 
-    override suspend fun invoke(param: String): GotStudentResponseSealed =
-        when (val res = phaseOneRepository.getLessons(param)) {
+    override suspend fun invoke(getLessonModel: GetLessonModel): GotStudentResponseSealed =
+        when (val res =
+            phaseOneRepository.getLessons(getLessonModel.levels, getLessonModel.price)) {
             is Result.Success -> {
                 if (res.data.isEmpty()) {
                     GotStudentError
@@ -21,6 +22,9 @@ class GetLessonsUseCase @Inject constructor(
                     GotLessons(res.data)
                 }
             }
+
             is Result.Error -> GotStudentError
         }
+
+    data class GetLessonModel(val levels: String, val price: Double)
 }

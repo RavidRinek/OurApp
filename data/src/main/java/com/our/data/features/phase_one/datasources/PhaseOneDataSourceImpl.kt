@@ -26,10 +26,11 @@ class PhaseOneDataSourceImpl @Inject constructor(
             errorMessage = "Cant get any subject branches"
         )
 
-    override suspend fun getLessons(levels: String): Result<BaseResponse> {
+    override suspend fun getLessons(levels: String, pricea: Double): Result<BaseResponse> {
         return safeApiCall(
-            call =
-            { api.getLessons(levels) },
+            call = {
+                api.getLessons(levels, pricea)
+            },
             errorMessage = "Cant find any lessons by level branch id"
         )
     }

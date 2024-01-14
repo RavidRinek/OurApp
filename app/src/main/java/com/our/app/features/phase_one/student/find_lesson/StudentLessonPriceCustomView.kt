@@ -16,8 +16,12 @@ class StudentLessonPriceCustomView(context: Context?, attrs: AttributeSet?) :
         .inflate(R.layout.cv_student_lesson_price, this, true)
     private val viewBinding = CvStudentLessonPriceBinding.bind(view)
 
+    var pickedPrice: Int = 0
+        private set
+
     init {
         viewBinding.sliderStudentLessonPrice.addOnChangeListener(Slider.OnChangeListener { _, value, _ ->
+            pickedPrice = value.toInt()
             viewBinding.tvStudentLessonPrice.text = "${value.toInt()}₪"
         })
     }

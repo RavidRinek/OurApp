@@ -14,7 +14,11 @@ class StudentFindLessonResultAdapter(
     RecyclerView.Adapter<StudentFindLessonResultAdapter.LessonResultViewHolder>() {
 
     interface OnStudentFindLessonResultAdapterListener {
-        fun showTeacherProfilerBtnClicked(teacherId: Int, lessonId: Int)
+        fun showTeacherProfilerBtnClicked(
+            teacherId: Int,
+            lessonId: Int
+        )
+
         fun orderALessonBtnClicked()
     }
 

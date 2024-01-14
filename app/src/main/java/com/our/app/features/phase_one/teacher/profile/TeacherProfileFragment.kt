@@ -2,6 +2,7 @@ package com.our.app.features.phase_one.teacher.profile
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
@@ -31,19 +32,19 @@ class TeacherProfileFragment :
         arguments?.apply {
             viewModel.getTeacherById(getInt("teacherId"))
         }
+        Toast.makeText(requireContext(), "lessonId: ${requireArguments().getInt("lessonId")}", Toast.LENGTH_SHORT).show()
         binding.btnStudentFindLesson.setOnClickListener {
             findNavController().navigate(
                 R.id.action_teacherProfileFragment_to_orderLessonFragment,
                 Bundle().apply {
                     putParcelable(
                         OrderLessonFragment.K_LESSON_INFO, OrderLessonUi(
-                            lessonId = "fsdf",
-                            price = "fdsfsd",
-                            name = "fdsffdsfsddfs",
-                            time = "fdsfsdfsdfdsfsddf"
+                            lessonId = requireArguments().getInt("lessonId"),
+                            price = requireArguments().getDouble("price"),
+                            name = teacherProfile.teacherName,
+                            time = requireArguments().getLong("TIME_STAMP")
                         )
                     )
-                    putInt("lessonId", arguments?.getInt("lessonId") ?: 0)
                 }
             )
         }

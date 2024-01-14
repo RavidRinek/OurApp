@@ -27,6 +27,7 @@ class TeacherContainerViewModelImpl @Inject constructor(
     private val getTeacherByIdUseCase: GetTeacherByIdUseCase,
     private val postFCMTokenUseCase: PostFCMTokenUseCase
 ) : TeacherContainerViewModel() {
+
     override val teacherLobbyResponseLiveData = MutableLiveData<GotTeacherLobbyResponseSealed>()
 
     override fun getTeacherById(teacherId: Int) {
