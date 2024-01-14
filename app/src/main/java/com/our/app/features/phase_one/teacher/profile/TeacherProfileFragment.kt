@@ -37,7 +37,7 @@ class TeacherProfileFragment :
                 Bundle().apply {
                     putParcelable(
                         OrderLessonFragment.K_LESSON_INFO, OrderLessonUi(
-                            level = "fsdf",
+                            lessonId = "fsdf",
                             price = "fdsfsd",
                             name = "fdsffdsfsddfs",
                             time = "fdsfsdfsdfdsfsddf"

@@ -40,7 +40,7 @@ class OrderLessonFragment :
 
         (arguments?.getParcelable(K_LESSON_INFO) as? OrderLessonUi)?.let {
             binding.apply {
-                levelOfClass.text = it.level
+                levelOfClass.text = it.lessonId
                 lessonPrice.text = it.price
                 teachersName.text = it.name
                 lessonDate.text = it.time
@@ -112,7 +112,7 @@ class OrderLessonFragment :
 
 @Parcelize
 data class OrderLessonUi(
-    val level: String,
+    val lessonId: String,
     val price: String,
     val name: String,
     val time: String,

@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import com.our.app.R
 import com.our.app.databinding.CvStudentSubjectsSpinnerBinding
+import com.our.app.features.phase_one.teacher.teacherknowledge.Tahat
 import com.our.domain.features.phase_one.models.remote.BaseSubject
 
 class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
@@ -18,8 +19,9 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
     private val view: View = LayoutInflater.from(context)
         .inflate(R.layout.cv_student_subjects_spinner, this, true)
     private val viewBinding = CvStudentSubjectsSpinnerBinding.bind(view)
-    var listOfPickedBranchLevels = ArrayList<Int>()
-    private var listOfPickedBranches: ArrayList<BaseSubject> = ArrayList()
+    private val tahat = Tahat()
+    private var idsList = ArrayList<Int>()
+
 
     init {
         val typedArray: TypedArray? = context?.obtainStyledAttributes(
@@ -59,64 +61,17 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
     fun setSubjectsItems(
         subjectMode: SubjectsSpinnerAdapter.SubjectMode,
         subjects: List<BaseSubject>,
-        listener: SubjectsSpinnerAdapter.OnSubjectsSpinnerAdapterListener
     ) {
         val mListener = object : SubjectsSpinnerAdapter.OnSubjectsSpinnerAdapterListener {
-            override fun itemClicked(baseSubject: BaseSubject) {
-                when (subjectMode) {
-                    SubjectsSpinnerAdapter.SubjectMode.MAIN -> {
-                        handleItemMainClick(baseSubject.name)
-                        listener.itemClicked(baseSubject)
-                    }
-
-                    SubjectsSpinnerAdapter.SubjectMode.BRANCH -> handleItemBranchClick(baseSubject)
-                }
-            }
-
-            override fun itemClicked(lessonId: Int) {
-                handleItemBranchLevelClick(lessonId)
+            override fun itemClicked(ids: List<Int>) {
+                val a = ArrayList<Int>()
+                a.addAll(ids)
+                idsList = tahat.getIdsArray(a)
             }
         }
         viewBinding.rvSubjectsSpinner.adapter =
             SubjectsSpinnerAdapter(subjectMode, subjects, mListener)
     }
 
-    private fun handleItemMainClick(subjectName: String) {
-        dismissRvSubjectsVisibility()
-        viewBinding.tvSubjectsSpinnerPick.apply {
-            text = subjectName
-            isVisible = true
-        }
-    }
-
-    private fun handleItemBranchLevelClick(id: Int) {
-        if (listOfPickedBranchLevels.contains(id)) {
-            listOfPickedBranchLevels.remove(id)
-        } else {
-            listOfPickedBranchLevels.add(id)
-        }
-    }
-
-    private fun handleItemBranchClick(baseSubject: BaseSubject) {
-        if (listOfPickedBranches.contains(baseSubject)) {
-            listOfPickedBranches.remove(baseSubject)
-        } else {
-            listOfPickedBranches.add(baseSubject)
-        }
-
-        viewBinding.tvSubjectsSpinnerPick.apply {
-            when {
-                listOfPickedBranches.isEmpty() -> isVisible = false
-                listOfPickedBranches.size == 1 -> {
-                    text = listOfPickedBranches.first().name
-                    isVisible = true
-                }
-
-                else -> {
-                    text = "${listOfPickedBranches.size} נבחרו"
-                    isVisible = true
-                }
-            }
-        }
-    }
+    fun getSelectedItemLevels() = idsList
 }

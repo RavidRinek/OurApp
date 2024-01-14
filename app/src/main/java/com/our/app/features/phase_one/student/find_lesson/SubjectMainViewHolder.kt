@@ -35,24 +35,22 @@ class SubjectMainViewHolder(
                         text = subjectLevel?.name
                         setOnClickListener {
                             it.isSelected = !it.isSelected
-                            listener.itemClicked(subject.subjectLevel[i].id)
+                            listener.itemClicked(ArrayList<Int>().apply {
+                                add(
+                                    subjectLevel?.id ?: 0
+                                )
+                            })
                         }
                     }
                 }
 
                 cbSelectAll.setOnCheckedChangeListener { _, isChecked ->
-                    if (tvSubjectFirst.isSelected != isChecked) {
-                        listener.itemClicked(subject.subjectLevel[2].id)
-                    }
                     tvSubjectFirst.isSelected = isChecked
-                    if (tvSubjectSecond.isSelected != isChecked) {
-                        listener.itemClicked(subject.subjectLevel[1].id)
-                    }
                     tvSubjectSecond.isSelected = isChecked
-                    if (tvSubjectThird.isSelected != isChecked) {
-                        listener.itemClicked(subject.subjectLevel[0].id)
-                    }
                     tvSubjectThird.isSelected = isChecked
+                    listener.itemClicked(ArrayList<Int>().apply {
+                        addAll(subject.subjectLevel.map { it.id })
+                    })
                 }
             }
         }

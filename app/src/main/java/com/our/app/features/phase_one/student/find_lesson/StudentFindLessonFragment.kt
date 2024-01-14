@@ -42,14 +42,10 @@ class StudentFindLessonFragment :
             binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
         }
         binding.btnStudentFindLesson.setOnClickListener {
-            //todo moved subjects IDS to 'StudentFindLessonResultFragment
-//            Toast.makeText(requireContext(), "XXX", Toast.LENGTH_SHORT).show()
-            val array = ArrayList<Int>()
-            array.add(11)
             findNavController().navigate(
                 R.id.action_studentFindLessonFragment_to_studentFindLessonResultFragment,
                 Bundle().apply {
-                    putIntegerArrayList("TAHAT", array)
+                    putIntegerArrayList("TAHAT", binding.subjectSpinnerMain.getSelectedItemLevels())
                 }
             )
         }
@@ -73,24 +69,7 @@ class StudentFindLessonFragment :
             SubjectsSpinnerAdapter.SubjectMode.MAIN
         else SubjectsSpinnerAdapter.SubjectMode.BRANCH
 
-        subjectSpinnerCustomView.setSubjectsItems(subjectMode, subjects,
-            object : SubjectsSpinnerAdapter.OnSubjectsSpinnerAdapterListener {
-                override fun itemClicked(baseSubject: BaseSubject) {
-                    when (subjectMode) {
-                        SubjectsSpinnerAdapter.SubjectMode.MAIN -> {
-                            viewModel.getSubjectBranches(baseSubject.id)
-                        }
-
-                        SubjectsSpinnerAdapter.SubjectMode.BRANCH -> {
-                            viewModel.getSubjectBranches(baseSubject.id)
-                        }
-                    }
-                }
-
-                override fun itemClicked(lessonId: Int) {
-
-                }
-            })
+        subjectSpinnerCustomView.setSubjectsItems(subjectMode, subjects)
     }
 
 
