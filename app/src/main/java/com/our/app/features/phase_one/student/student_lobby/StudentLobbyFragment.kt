@@ -1,7 +1,5 @@
 package com.our.app.features.phase_one.student.student_lobby
 
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.viewModels
 import com.our.app.R
 import com.our.app.base.BaseFragment
@@ -16,11 +14,6 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
 
     override val viewModel: StudentLobbyViewModel by viewModels<StudentLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentStudentLobbyBinding::bind)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
 
     override fun observeData() {
         super.observeData()

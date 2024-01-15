@@ -8,6 +8,8 @@ import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTearcherProfileBinding
+import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonFragment
+import com.our.app.features.phase_one.student.find_lesson_res.StudentFindLessonResultFragment
 import com.our.app.features.phase_one.student.order_lesson.OrderLessonFragment
 import com.our.app.features.phase_one.student.order_lesson.OrderLessonUi
 import com.our.app.features.phase_one.teacher.container.TeacherContainerViewModel
@@ -30,19 +32,18 @@ class TeacherProfileFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.apply {
-            viewModel.getTeacherById(getInt("teacherId"))
+            viewModel.getTeacherById(getInt(StudentFindLessonResultFragment.SELECTED_TEACHER_ID))
         }
-        Toast.makeText(requireContext(), "lessonId: ${requireArguments().getInt("lessonId")}", Toast.LENGTH_SHORT).show()
         binding.btnStudentFindLesson.setOnClickListener {
             findNavController().navigate(
                 R.id.action_teacherProfileFragment_to_orderLessonFragment,
                 Bundle().apply {
                     putParcelable(
                         OrderLessonFragment.K_LESSON_INFO, OrderLessonUi(
-                            lessonId = requireArguments().getInt("lessonId"),
-                            price = requireArguments().getDouble("price"),
+                            lessonId = requireArguments().getInt(StudentFindLessonResultFragment.SELECTED_LESSON_ID),
+                            price = requireArguments().getDouble(StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE),
                             name = teacherProfile.teacherName,
-                            time = requireArguments().getLong("TIME_STAMP")
+                            time = requireArguments().getLong(StudentFindLessonFragment.SELECTED_LESSON_TIME_STAMP)
                         )
                     )
                 }
@@ -73,7 +74,6 @@ class TeacherProfileFragment :
                     it.submitList(teacherProfile.profileGallery)
                 }
                 rvTeacherReviews.adapter = TeacherProfileReviewsAdapter().also {
-                    println()
                     it.submitList(teacherProfile.reviews)
                 }
             }

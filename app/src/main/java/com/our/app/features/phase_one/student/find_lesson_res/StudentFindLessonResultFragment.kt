@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentFindLessonResultBinding
+import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonFragment
 import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonViewModel
 import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonViewModelImpl
 import com.our.app.features.phase_one.student.student_lobby.StudentLobbyViewModel
@@ -32,8 +33,8 @@ class StudentFindLessonResultFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
-            lessonsIds = getIntegerArrayList("TAHAT")
-            mPrice = getInt("price")
+            lessonsIds = getIntegerArrayList(StudentFindLessonFragment.SELECTED_SUBJECT_LEVELS_IDS)
+            mPrice = getInt(StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE)
         }
     }
 
@@ -58,10 +59,13 @@ class StudentFindLessonResultFragment :
                                 findNavController().navigate(
                                     R.id.action_studentFindLessonResultFragment_to_teacherProfileFragment,
                                     Bundle().apply {
-                                        putInt("lessonId", lessonId)
-                                        putInt("teacherId", teacherId)
-                                        putDouble("price", mPrice.toDouble())
-                                        putLong("TIME_STAMP", arguments!!.getLong("TIME_STAMP"))
+                                        putInt(SELECTED_LESSON_ID, lessonId)
+                                        putInt(SELECTED_TEACHER_ID, teacherId)
+                                        putDouble(
+                                            StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE,
+                                            mPrice.toDouble()
+                                        )
+                                        arguments!!.getLong(StudentFindLessonFragment.SELECTED_LESSON_TIME_STAMP)
                                     }
                                 )
                             }
@@ -74,5 +78,10 @@ class StudentFindLessonResultFragment :
                 else -> Unit
             }
         }
+    }
+
+    companion object {
+        const val SELECTED_LESSON_ID = "selected_lesson_id"
+        const val SELECTED_TEACHER_ID = "selected_teacher_id"
     }
 }

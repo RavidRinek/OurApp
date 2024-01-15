@@ -45,9 +45,9 @@ class StudentFindLessonFragment :
             findNavController().navigate(
                 R.id.action_studentFindLessonFragment_to_studentFindLessonResultFragment,
                 Bundle().apply {
-                    putIntegerArrayList("TAHAT", binding.subjectSpinnerMain.getSelectedItemLevels())
-                    putLong("TIME_STAMP", 5984736L)
-                    putInt("price", binding.cvLessonPrice.pickedPrice)
+                    putIntegerArrayList(SELECTED_SUBJECT_LEVELS_IDS, binding.subjectSpinnerMain.getSelectedItemLevels())
+                    putLong(SELECTED_LESSON_TIME_STAMP, 5984736L)
+                    putInt(SELECTED_LESSON_MAX_PRICE, binding.cvLessonPrice.pickedPrice)
                 }
             )
         }
@@ -81,6 +81,10 @@ class StudentFindLessonFragment :
     }
 
     companion object {
+        const val SELECTED_SUBJECT_LEVELS_IDS = "selected_subject_lvl_ids"
+        const val SELECTED_LESSON_TIME_STAMP = "selected_lesson_timestamp"
+        const val SELECTED_LESSON_MAX_PRICE = "selected_lesson_max_price"
+
         @JvmStatic
         fun newInstance() = StudentFindLessonFragment()
     }
