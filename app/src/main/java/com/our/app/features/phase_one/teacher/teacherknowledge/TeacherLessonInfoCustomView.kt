@@ -40,11 +40,14 @@ class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
             viewBinding.clSubjectsSpinner.isSelected
     }
 
-    fun getLessonInfoData(): LessonInfoData =
-        LessonInfoData(
-            pricePer40m = viewBinding.layoutTeacherPriceInfo.etPricePer40m.text.toString().toInt(),
-            pricePer60m = viewBinding.layoutTeacherPriceInfo.etPricePer60m.text.toString().toInt(),
+    fun getLessonInfoData(): LessonInfoData {
+        val priceFor40m = viewBinding.layoutTeacherPriceInfo.etPricePer40m.text.toString().ifEmpty { "80" }
+        val pricePer60m = viewBinding.layoutTeacherPriceInfo.etPricePer60m.text.toString().ifEmpty { "120" }
+       return LessonInfoData(
+            pricePer40m = priceFor40m.toInt(),
+            pricePer60m = pricePer60m.toInt(),
             allowFreeFirstLesson = viewBinding.layoutTeacherPriceInfo.cbFreeFirstLesson.isChecked,
             additionalInfo = viewBinding.layoutTeacherPriceInfo.etAdditionalInfo.text.toString()
         )
+    }
 }

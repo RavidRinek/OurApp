@@ -30,7 +30,6 @@ class StudentFindLessonFragment :
     private var _binding: FragmentStudentFindLessonBinding? = null
     private val binding get() = _binding!!
 
-    private var subjectBranchId: Int = 42
     private var date = ""
     private var time = ""
     private var fullDate: Any = ""
@@ -47,6 +46,7 @@ class StudentFindLessonFragment :
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
@@ -58,26 +58,31 @@ class StudentFindLessonFragment :
         binding.clContainer.setOnClickListener {
             binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
         }
+
+        binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
+
+        binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
+
         binding.btnStudentFindLesson.setOnClickListener {
+            val selectedItemLevels = binding.subjectSpinnerMain.getSelectedItemLevels().ifEmpty {
+                ArrayList<Int>().apply {
+                    add(4)
+                    add(6)
+                    add(7)
+                }
+            }
+
             findNavController().navigate(
                 R.id.action_studentFindLessonFragment_to_studentFindLessonResultFragment,
                 Bundle().apply {
                     putIntegerArrayList(
                         SELECTED_SUBJECT_LEVELS_IDS,
-                        binding.subjectSpinnerMain.getSelectedItemLevels()
+                        selectedItemLevels
                     )
                     putLong(SELECTED_LESSON_TIME_STAMP, 5984736L)
                     putInt(SELECTED_LESSON_MAX_PRICE, binding.cvLessonPrice.pickedPrice)
                 }
             )
-        }
-
-        binding.layoutLessonTime.tvLessonDate.setOnClickListener {
-            showTimePickerDialog()
-        }
-
-        binding.layoutLessonDate.tvLessonDate.setOnClickListener {
-            showDatePicker()
         }
 
         binding.layoutLessonTime.tvLessonDate.text = "בחר שעה"
