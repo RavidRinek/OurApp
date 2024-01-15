@@ -1,8 +1,10 @@
 package com.our.app.features.phase_one.student.find_lesson_res
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
@@ -30,6 +32,17 @@ class StudentFindLessonResultFragment :
     private var lessonsIds: ArrayList<Int>? = null
     private var mPrice: Int = 0
 
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_studentFindLessonResultFragment_to_studentFindLessonFragment)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
@@ -48,8 +61,7 @@ class StudentFindLessonResultFragment :
         viewModel.studentLobbyResponseLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is GotLessons -> {
-                    val mappedLessons = it.lessons.map { it.lesson }
-                    binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(mappedLessons,
+                    binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(it.lessons,
                         object :
                             StudentFindLessonResultAdapter.OnStudentFindLessonResultAdapterListener {
                             override fun showTeacherProfilerBtnClicked(
@@ -70,8 +82,7 @@ class StudentFindLessonResultFragment :
                                 )
                             }
 
-                            override fun orderALessonBtnClicked() {
-                            }
+                            override fun orderALessonBtnClicked() {}
                         })
                 }
 

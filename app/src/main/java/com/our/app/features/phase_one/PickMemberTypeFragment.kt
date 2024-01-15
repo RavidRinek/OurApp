@@ -1,9 +1,12 @@
 package com.our.app.features.phase_one
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
@@ -14,6 +17,17 @@ import com.our.app.utilities.bindingDelegates.viewBinding
 class PickMemberTypeFragment : Fragment() {
 
     private val binding by viewBinding(FragmentPickMemberTypeBinding::bind)
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            Toast.makeText(requireContext(), "fdssfd", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

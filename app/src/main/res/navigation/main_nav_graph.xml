@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_studentFindLessonResultFragment_to_studentLobbyFragment"
             app:destination="@id/studentLobbyFragment" />
+        <action
+            android:id="@+id/action_studentFindLessonResultFragment_to_studentFindLessonFragment"
+            app:destination="@id/studentFindLessonFragment" />
     </fragment>
 
 

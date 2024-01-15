@@ -9,11 +9,14 @@ data class StudentLessonOffersResponse(
     @SerializedName("lesson")
     val lessonResponse: LessonResponse? = null,
     @SerializedName("lessonInfo")
-    val lessonInfo: LessonInfoResponse? = null
+    val lessonInfo: LessonInfoResponse? = null,
+    @SerializedName("teacher")
+    val teacherResponse: TeacherProfileResponse? = null
 )
 
 fun StudentLessonOffersResponse.toDomain(): StudentLessonOffers =
     StudentLessonOffers(
         lesson = (lessonResponse ?: LessonResponse()).toDomain(),
-        lessonInfo = (lessonInfo ?: LessonInfoResponse()).toDomain()
+        lessonInfo = (lessonInfo ?: LessonInfoResponse()).toDomain(),
+        teacherProfile = (teacherResponse ?: TeacherProfileResponse()).toDomain()
     )
