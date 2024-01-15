@@ -31,9 +31,7 @@ class TeacherContainerFragment :
     lateinit var prefs: Prefs
 
     private val backPressedCallback = object : OnBackPressedCallback(false) {
-        override fun handleOnBackPressed() {
-            Toast.makeText(requireContext(), "fdssfd", Toast.LENGTH_SHORT).show()
-        }
+        override fun handleOnBackPressed() {}
     }
 
     override fun onAttach(context: Context) {

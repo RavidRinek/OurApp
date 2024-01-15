@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.our.app.base.BaseViewModelImpl
 import com.our.app.base.DisplayProgressTypes
+import com.our.data.base.datasources.Prefs
+import com.our.domain.features.phase_one.models.local.GotCompletedFullRegistration
 import com.our.domain.features.phase_one.models.local.GotTeacherLobbyResponseSealed
 import com.our.domain.features.phase_one.usecases.GetSubjectsLevelsKnowledgeUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
@@ -18,6 +20,7 @@ abstract class TeacherKnowledgeViewModel : BaseViewModelImpl() {
 
 @HiltViewModel
 class TeacherKnowledgeViewModelImpl @Inject constructor(
+    private val prefs: Prefs,
     private val getSubjects: GetSubjectsLevelsKnowledgeUseCase,
     private val postTeacherInfoUseCase: PostTeacherInfoUseCase,
 ) : TeacherKnowledgeViewModel() {
@@ -39,7 +42,11 @@ class TeacherKnowledgeViewModelImpl @Inject constructor(
         launch(
             displayProgressType = DisplayProgressTypes.PROGRESS_BAR
         ) {
-            teacherLobbyResponseLiveData.postValue(postTeacherInfoUseCase.invoke(teacherInfo))
+            val res = postTeacherInfoUseCase.invoke(teacherInfo)
+            if (res is GotCompletedFullRegistration) {
+                prefs.putBoolean(Prefs.COMPLETED_TEACHER_FULL_REGISTRATION, true)
+            }
+            teacherLobbyResponseLiveData.postValue(res)
         }
     }
 }

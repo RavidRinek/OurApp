@@ -43,12 +43,11 @@ class TeacherPersonalInfoFragment :
         binding.btnTeacherCreateInfo.setOnClickListener {
             val filledInfo = getTeachInfo()
             if (filledInfo.entries.first().value.isNotEmpty()) {
-                it.isEnabled = false
                 viewModel.postTeacherCreateInfo(filledInfo)
-            }
-            viewLifecycleOwner.lifecycleScope.launch {
-                delay(1_500)
-                findNavController().navigate(R.id.action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment)
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(1_500)
+                    findNavController().navigate(R.id.action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment)
+                }
             }
         }
     }
@@ -72,8 +71,8 @@ class TeacherPersonalInfoFragment :
     private fun getTeachInfo(): HashMap<String, String> {
         for (i in 0 until binding.llInfoContainer.childCount) {
             (binding.llInfoContainer[i] as EditText).apply {
-                var txt = "gdfijlk"
-                txt = text.toString().ifEmpty {
+                var txt = text.toString()
+                txt = txt.ifEmpty {
                     when (tag) {
                         "teacherPhone" -> System.currentTimeMillis().toString().take(10)
                         "teacherMail" -> "$txt@gmail.com"

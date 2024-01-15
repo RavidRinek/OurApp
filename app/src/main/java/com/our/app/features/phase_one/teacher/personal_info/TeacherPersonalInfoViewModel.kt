@@ -36,9 +36,11 @@ class TeacherPersonalInfoViewModelImpl @Inject constructor(
         launch(
             displayProgressType = DisplayProgressTypes.PROGRESS_BAR
         ) {
-            val res = getTeacherByIdUseCase.invoke(prefs.getInt(Prefs.TEACHER_ID))
-            if (res is GotTeacherPersonalInfo) {
-                teacherPersonalInfoResponseLiveData.postValue(res)
+            prefs.getInt(Prefs.TEACHER_ID).takeIf { it > 0 }?.let {
+                val res = getTeacherByIdUseCase.invoke(it)
+                if (res is GotTeacherPersonalInfo) {
+                    teacherPersonalInfoResponseLiveData.postValue(res)
+                }
             }
         }
     }

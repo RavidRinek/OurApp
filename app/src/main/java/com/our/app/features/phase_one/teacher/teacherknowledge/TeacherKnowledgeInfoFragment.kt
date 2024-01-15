@@ -29,25 +29,24 @@ class TeacherKnowledgeInfoFragment :
     @Inject
     lateinit var prefs: Prefs
 
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(
+                R.id.action_teacherKnowlageInfoFragment_to_teacherPersonalInfoFragment
+            )
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigate(
-                    R.id.action_teacherKnowlageInfoFragment_to_teacherPersonalInfoFragment
-                )
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            this, onBackPressedCallback
-        )
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTeacherKnowlageInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,30 +64,18 @@ class TeacherKnowledgeInfoFragment :
                 var selectedItemLevels = cvTeacherSubjectKnowledge.getSelectedItemLevels()
                 var lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
                 var degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
+
                 if (selectedItemLevels.isEmpty()) {
-                    selectedItemLevels = ArrayList<Int>().apply {
-                        add(1)
-                    }
-                    lessonInfo = TeacherLessonInfoCustomView.LessonInfoData(40, 100, true, "fdsfsd")
-                    degreeInfo =
-                        TeacherDegreeInfoCustomView.TeacherDegreeDataInfo("fsdfds", "fdsfsdfds")
+                    selectedItemLevels = getMockLevelIds()
+                    lessonInfo = getMockLessonInfoData()
+                    degreeInfo = getMockTeacherDegreeDataInfo()
                 }
 
-                val teacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo =
-                    PostTeacherInfoUseCase.UpdateTeacherInfo(
-                        teacherId = prefs.getInt(Prefs.TEACHER_ID),
-                        teacherSubjectsLevelsId = selectedItemLevels.toList(),
-                        lessonInfo = PostTeacherInfoUseCase.LessonInfo(
-                            pricePer60m = lessonInfo.pricePer60m,
-                            pricePer40m = lessonInfo.pricePer40m,
-                            firstLessonFree = lessonInfo.allowFreeFirstLesson,
-                            additionalInfo = lessonInfo.additionalInfo
-                        ),
-                        degreeInfo = PostTeacherInfoUseCase.DegreeInfo(
-                            schoolName = degreeInfo.schoolName,
-                            degreeName = degreeInfo.degreeName
-                        )
-                    )
+                val teacherInfo = prepTeacherKnowledgeToPostServer(
+                    selectedItemLevels,
+                    lessonInfo,
+                    degreeInfo
+                )
 
                 viewModel.completeTeacherFullRegistration(teacherInfo)
             }
@@ -99,20 +86,64 @@ class TeacherKnowledgeInfoFragment :
         super.observeData()
         viewModel.teacherLobbyResponseLiveData.observe {
             when (it) {
+                is GotSubjectLevelsForTeacherKnowledgeInfo -> {
+                    binding.cvTeacherSubjectKnowledge.initViews(it.subjects)
+                }
+
                 GotCompletedFullRegistration -> {
-                    prefs.putBoolean(Prefs.COMPLETED_TEACHER_FULL_REGISTRATION, true)
                     findNavController().navigate(
                         R.id.action_teacherKnowlageInfoFragment_to_teacherLobbyFragment
                     )
                 }
 
-                is GotSubjectLevelsForTeacherKnowledgeInfo -> {
-                    binding.cvTeacherSubjectKnowledge.initViews(it.subjects)
-                }
-
                 else -> Unit
             }
         }
+    }
+
+    private fun getMockLevelIds(): ArrayList<Int> {
+        return ArrayList<Int>().apply {
+            add(1)
+        }
+    }
+
+    private fun getMockLessonInfoData(): TeacherLessonInfoCustomView.LessonInfoData {
+        return TeacherLessonInfoCustomView
+            .LessonInfoData(
+                40,
+                100,
+                true,
+                "fdsfsd"
+            )
+    }
+
+    private fun getMockTeacherDegreeDataInfo(): TeacherDegreeInfoCustomView.TeacherDegreeDataInfo {
+        return TeacherDegreeInfoCustomView
+            .TeacherDegreeDataInfo(
+                "fsdfds",
+                "fdsfsdfds"
+            )
+    }
+
+    private fun prepTeacherKnowledgeToPostServer(
+        selectedItemLevels: ArrayList<Int>,
+        lessonInfo: TeacherLessonInfoCustomView.LessonInfoData,
+        degreeInfo: TeacherDegreeInfoCustomView.TeacherDegreeDataInfo
+    ): PostTeacherInfoUseCase.UpdateTeacherInfo {
+        return PostTeacherInfoUseCase.UpdateTeacherInfo(
+            teacherId = prefs.getInt(Prefs.TEACHER_ID),
+            teacherSubjectsLevelsId = selectedItemLevels.toList(),
+            lessonInfo = PostTeacherInfoUseCase.LessonInfo(
+                pricePer60m = lessonInfo.pricePer60m,
+                pricePer40m = lessonInfo.pricePer40m,
+                firstLessonFree = lessonInfo.allowFreeFirstLesson,
+                additionalInfo = lessonInfo.additionalInfo
+            ),
+            degreeInfo = PostTeacherInfoUseCase.DegreeInfo(
+                schoolName = degreeInfo.schoolName,
+                degreeName = degreeInfo.degreeName
+            )
+        )
     }
 
     override fun onDestroyView() {
