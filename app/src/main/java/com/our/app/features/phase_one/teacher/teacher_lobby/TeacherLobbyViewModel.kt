@@ -35,18 +35,15 @@ class TeacherLobbyViewModelImpl @Inject constructor(
 
     override fun getTeacherUpcomingLessons() {
         launch {
-            when (val res = getTeacherOrdersUseCase.invoke(prefs.getInt(Prefs.TEACHER_ID)/*33*/)) {
-                is Result.Error -> println("ERROR -> ENDPONT: get_order")
-                is Result.Success -> {
-                    teacherLobbyResponseLiveData.postValue(
-                        teacherLobbyResponseLiveData.value?.copy(
-                            emitType = EmitType.TEACHER_ORDERS,
-                            uiState = teacherLobbyResponseLiveData.value!!.uiState.copy(
-                                teacherOrders = res.data
-                            )
+            getTeacherOrdersUseCase.invoke(prefs.getInt(Prefs.TEACHER_ID)).onSuccess {
+                teacherLobbyResponseLiveData.postValue(
+                    teacherLobbyResponseLiveData.value?.copy(
+                        emitType = EmitType.TEACHER_ORDERS,
+                        uiState = teacherLobbyResponseLiveData.value!!.uiState.copy(
+                            teacherOrders = it
                         )
                     )
-                }
+                )
             }
         }
     }
