@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.our.app.features.phase_one.teacherlobby.create.TeacherCreateInfoCustomView
+    <com.our.app.features.phase_one.teacherlobby.personal_info.TeacherCreateInfoCustomView
         android:id="@+id/cvTeacherCreateInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
