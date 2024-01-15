@@ -65,7 +65,7 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherPhone"
-                android:textColor="#FF3817" />
+                android:textColor="#FF3817"/>
 
             <EditText
                 android:id="@+id/etMail"
@@ -96,6 +96,14 @@
                 android:paddingBottom="17dp"
                 android:tag="teacherBirthday"
                 android:textColor="#FF3817" />
+
+            <Button
+                android:id="@+id/btnDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Date"
+                android:onClick="showDatePickerDialog"/>
+
 
             <EditText
                 android:id="@+id/etAddress"

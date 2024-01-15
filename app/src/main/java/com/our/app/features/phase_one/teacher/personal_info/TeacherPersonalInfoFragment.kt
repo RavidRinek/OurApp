@@ -1,9 +1,11 @@
 package com.our.app.features.phase_one.teacher.personal_info
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.core.view.get
 import androidx.fragment.app.viewModels
@@ -16,6 +18,7 @@ import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 @AndroidEntryPoint
 class TeacherPersonalInfoFragment :
@@ -24,6 +27,7 @@ class TeacherPersonalInfoFragment :
     override val viewModel: TeacherPersonalInfoViewModel by viewModels<TeacherPersonalInfoViewModelImpl>()
     private var _binding: FragmentTeacherPersonalInfoBinding? = null
     private val binding get() = _binding!!
+
     private val teachInfoHashMap = HashMap<String, String>()
 
     override fun onCreateView(
@@ -50,37 +54,59 @@ class TeacherPersonalInfoFragment :
                 }
             }
         }
+
+        binding.btnDatePicker.setOnClickListener {
+            showDatePickerDialog()
+        }
+    }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(requireContext(),
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                binding.etBd.setText(selectedDate)
+            }, year, month, day)
+
+        datePickerDialog.show()
     }
 
     override fun observeData() {
         super.observeData()
-        viewModel.teacherPersonalInfoResponseLiveData.observe {
-            binding.apply {
-                it.teacherProfile.apply {
-                    etName.setText(teacherName)
-                    etLastName.setText(teacherLastName)
-                    etPhone.setText(teacherPhone)
-                    etMail.setText(teacherMail)
-                    etBd.setText(teacherPhone)
-//                etAddress.setText(teacherAddress)
+        viewModel.teacherPersonalInfoResponseLiveData.observe(viewLifecycleOwner) { response ->
+            response?.teacherProfile?.let { teacherProfile ->
+                binding.apply {
+                    etName.setText(teacherProfile.teacherName)
+                    etLastName.setText(teacherProfile.teacherLastName)
+                    etPhone.setText(teacherProfile.teacherPhone)
+                    etMail.setText(teacherProfile.teacherMail)
+                    etBd.setText(teacherProfile.teacherBirthday)
+                    // etAddress.setText(teacherProfile.teacherAddress)
                 }
             }
         }
     }
 
     private fun getTeachInfo(): HashMap<String, String> {
+        val teachInfoHashMap = HashMap<String, String>()
         for (i in 0 until binding.llInfoContainer.childCount) {
-            (binding.llInfoContainer[i] as EditText).apply {
-                var txt = text.toString()
-                txt = txt.ifEmpty {
-                    when (tag) {
+            val editText = binding.llInfoContainer.getChildAt(i) as? EditText
+            editText?.let {
+                val tagString = it.tag as? String
+                var txt = it.text.toString()
+                txt = if (txt.isEmpty()) {
+                    when (tagString) {
                         "teacherPhone" -> System.currentTimeMillis().toString().take(10)
                         "teacherMail" -> "$txt@gmail.com"
                         "teacherBirthday" -> (2000..3000).random().toString()
                         else -> "Unit"
                     }
-                }
-                teachInfoHashMap[tag as String] = txt
+                } else txt
+                teachInfoHashMap[tagString ?: ""] = txt
             }
         }
         return teachInfoHashMap
@@ -96,10 +122,7 @@ class TeacherPersonalInfoFragment :
         @JvmStatic
         fun newInstance(teacherProfile: TeacherProfile) =
             TeacherPersonalInfoFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
+                // Handle the newInstance logic if needed
             }
     }
 }
