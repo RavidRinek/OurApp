@@ -23,6 +23,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tvLessonDateTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="12dp"
@@ -30,5 +31,4 @@
         android:textColor="@android:color/black"
         android:textSize="17sp"
         app:drawableEndCompat="@drawable/ic_student_lesson_date" />
-
 </LinearLayout>
