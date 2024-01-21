@@ -15,7 +15,9 @@ data class UpcomingLessons(
     @SerializedName("teacher")
     val teacherResponse: TeacherProfileResponse? = null,
     @SerializedName("subject")
-    val subjectResponse: SubjectResponse? = null
+    val subjectResponse: SubjectResponse? = null,
+    @SerializedName("urlVideo")
+    val videoUrlResponse: String? = null
 )
 
 fun UpcomingLessons.toDomain(): TeacherOrder =
@@ -24,5 +26,6 @@ fun UpcomingLessons.toDomain(): TeacherOrder =
         student = (student ?: StudentResponse()).toDomain(),
         lesson = (lessonResponse ?: LessonResponse()).toDomain(),
         teacher = (teacherResponse ?: TeacherProfileResponse()).toDomain(),
-        subject = (subjectResponse ?: SubjectResponse()).toDomain()
+        subject = (subjectResponse ?: SubjectResponse()).toDomain(),
+        videoUrl = videoUrlResponse ?: ""
     )

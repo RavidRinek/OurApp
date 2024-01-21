@@ -1,8 +1,10 @@
 package com.our.app.features.phase_one.teacher.teacher_lobby
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import com.our.app.R
 import com.our.app.base.BaseFragment
@@ -20,6 +22,17 @@ class TeacherLobbyFragment :
 
     override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            requireActivity().moveTaskToBack(true)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

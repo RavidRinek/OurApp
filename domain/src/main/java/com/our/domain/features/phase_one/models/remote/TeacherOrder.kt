@@ -5,5 +5,6 @@ data class TeacherOrder(
     val student: Student,
     val lesson: Lesson,
     val teacher: TeacherProfile,
-    val subject: Subject
+    val subject: Subject,
+    val videoUrl: String
 ) : java.io.Serializable

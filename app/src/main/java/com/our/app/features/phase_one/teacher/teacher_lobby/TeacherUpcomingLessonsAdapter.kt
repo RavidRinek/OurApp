@@ -1,5 +1,6 @@
 package com.our.app.features.phase_one.teacher.teacher_lobby
 
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,11 @@ class TeacherUpcomingLessonsAdapter(val orders: List<TeacherOrder>) :
                 tvSubject.text = order.lesson.subjectName
                 tvStudentName.text = order.student.name
                 tvTime.text = order.lesson.time
-                tvDuration.text = order.lesson.durationInMin.toString()
+                tvDuration.apply {
+                    movementMethod = LinkMovementMethod.getInstance()
+                    text = order.videoUrl
+//                    text = order.lesson.durationInMin.toString()
+                }
             }
         }
     }

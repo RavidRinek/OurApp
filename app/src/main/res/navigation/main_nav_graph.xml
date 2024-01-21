@@ -50,9 +50,6 @@
         <action
             android:id="@+id/action_teacherContainerFragment_to_teacherLobbyFragment"
             app:destination="@id/teacherLobbyFragment" />
-        <action
-            android:id="@+id/action_teacherContainerFragment_to_teacherLobbyFragment2"
-            app:destination="@id/teacherLobbyFragment" />
     </fragment>
 
 
