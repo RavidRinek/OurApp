@@ -8,7 +8,7 @@ import com.our.domain.features.phase_one.models.remote.Student
 import com.our.domain.features.phase_one.models.remote.StudentLessonOffers
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
-import com.our.domain.features.phase_one.models.remote.TeacherOrder
+import com.our.domain.features.phase_one.models.remote.Oreder
 import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import com.our.domain.features.phase_one.repositories.PhaseOneRepository
 import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
@@ -58,7 +58,7 @@ class PhaseOneRepositoryImpl @Inject constructor(
             Unit
         }
 
-    override suspend fun getTeacherOrders(teacherId: Int): Result<List<TeacherOrder>> =
+    override suspend fun getTeacherOrders(teacherId: Int): Result<List<Oreder>> =
         phaseOneDataSource.getTeacherOrders(teacherId).map {
             (it as GetUpcomingLessons).toDomain()
         }
@@ -78,7 +78,7 @@ class PhaseOneRepositoryImpl @Inject constructor(
             (it as GetStudentResponse).toDomain()
         }
 
-    override suspend fun getStudentOrders(studentId: Int): Result<List<TeacherOrder>> =
+    override suspend fun getStudentOrders(studentId: Int): Result<List<Oreder>> =
         phaseOneDataSource.getStudentOrders(studentId).map {
             (it as GetUpcomingLessons).toDomain()
         }

@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentLobbyBinding
-import com.our.app.features.phase_one.teacher.teacher_lobby.TeacherUpcomingLessonsAdapter
+import com.our.app.features.phase_one.common.UpcomingLessonsAdapter
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.domain.features.phase_one.models.local.GotStudentUpcomingLessons
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +48,7 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
             when (it) {
                 is GotStudentUpcomingLessons -> {
                     binding.rvStudentLessons.adapter =
-                        TeacherUpcomingLessonsAdapter(it.upcomingLessons)
+                        UpcomingLessonsAdapter(it.upcomingLessons)
                 }
 
                 else -> Unit

@@ -68,14 +68,9 @@ class StudentFindLessonFragment :
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
-        binding.clContainer.setOnClickListener {
-            binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
-        }
-
+        binding.clContainer.setOnClickListener { binding.subjectSpinnerMain.dismissRvSubjectsVisibility() }
         binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
-
         binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
-
         binding.btnStudentFindLesson.setOnClickListener {
             val selectedItemLevels = binding.subjectSpinnerMain.getSelectedItemLevels().ifEmpty {
                 ArrayList<Int>().apply {

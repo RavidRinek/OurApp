@@ -10,6 +10,7 @@ import com.our.app.MainActivity
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTeacherLobbyBinding
+import com.our.app.features.phase_one.common.UpcomingLessonsAdapter
 import com.our.app.utilities.bindingDelegates.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,7 +63,7 @@ class TeacherLobbyFragment :
                 EmitType.TEACHER_ORDERS -> {
                     println("teacherLobbyResponseLiveData: emitType: TEACHER_ORDERS")
                     binding.rvTeacherLessons.adapter =
-                        TeacherUpcomingLessonsAdapter(it.uiState.teacherOrders)
+                        UpcomingLessonsAdapter(it.uiState.teacherOrders)
                 }
             }
         }

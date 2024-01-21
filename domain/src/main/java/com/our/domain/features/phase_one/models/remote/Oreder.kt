@@ -1,6 +1,6 @@
 package com.our.domain.features.phase_one.models.remote
 
-data class TeacherOrder(
+data class Oreder(
     val id: Int,
     val student: Student,
     val lesson: Lesson,

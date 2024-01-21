@@ -4,7 +4,7 @@ import com.our.domain.features.phase_one.models.remote.Student
 import com.our.domain.features.phase_one.models.remote.StudentLessonOffers
 import com.our.domain.features.phase_one.models.remote.Subject
 import com.our.domain.features.phase_one.models.remote.SubjectBranch
-import com.our.domain.features.phase_one.models.remote.TeacherOrder
+import com.our.domain.features.phase_one.models.remote.Oreder
 
 sealed class GotStudentResponseSealed
 
@@ -23,4 +23,4 @@ object GotOrderedLesson : GotStudentResponseSealed()
 
 data class GotStudentPersonalInfo(val student: Student): GotStudentResponseSealed()
 
-    data class GotStudentUpcomingLessons(val upcomingLessons: List<TeacherOrder>): GotStudentResponseSealed()
+    data class GotStudentUpcomingLessons(val upcomingLessons: List<Oreder>): GotStudentResponseSealed()

@@ -2,7 +2,7 @@ package com.our.data.features.phase_one.models
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.our.domain.features.phase_one.models.remote.TeacherOrder
+import com.our.domain.features.phase_one.models.remote.Oreder
 
 @Keep
 data class UpcomingLessons(
@@ -20,8 +20,8 @@ data class UpcomingLessons(
     val videoUrlResponse: String? = null
 )
 
-fun UpcomingLessons.toDomain(): TeacherOrder =
-    TeacherOrder(
+fun UpcomingLessons.toDomain(): Oreder =
+    Oreder(
         id = id ?: 0,
         student = (student ?: StudentResponse()).toDomain(),
         lesson = (lessonResponse ?: LessonResponse()).toDomain(),
