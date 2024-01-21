@@ -32,4 +32,25 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_teacher_class_info" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="12dp"
+        android:background="#D0D0D0"
+        app:layout_constraintBottom_toTopOf="@+id/tvAddLesson"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAddLesson"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:drawableTop="@drawable/add_lesson_ic"
+        android:gravity="center"
+        android:text="הוסף שיעור"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

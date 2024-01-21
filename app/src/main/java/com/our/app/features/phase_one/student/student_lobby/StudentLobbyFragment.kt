@@ -1,6 +1,9 @@
 package com.our.app.features.phase_one.student.student_lobby
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentLobbyBinding
@@ -14,6 +17,17 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
 
     override val viewModel: StudentLobbyViewModel by viewModels<StudentLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentStudentLobbyBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+    }
+
+    private fun initViews() {
+        binding.tvAddLesson.setOnClickListener {
+            findNavController().navigate(R.id.action_studentLobbyFragment_to_studentFindLessonFragment)
+        }
+    }
 
     override fun observeData() {
         super.observeData()

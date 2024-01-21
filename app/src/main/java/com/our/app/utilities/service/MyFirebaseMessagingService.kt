@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.TaskStackBuilder
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.Worker
@@ -45,6 +46,11 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
                 sendNotification(message ?: "", applicationContext)
                 scheduleJob()
             }
+            val lbm = LocalBroadcastManager.getInstance(this)
+            val dataIntent = Intent().apply {
+                putExtra("badge", notification.body)
+            }
+            lbm.sendBroadcast(dataIntent)
         }
         //-------------------------------------------------------------//
 

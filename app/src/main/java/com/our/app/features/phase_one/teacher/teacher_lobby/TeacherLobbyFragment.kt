@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import com.our.app.MainActivity
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentTeacherLobbyBinding
@@ -36,6 +37,7 @@ class TeacherLobbyFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).onFragmentChanged(this)
         initViews()
     }
 
@@ -64,6 +66,10 @@ class TeacherLobbyFragment :
                 }
             }
         }
+    }
+
+    fun updateUpcomingLessons() {
+        viewModel.getTeacherUpcomingLessons()
     }
 
     companion object {

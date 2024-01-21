@@ -34,7 +34,11 @@
         android:id="@+id/studentLobbyFragment"
         android:name="com.our.app.features.phase_one.student.student_lobby.StudentLobbyFragment"
         android:label="fragment_student_lobby"
-        tools:layout="@layout/fragment_student_lobby"/>
+        tools:layout="@layout/fragment_student_lobby">
+        <action
+            android:id="@+id/action_studentLobbyFragment_to_studentFindLessonFragment"
+            app:destination="@id/studentFindLessonFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/teacherContainerFragment"

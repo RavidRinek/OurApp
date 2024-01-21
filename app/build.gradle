@@ -98,4 +98,7 @@ dependencies {
     //temp
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 
+    // EventBus
+    implementation("org.greenrobot:eventbus:3.3.1")
+
 }
