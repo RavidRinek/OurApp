@@ -41,7 +41,6 @@ class TeacherContainerFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         notificationBody = arguments?.getString(ARG_NOTIFICATION_BODY, "") ?: ""
     }
 

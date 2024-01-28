@@ -50,7 +50,6 @@ class StudentContainerFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,8 +2,10 @@ package com.our.app.features.phase_one.student.find_lesson
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,7 @@ import com.our.app.databinding.FragmentStudentFindLessonBinding
 import com.our.domain.features.phase_one.models.local.GotSubjects
 import com.our.domain.features.phase_one.models.remote.BaseSubject
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatterBuilder
@@ -137,7 +140,14 @@ class StudentFindLessonFragment :
                 this.date = ""
                 val selectedDate = formatDate(year, month, dayOfMonth)
                 binding.layoutLessonDate.tvLessonDate.text = selectedDate
-                this.date = "${year}" + "-" + "${month}" + "-" + "${dayOfMonth}"
+
+                if(month <= 9 && month >= 0){
+                    this.date = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
+                }else{
+                    this.date = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
+                }
+
+
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -145,7 +155,10 @@ class StudentFindLessonFragment :
         )
 
         datePickerDialog.show()
+        datePickerDialog.setOnDismissListener(DialogInterface.OnDismissListener { dialogInterface -> datePickerDialog })
+        println(fullDate);
         if (this.date != "" && this.time != "") {
+
             fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
                 .toEpochSecond(ZoneOffset.UTC).toString()
         }

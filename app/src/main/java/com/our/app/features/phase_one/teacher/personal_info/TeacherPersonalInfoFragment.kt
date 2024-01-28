@@ -55,7 +55,7 @@ class TeacherPersonalInfoFragment :
             }
         }
 
-        binding.btnDatePicker.setOnClickListener {
+        binding.etBd.setOnClickListener {
             showDatePickerDialog()
         }
     }

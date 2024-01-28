@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     tools:context=".features.phase_one.teacher.personal_info.TeacherPersonalInfoFragment">
 
     <androidx.cardview.widget.CardView
@@ -17,23 +18,23 @@
         <LinearLayout
             android:id="@+id/llInfoContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <EditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"
+                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/create_teacher_info_name"
                 android:hint="שם פרטי"
                 android:inputType="text"
-                android:paddingStart="12dp"
                 android:paddingTop="6dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherName"
-                android:textColor="#FF3817"
+                android:textColor="#000"
                 tools:text="שרה" />
 
             <EditText
@@ -41,15 +42,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"
+                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/create_teacher_info_name"
                 android:hint="שם משפחה"
                 android:inputType="text"
-                android:paddingStart="12dp"
                 android:paddingTop="6dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherLastName"
-                android:textColor="#FF3817" />
+                android:textColor="#000" />
 
             <EditText
                 android:id="@+id/etPhone"
@@ -57,30 +57,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"
                 android:drawableStart="@drawable/create_teacher_info_phone"
+                android:drawablePadding="10dp"
                 android:gravity="right|center|center_vertical"
                 android:hint="מספר טלפון"
                 android:inputType="phone|number"
-                android:paddingStart="12dp"
                 android:paddingTop="6dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherPhone"
-                android:textColor="#FF3817"/>
+                android:textColor="#000" />
 
             <EditText
                 android:id="@+id/etMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"
+                android:drawablePadding="10dp"
                 android:drawableStart="@drawable/create_teacher_info_mail"
                 android:hint="כתובת מייל"
                 android:inputType="textEmailAddress"
-                android:paddingStart="12dp"
                 android:paddingTop="6dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherMail"
-                android:textColor="#FF3817" />
+                android:textColor="#000" />
 
             <EditText
                 android:id="@+id/etBd"
@@ -88,21 +86,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="7dp"
                 android:drawableStart="@drawable/create_teacher_info_bd"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:hint="תאריך לידה"
-                android:inputType="date"
-                android:paddingStart="12dp"
+                android:onClick="showDatePickerDialog"
                 android:paddingTop="6dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherBirthday"
-                android:textColor="#FF3817" />
-
-            <Button
-                android:id="@+id/btnDatePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Select Date"
-                android:onClick="showDatePickerDialog"/>
+                android:textColor="#000" />
 
 
             <EditText
@@ -112,12 +104,12 @@
                 android:layout_marginBottom="7dp"
                 android:drawableStart="@drawable/create_teacher_info_location"
                 android:hint="כתובת מלאה"
-                android:paddingStart="12dp"
+                android:drawablePadding="10dp"
+                android:paddingStart="7dp"
                 android:paddingTop="6dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="17dp"
                 android:tag="teacherAddress"
-                android:textColor="#FF3817" />
+                android:textColor="#000" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
