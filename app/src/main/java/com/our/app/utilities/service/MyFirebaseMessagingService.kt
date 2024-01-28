@@ -20,6 +20,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.our.app.MainActivity
 import com.our.app.R
+import org.greenrobot.eventbus.EventBus
 
 class MyFirebaseMessagingService  : FirebaseMessagingService() {
     // [START receive_message]
@@ -56,9 +57,14 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
 
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
+            EventBus.getDefault().postSticky(
+                FirebasePushEvent(
+                    "uploadPhotoIntent.openChallenge!!",
+                    "selectedPhotosIds"
+                ))
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-            var message = remoteMessage.data.get("body") as String
-            sendNotification(message!! , applicationContext)
+            var message = remoteMessage.data.get("body") as? String
+            sendNotification(message , applicationContext)
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
                 scheduleJob()
@@ -122,14 +128,13 @@ class MyFirebaseMessagingService  : FirebaseMessagingService() {
         return PendingIntent.getBroadcast(context, 0, intent,   PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
-    private fun sendNotification(messageBody: String, context: Context) {
+    private fun sendNotification(messageBody: String?, context: Context) {
         //val intent = Intent(this, MainActivity::class.java)
         //intent.action = ACTION_NOTIFICATION_CLICK
         //val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val intent = Intent(context, MainActivity::class.java)
        // intent.putExtra("fragment", "TeacherLobbyFragment") // Pass the fragment name as an extra
-        print(messageBody)
 
         intent.putExtra("body", messageBody) // Pass the user object as an extra
         //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK

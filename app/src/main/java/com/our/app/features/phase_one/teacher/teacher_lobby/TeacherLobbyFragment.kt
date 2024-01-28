@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.withResumed
 import com.our.app.MainActivity
 import com.our.app.R
 import com.our.app.base.BaseFragment
@@ -13,6 +15,7 @@ import com.our.app.databinding.FragmentTeacherLobbyBinding
 import com.our.app.features.phase_one.common.UpcomingLessonsAdapter
 import com.our.app.utilities.bindingDelegates.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -39,6 +42,11 @@ class TeacherLobbyFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity).onFragmentChanged(this)
+        lifecycleScope.launch {
+            withResumed {
+                (requireActivity() as MainActivity).requestPushNotificationPermission()
+            }
+        }
         initViews()
     }
 
