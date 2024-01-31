@@ -64,7 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
-            android:gravity="right|bottom"
             android:text="שון גיטלמן"
             android:textColor="#000"
             android:textStyle="bold"

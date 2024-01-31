@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.DownsampleStrategy
 import com.bumptech.glide.load.resource.bitmap.FitCenter
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.BitmapImageViewTarget
@@ -79,11 +80,13 @@ fun ImageView.loadImage(
     onError: ((Exception?) -> Unit)? = null,
     transformations: List<BitmapTransformation> = listOf(),
     placeholder: Int? = null,
-    cacheStrategy: DiskCacheStrategy = DiskCacheStrategy.ALL
+    cacheStrategy: DiskCacheStrategy = DiskCacheStrategy.ALL,
+    rounded: Boolean = false
 ) {
     context?.isAvailable()?.let {
         Glide.with(it.applicationContext)
             .load(url)
+            .transform(CenterCrop(), RoundedCorners(if (rounded) 25 else 1))
             .applyLoading(
                 error,
                 placeholder,
