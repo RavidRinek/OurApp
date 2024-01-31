@@ -33,7 +33,10 @@ class TeacherProfileGalleryAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(profileGallery: TeacherGallery) {
             binding.apply {
-                ivTemplate.loadImage(profileGallery.imgUrl)
+                ivTemplate.loadImage(
+                    url = profileGallery.imgUrl,
+                    rounded = true
+                )
             }
         }
     }

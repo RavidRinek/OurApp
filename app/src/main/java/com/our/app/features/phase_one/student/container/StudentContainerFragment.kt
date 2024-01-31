@@ -1,13 +1,7 @@
 package com.our.app.features.phase_one.student.container
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,9 +9,6 @@ import com.our.app.MainActivity
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentContainerBinding
-import com.our.app.databinding.FragmentTeacherContainerBinding
-import com.our.app.features.phase_one.teacher.container.TeacherContainerViewModel
-import com.our.app.features.phase_one.teacher.container.TeacherContainerViewModelImpl
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.data.base.datasources.Prefs
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,16 +28,6 @@ class StudentContainerFragment :
     @Inject
     lateinit var prefs: Prefs
 
-    private val backPressedCallback = object : OnBackPressedCallback(false) {
-        override fun handleOnBackPressed() {
-            Toast.makeText(requireContext(), "fdssfd", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

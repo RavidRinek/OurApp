@@ -2,6 +2,7 @@ package com.our.app.features.phase_one.student.find_lesson
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
@@ -9,6 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -40,6 +43,16 @@ class StudentFindLessonFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     val formatter = DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd HH:mm").toFormatter()
 
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,14 +71,9 @@ class StudentFindLessonFragment :
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
-        binding.clContainer.setOnClickListener {
-            binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
-        }
-
+        binding.clContainer.setOnClickListener { binding.subjectSpinnerMain.dismissRvSubjectsVisibility() }
         binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
-
         binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
-
         binding.btnStudentFindLesson.setOnClickListener {
             val selectedItemLevels = binding.subjectSpinnerMain.getSelectedItemLevels().ifEmpty {
                 ArrayList<Int>().apply {

@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.our.app.base.BaseViewModelImpl
 import com.our.data.base.datasources.Prefs
-import com.our.domain.base.models.Result
-import com.our.domain.features.phase_one.models.remote.TeacherOrder
+import com.our.domain.features.phase_one.models.remote.Oreder
 import com.our.domain.features.phase_one.usecases.GetTeacherOrdersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -60,5 +59,5 @@ enum class EmitType {
 }
 
 data class UiState(
-    val teacherOrders: List<TeacherOrder>
+    val teacherOrders: List<Oreder>
 )

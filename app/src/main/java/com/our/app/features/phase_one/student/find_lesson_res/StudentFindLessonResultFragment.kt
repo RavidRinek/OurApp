@@ -1,22 +1,20 @@
 package com.our.app.features.phase_one.student.find_lesson_res
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentFindLessonResultBinding
 import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonFragment
-import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonViewModel
-import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonViewModelImpl
-import com.our.app.features.phase_one.student.student_lobby.StudentLobbyViewModel
-import com.our.app.features.phase_one.student.student_lobby.StudentLobbyViewModelImpl
 import com.our.app.utilities.bindingDelegates.viewBinding
+import com.our.data.base.datasources.Prefs
 import com.our.domain.features.phase_one.models.local.GotLessons
-import com.our.domain.features.phase_one.models.remote.Lesson
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 const val LESSONS_IDS: String = "lessons_ids"
 
@@ -29,6 +27,20 @@ class StudentFindLessonResultFragment :
 
     private var lessonsIds: ArrayList<Int>? = null
     private var mPrice: Int = 0
+
+    @Inject
+    lateinit var prefs: Prefs
+
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            findNavController().navigate(R.id.action_studentFindLessonResultFragment_to_studentFindLessonFragment)
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +60,9 @@ class StudentFindLessonResultFragment :
         viewModel.studentLobbyResponseLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is GotLessons -> {
-                    val mappedLessons = it.lessons.map { it.lesson }
-                    binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(mappedLessons,
+                    binding.rvLessonResults.adapter = StudentFindLessonResultAdapter(
+                        it.lessons,
+                        prefs.contains(Prefs.COMPLETED_STUDENT_FULL_REGISTRATION),
                         object :
                             StudentFindLessonResultAdapter.OnStudentFindLessonResultAdapterListener {
                             override fun showTeacherProfilerBtnClicked(
@@ -70,8 +83,7 @@ class StudentFindLessonResultFragment :
                                 )
                             }
 
-                            override fun orderALessonBtnClicked() {
-                            }
+                            override fun orderALessonBtnClicked() {}
                         })
                 }
 

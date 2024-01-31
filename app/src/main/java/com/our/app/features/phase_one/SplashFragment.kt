@@ -34,19 +34,14 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lottieSplashScreen.addAnimatorListener(object :Animator.AnimatorListener{
-            override fun onAnimationStart(animation: Animator?) {
-            }
-
-            override fun onAnimationEnd(animation: Animator?) {
+        binding.lottieSplashScreen.addAnimatorListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(p0: Animator) {}
+            override fun onAnimationEnd(p0: Animator) {
                 findNavController().navigate(R.id.action_splashFragment_to_pickMemberTypeFragment)
             }
 
-            override fun onAnimationCancel(animation: Animator?) {
-            }
-
-            override fun onAnimationRepeat(animation: Animator?) {
-            }
+            override fun onAnimationCancel(p0: Animator) {}
+            override fun onAnimationRepeat(p0: Animator) {}
         })
     }
 

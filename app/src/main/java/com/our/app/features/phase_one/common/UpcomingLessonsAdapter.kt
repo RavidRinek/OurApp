@@ -1,15 +1,20 @@
-package com.our.app.features.phase_one.teacher.teacher_lobby
+package com.our.app.features.phase_one.common
 
+import android.content.Intent
+import android.net.Uri
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.our.app.R
 import com.our.app.databinding.ItemTeacherClassInfoBinding
 import com.our.app.utilities.extensions.loadImage
-import com.our.domain.features.phase_one.models.remote.TeacherOrder
+import com.our.domain.features.phase_one.models.remote.Oreder
 
-class TeacherUpcomingLessonsAdapter(val orders: List<TeacherOrder>) :
-    RecyclerView.Adapter<TeacherUpcomingLessonsAdapter.ScheduledLessonViewHolder>() {
+
+class UpcomingLessonsAdapter(val orders: List<Oreder>) :
+    RecyclerView.Adapter<UpcomingLessonsAdapter.ScheduledLessonViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduledLessonViewHolder =
         ScheduledLessonViewHolder(
@@ -27,13 +32,24 @@ class TeacherUpcomingLessonsAdapter(val orders: List<TeacherOrder>) :
 
     class ScheduledLessonViewHolder(val binding: ItemTeacherClassInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(order: TeacherOrder) {
+        fun bind(order: Oreder) {
             binding.apply {
                 ivAvatar.loadImage(order.student.avatarUrl)
                 tvSubject.text = order.lesson.subjectName
                 tvStudentName.text = order.student.name
                 tvTime.text = order.lesson.time
-                tvDuration.text = order.lesson.durationInMin.toString()
+
+                tvDuration.apply {
+                    movementMethod = LinkMovementMethod.getInstance()
+                    text = order.videoUrl
+                    setOnClickListener {
+                        val url = order.videoUrl
+                        val i = Intent(Intent.ACTION_VIEW)
+                        i.data = Uri.parse(url)
+                        startActivity(itemView.context, i, null)
+                    }
+//                    text = order.lesson.durationInMin.toString()
+                }
             }
         }
     }
