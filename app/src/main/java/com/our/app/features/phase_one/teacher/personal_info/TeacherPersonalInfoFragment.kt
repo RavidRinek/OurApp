@@ -1,13 +1,16 @@
 package com.our.app.features.phase_one.teacher.personal_info
 
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.core.view.children
 import androidx.core.view.get
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -44,6 +47,7 @@ class TeacherPersonalInfoFragment :
     }
 
     private fun initViews() {
+        updateCreateInfoBtnState()
         binding.btnTeacherCreateInfo.setOnClickListener {
             val filledInfo = getTeachInfo()
             if (filledInfo.entries.first().value.isNotEmpty()) {
@@ -55,8 +59,34 @@ class TeacherPersonalInfoFragment :
             }
         }
 
+        binding.llInfoContainer.children.forEach {
+            (it as? EditText)?.addTextChangedListener { updateCreateInfoBtnState() }
+        }
+
         binding.etBd.setOnClickListener {
             showDatePickerDialog()
+        }
+    }
+
+    private fun updateCreateInfoBtnState() {
+        binding.apply {
+            if (etName.text.isEmpty()
+                || etLastName.text.isEmpty()
+                || etPhone.text.isEmpty()
+                || etMail.text.isEmpty()
+                || etBd.text.isEmpty()
+                || etAddress.text.isEmpty()
+            ) {
+                btnTeacherCreateInfo.apply {
+                    setBackgroundResource(R.drawable.rec_767676_rad_12)
+                    isEnabled = false
+                }
+            } else {
+                btnTeacherCreateInfo.apply {
+                    setBackgroundResource(R.drawable.rec_ff3817_rad_12)
+                    isEnabled = true
+                }
+            }
         }
     }
 
@@ -66,11 +96,14 @@ class TeacherPersonalInfoFragment :
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        val datePickerDialog = DatePickerDialog(requireContext(),
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
             { _, selectedYear, selectedMonth, selectedDay ->
                 val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                 binding.etBd.setText(selectedDate)
-            }, year, month, day)
+                updateCreateInfoBtnState()
+            }, year, month, day
+        )
 
         datePickerDialog.show()
     }
