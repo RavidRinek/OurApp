@@ -72,6 +72,29 @@
         android:text="מצא שיעור!"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/viewLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="12dp"
+        android:background="#D0D0D0"
+        app:layout_constraintBottom_toTopOf="@+id/tvGoToHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvGoToHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:drawableTop="@drawable/bottom_nav_home"
+        android:gravity="center"
+        android:text="בית"
+        android:textColor="#FF3817"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

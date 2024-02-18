@@ -51,12 +51,16 @@ class TeacherLobbyFragment :
     }
 
     private fun initViews() {
-        binding.switchAvailableForLesson.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(
-                requireContext(),
-                "updateAvailability: status: $isChecked",
-                Toast.LENGTH_SHORT
-            ).show()
+        binding.switchAvailableForLesson.apply {
+            text = if (isChecked) "פנוי לשיעור" else "לא פנוי לשיעור"
+            setOnCheckedChangeListener { _, isChecked ->
+                text = if (isChecked) "פנוי לשיעור" else "לא פנוי לשיעור"
+                Toast.makeText(
+                    requireContext(),
+                    "updateAvailability: status: $isChecked",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

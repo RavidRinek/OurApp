@@ -159,6 +159,9 @@
         <action
             android:id="@+id/action_studentFindLessonFragment_to_studentFindLessonResultFragment"
             app:destination="@id/studentFindLessonResultFragment" />
+        <action
+            android:id="@+id/action_studentFindLessonFragment_to_studentLobbyFragment"
+            app:destination="@id/studentLobbyFragment" />
     </fragment>
 
 

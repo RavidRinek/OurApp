@@ -84,7 +84,7 @@ class TeacherPersonalInfoFragment :
                     etLastName.setText(teacherProfile.teacherLastName)
                     etPhone.setText(teacherProfile.teacherPhone)
                     etMail.setText(teacherProfile.teacherMail)
-                    etBd.setText(teacherProfile.teacherBirthday)
+//                    etBd.setText(teacherProfile.teacherBirthday)
                     // etAddress.setText(teacherProfile.teacherAddress)
                 }
             }

@@ -13,11 +13,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
 import com.our.app.databinding.FragmentStudentFindLessonBinding
+import com.our.data.base.datasources.Prefs
 import com.our.domain.features.phase_one.models.local.GotSubjects
 import com.our.domain.features.phase_one.models.remote.BaseSubject
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +28,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatterBuilder
 import java.util.Calendar
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -42,6 +45,9 @@ class StudentFindLessonFragment :
 
     @RequiresApi(Build.VERSION_CODES.O)
     val formatter = DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd HH:mm").toFormatter()
+
+    @Inject
+    lateinit var prefs: Prefs
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
@@ -75,6 +81,8 @@ class StudentFindLessonFragment :
         binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
         binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
         binding.btnStudentFindLesson.setOnClickListener {
+            val a = fullDate as String
+            println("FULLDATE: $a")
             val selectedItemLevels = binding.subjectSpinnerMain.getSelectedItemLevels().ifEmpty {
                 ArrayList<Int>().apply {
                     add(4)
@@ -94,6 +102,12 @@ class StudentFindLessonFragment :
                     putInt(SELECTED_LESSON_MAX_PRICE, binding.cvLessonPrice.pickedPrice)
                 }
             )
+        }
+        binding.tvGoToHome.apply {
+            isVisible = prefs.contains(Prefs.COMPLETED_STUDENT_FULL_REGISTRATION)
+            setOnClickListener {
+                findNavController().navigate(R.id.action_studentFindLessonFragment_to_studentLobbyFragment)
+            }
         }
 
         binding.layoutLessonTime.tvLessonDate.text = "בחר שעה"
@@ -117,10 +131,8 @@ class StudentFindLessonFragment :
                 if (hourOfDay <= 9)
                     this.time = this.time + "0" + "$hourOfDay:"
                 else this.time = this.time + "$hourOfDay:"
-                if (minute <= 9)
-                    this.time = this.time + "0" + "$minute"
-                else
-                    this.time = this.time + "$minute"
+                if (minute <= 9) this.time = this.time + "0" + "$minute"
+                else this.time = this.time + "$minute"
 
                 binding.layoutLessonTime.tvLessonDate.text = this.time
 
@@ -149,11 +161,14 @@ class StudentFindLessonFragment :
                 val selectedDate = formatDate(year, month, dayOfMonth)
                 binding.layoutLessonDate.tvLessonDate.text = selectedDate
 
-                if(month <= 9 && month >= 0){
+                if (month <= 9 && month >= 0) {
                     this.date = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
-                }else{
+                } else {
                     this.date = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
                 }
+                val calendar = Calendar.getInstance()
+                calendar.set(year, month, dayOfMonth)
+                println("calendar.before(1708276368) ${calendar.timeInMillis}")
 
 
             },
@@ -163,10 +178,7 @@ class StudentFindLessonFragment :
         )
 
         datePickerDialog.show()
-        datePickerDialog.setOnDismissListener(DialogInterface.OnDismissListener { dialogInterface -> datePickerDialog })
-        println(fullDate);
         if (this.date != "" && this.time != "") {
-
             fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
                 .toEpochSecond(ZoneOffset.UTC).toString()
         }
