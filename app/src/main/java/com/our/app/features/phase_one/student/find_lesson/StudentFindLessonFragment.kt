@@ -123,7 +123,8 @@ class StudentFindLessonFragment :
                     this.time = this.time + "$minute"
 
                 binding.layoutLessonTime.tvLessonDate.text = this.time
-
+                println(this.fullDate);
+                Log.d("test",this.fullDate.toString())
             },
             hour,
             minute,
@@ -131,11 +132,9 @@ class StudentFindLessonFragment :
         )
 
         timePickerDialog.show()
-
-        if (this.date != "" && this.time != "") {
-            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter).toEpochSecond(
-                ZoneOffset.UTC
-            ).toString()
+        timePickerDialog.setOnDismissListener(){
+            formatDateFinal();
+            Log.d("test",this.fullDate.toString())
         }
     }
 
@@ -154,21 +153,15 @@ class StudentFindLessonFragment :
                 }else{
                     this.date = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
                 }
-
-
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-
         datePickerDialog.show()
-        datePickerDialog.setOnDismissListener(DialogInterface.OnDismissListener { dialogInterface -> datePickerDialog })
-        println(fullDate);
-        if (this.date != "" && this.time != "") {
-
-            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
-                .toEpochSecond(ZoneOffset.UTC).toString()
+        datePickerDialog.setOnDismissListener() {
+            formatDateFinal();
+            Log.d("test",this.fullDate.toString())
         }
     }
 
@@ -199,6 +192,13 @@ class StudentFindLessonFragment :
         subjectSpinnerCustomView.setSubjectsItems(subjectMode, subjects)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun formatDateFinal(){
+        if (this.date != "" && this.time != "") {
+            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
+                .toEpochSecond(ZoneOffset.UTC).toString()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
