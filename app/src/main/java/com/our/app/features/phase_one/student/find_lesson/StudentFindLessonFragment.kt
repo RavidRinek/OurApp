@@ -131,11 +131,14 @@ class StudentFindLessonFragment :
                 if (hourOfDay <= 9)
                     this.time = this.time + "0" + "$hourOfDay:"
                 else this.time = this.time + "$hourOfDay:"
-                if (minute <= 9) this.time = this.time + "0" + "$minute"
-                else this.time = this.time + "$minute"
+                if (minute <= 9)
+                    this.time = this.time + "0" + "$minute"
+                else
+                    this.time = this.time + "$minute"
 
                 binding.layoutLessonTime.tvLessonDate.text = this.time
-
+                println(this.fullDate);
+                Log.d("test",this.fullDate.toString())
             },
             hour,
             minute,
@@ -143,11 +146,9 @@ class StudentFindLessonFragment :
         )
 
         timePickerDialog.show()
-
-        if (this.date != "" && this.time != "") {
-            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter).toEpochSecond(
-                ZoneOffset.UTC
-            ).toString()
+        timePickerDialog.setOnDismissListener(){
+            formatDateFinal();
+            Log.d("test",this.fullDate.toString())
         }
     }
 
@@ -161,26 +162,20 @@ class StudentFindLessonFragment :
                 val selectedDate = formatDate(year, month, dayOfMonth)
                 binding.layoutLessonDate.tvLessonDate.text = selectedDate
 
-                if (month <= 9 && month >= 0) {
+                if(month <= 9 && month >= 0){
                     this.date = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
-                } else {
+                }else{
                     this.date = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
                 }
-                val calendar = Calendar.getInstance()
-                calendar.set(year, month, dayOfMonth)
-                println("calendar.before(1708276368) ${calendar.timeInMillis}")
-
-
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
-
         datePickerDialog.show()
-        if (this.date != "" && this.time != "") {
-            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
-                .toEpochSecond(ZoneOffset.UTC).toString()
+        datePickerDialog.setOnDismissListener() {
+            formatDateFinal();
+            Log.d("test",this.fullDate.toString())
         }
     }
 
@@ -211,6 +206,13 @@ class StudentFindLessonFragment :
         subjectSpinnerCustomView.setSubjectsItems(subjectMode, subjects)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun formatDateFinal(){
+        if (this.date != "" && this.time != "") {
+            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
+                .toEpochSecond(ZoneOffset.UTC).toString()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
