@@ -169,9 +169,15 @@ class StudentFindLessonFragment :
                 binding.layoutLessonDate.tvLessonDate.text = selectedDate
 
                 if (month <= 9 && month >= 0) {
-                    this.date = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
+                    this.date = "${year}" + "-" + "0" + "${month + 1}"
                 } else {
-                    this.date = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
+                    this.date = "${year}" + "-" + "${month + 1}"
+                }
+
+                if (dayOfMonth <= 9 && dayOfMonth >= 0) {
+                    this.date = this.date +  "-" + "0" + "${dayOfMonth}"
+                } else {
+                    this.date = this.date +  "-" + "${dayOfMonth}"
                 }
             },
             calendar.get(Calendar.YEAR),
