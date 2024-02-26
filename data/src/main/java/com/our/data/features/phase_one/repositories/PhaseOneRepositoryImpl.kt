@@ -32,9 +32,10 @@ class PhaseOneRepositoryImpl @Inject constructor(
 
     override suspend fun getLessons(
         levels: String,
-        price: Double
+        price: Double,
+        timestamp: Long
     ): Result<List<StudentLessonOffers>> =
-        phaseOneDataSource.getLessons(levels, price).map {
+        phaseOneDataSource.getLessons(levels, price, timestamp).map {
             (it as LessonsResponse).toDomain()
         }
 

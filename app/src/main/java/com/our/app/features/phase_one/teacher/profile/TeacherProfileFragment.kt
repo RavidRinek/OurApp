@@ -28,13 +28,18 @@ class TeacherProfileFragment :
     private val binding by viewBinding(FragmentTearcherProfileBinding::bind)
 
     private lateinit var teacherProfile: TeacherProfile
+    private var timestamp: Long = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.apply {
             viewModel.getTeacherById(getInt(StudentFindLessonResultFragment.SELECTED_TEACHER_ID))
+            timestamp = requireArguments().getLong(StudentFindLessonResultFragment.SELECTED_LESSON_TIMESTAMP)
         }
         binding.btnStudentFindLesson.setOnClickListener {
+            println("XXXXX: ${requireArguments().getInt(StudentFindLessonResultFragment.SELECTED_LESSON_ID)}")
+            println("XXXXX: ${requireArguments().getDouble(StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE)}")
+            println("XXXXX: ${requireArguments().getLong(StudentFindLessonResultFragment.SELECTED_LESSON_TIMESTAMP)}")
             findNavController().navigate(
                 R.id.action_teacherProfileFragment_to_orderLessonFragment,
                 Bundle().apply {
@@ -43,7 +48,7 @@ class TeacherProfileFragment :
                             lessonId = requireArguments().getInt(StudentFindLessonResultFragment.SELECTED_LESSON_ID),
                             price = requireArguments().getDouble(StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE),
                             name = teacherProfile.teacherName,
-                            time = requireArguments().getLong(StudentFindLessonFragment.SELECTED_LESSON_TIME_STAMP)
+                            time = timestamp
                         )
                     )
                 }

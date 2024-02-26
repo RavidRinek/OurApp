@@ -10,11 +10,12 @@ import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
 import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
+import java.sql.Timestamp
 
 interface PhaseOneRepository {
     suspend fun getSubjects(): Result<List<Subject>>
     suspend fun getSubjectBranches(subjectId: Int): Result<List<SubjectBranch>>
-    suspend fun getLessons(levels: String, price: Double): Result<List<StudentLessonOffers>>
+    suspend fun getLessons(levels: String, price: Double, timestamp: Long): Result<List<StudentLessonOffers>>
     suspend fun getTeacherById(teacherId: Int): Result<TeacherProfile>
     suspend fun postTeacherCreateInfo(teacherInfo: Map<String, String>): Result<TeacherProfile>
     suspend fun postTeacherInfo(updateTeacherInfo: PostTeacherInfoUseCase.UpdateTeacherInfo): Result<Unit>

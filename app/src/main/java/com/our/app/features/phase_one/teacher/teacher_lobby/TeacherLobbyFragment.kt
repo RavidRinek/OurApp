@@ -2,6 +2,8 @@ package com.our.app.features.phase_one.teacher.teacher_lobby
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -27,10 +29,19 @@ class TeacherLobbyFragment :
 
     override val viewModel: TeacherLobbyViewModel by viewModels<TeacherLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentTeacherLobbyBinding::bind)
+    private var allowBackPress: Boolean = false
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            requireActivity().moveTaskToBack(true)
+            if (allowBackPress) {
+                requireActivity().moveTaskToBack(true)
+            } else {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    allowBackPress = false
+                }, 1_500)
+                Toast.makeText(requireContext(), "Press again to exit.", Toast.LENGTH_SHORT).show()
+            }
+            allowBackPress = true
         }
     }
 

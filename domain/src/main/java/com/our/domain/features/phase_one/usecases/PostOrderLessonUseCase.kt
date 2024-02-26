@@ -20,6 +20,7 @@ class PostOrderLessonUseCase @Inject constructor(
 
     data class OrderInfo(
         val studentId: Int,
-        val lessonId: Int
+        val lessonId: Int,
+        val lessonTimestamp: Long
     )
 }

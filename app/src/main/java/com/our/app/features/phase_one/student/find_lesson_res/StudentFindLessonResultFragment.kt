@@ -27,6 +27,7 @@ class StudentFindLessonResultFragment :
 
     private var lessonsIds: ArrayList<Int>? = null
     private var mPrice: Int = 0
+    private var timestamp: Long = 0
 
     @Inject
     lateinit var prefs: Prefs
@@ -47,12 +48,13 @@ class StudentFindLessonResultFragment :
         arguments?.apply {
             lessonsIds = getIntegerArrayList(StudentFindLessonFragment.SELECTED_SUBJECT_LEVELS_IDS)
             mPrice = getInt(StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE)
+            timestamp = getLong(StudentFindLessonFragment.SELECTED_LESSON_TIME_STAMP)
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getLessons(lessonsIds!!, mPrice)
+        viewModel.getLessons(lessonsIds!!, mPrice, timestamp)
     }
 
     override fun observeData() {
@@ -78,7 +80,7 @@ class StudentFindLessonResultFragment :
                                             StudentFindLessonFragment.SELECTED_LESSON_MAX_PRICE,
                                             mPrice.toDouble()
                                         )
-                                        arguments!!.getLong(StudentFindLessonFragment.SELECTED_LESSON_TIME_STAMP)
+                                        putLong(SELECTED_LESSON_TIMESTAMP, timestamp)
                                     }
                                 )
                             }
@@ -95,5 +97,6 @@ class StudentFindLessonResultFragment :
     companion object {
         const val SELECTED_LESSON_ID = "selected_lesson_id"
         const val SELECTED_TEACHER_ID = "selected_teacher_id"
+        const val SELECTED_LESSON_TIMESTAMP = "selected_timestamp"
     }
 }
