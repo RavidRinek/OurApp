@@ -1,16 +1,14 @@
 package com.our.app.features.phase_one.teacher.personal_info
 
 import android.app.DatePickerDialog
-import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
-import androidx.core.view.children
-import androidx.core.view.get
-import androidx.core.widget.addTextChangedListener
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,7 +19,17 @@ import com.our.domain.features.phase_one.models.remote.TeacherProfile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Long.getLong
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatterBuilder
 import java.util.Calendar
+import java.util.Date
+import kotlin.collections.HashMap
+import kotlin.collections.first
+import kotlin.collections.set
 
 @AndroidEntryPoint
 class TeacherPersonalInfoFragment :
@@ -31,8 +39,13 @@ class TeacherPersonalInfoFragment :
     private var _binding: FragmentTeacherPersonalInfoBinding? = null
     private val binding get() = _binding!!
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    val formatter = DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd").toFormatter()
+
+//    private var date = ""
+    private var fullDate: String = ""
+
     private val teachInfoHashMap = HashMap<String, String>()
-    private var isbtnTeacherCreateInfoClickable = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,74 +55,99 @@ class TeacherPersonalInfoFragment :
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
-        updateCreateInfoBtnState()
+        binding.etBd.setOnClickListener { showDatePicker() }
         binding.btnTeacherCreateInfo.setOnClickListener {
-            if (isbtnTeacherCreateInfoClickable) {
-                binding.etBd.setText("435534543")
-                val filledInfo = getTeachInfo()
-                if (filledInfo.entries.first().value.isNotEmpty()) {
-                    viewModel.postTeacherCreateInfo(filledInfo)
-                    viewLifecycleOwner.lifecycleScope.launch {
-                        delay(1_500)
-                        findNavController().navigate(R.id.action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment)
-                    }
+            val filledInfo = getTeachInfo()
+            if (filledInfo.entries.first().value.isNotEmpty()) {
+                viewModel.postTeacherCreateInfo(filledInfo)
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(1_500)
+                    findNavController().navigate(R.id.action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment)
                 }
             }
-        }
-
-        binding.llInfoContainer.children.forEach {
-            (it as? EditText)?.addTextChangedListener { updateCreateInfoBtnState() }
         }
 
         binding.etBd.setOnClickListener {
-            showDatePickerDialog()
+            showDatePicker()
         }
-    }
 
-    private fun updateCreateInfoBtnState() {
-        binding.apply {
-            if (etName.text.isEmpty()
-                || etLastName.text.isEmpty()
-                || etPhone.text.isEmpty()
-                || etMail.text.isEmpty()
-                || etBd.text.isEmpty()
-                || etAddress.text.isEmpty()
-            ) {
-                btnTeacherCreateInfo.apply {
-                    setBackgroundResource(R.drawable.rec_767676_rad_12)
-                    isbtnTeacherCreateInfoClickable = false
-                }
-            } else {
-                btnTeacherCreateInfo.apply {
-                    setBackgroundResource(R.drawable.rec_ff3817_rad_12)
-                    isbtnTeacherCreateInfoClickable = true
-                }
-            }
-        }
+//        binding.etBd.text = 'pick date';
+//        binding.etBd.text = "בחר תאריך";
     }
-
-    private fun showDatePickerDialog() {
+    //
+//    private fun showDatePickerDialog() {
+//        val calendar = Calendar.getInstance()
+//        val year = calendar.get(Calendar.YEAR)
+//        val month = calendar.get(Calendar.MONTH)
+//        val day = calendar.get(Calendar.DAY_OF_MONTH)
+//
+//        val datePickerDialog = DatePickerDialog(requireContext(),
+//            { _, selectedYear, selectedMonth, selectedDay ->
+//                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+//                binding.etBd.setText(selectedDate)
+//            }, year, month, day)
+//
+//        datePickerDialog.show()
+//
+//
+//    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun showDatePicker() {
         val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
         val datePickerDialog = DatePickerDialog(
             requireContext(),
-            { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                binding.etBd.setText(selectedDate)
-                updateCreateInfoBtnState()
-            }, year, month, day
-        )
+            { _, year, month, dayOfMonth ->
+                this.fullDate = ""
+                val selectedDate = formatDate(year, month, dayOfMonth)
 
+                binding.etBd.hint = selectedDate;
+
+                if(month <= 9 && month >= 0){
+                    this.fullDate = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
+                }else{
+                    this.fullDate = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
+                }
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
         datePickerDialog.show()
+        datePickerDialog.setOnDismissListener() {
+            formatDateFinal();
+            Log.d("test",this.fullDate.toString())
+        }
+    }
+
+    private fun formatDate(year: Int, month: Int, day: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+        return "${day}/${month + 1}/${year}"
+    }
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun formatDateFinal(){
+        if (this.fullDate != "") {
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            var date: Date? = null
+            try {
+                date = sdf.parse(fullDate)
+            } catch (e: ParseException) {
+                // handle exception here !
+            }
+            val dateFormat = android.text.format.DateFormat.getDateFormat(context)
+            val s = date?.time.toString();
+            Log.d("test", s);
+        }
     }
 
     override fun observeData() {
@@ -121,7 +159,7 @@ class TeacherPersonalInfoFragment :
                     etLastName.setText(teacherProfile.teacherLastName)
                     etPhone.setText(teacherProfile.teacherPhone)
                     etMail.setText(teacherProfile.teacherMail)
-//                    etBd.setText(teacherProfile.teacherBirthday)
+                    etBd.setText(teacherProfile.teacherBirthday)
                     // etAddress.setText(teacherProfile.teacherAddress)
                 }
             }
