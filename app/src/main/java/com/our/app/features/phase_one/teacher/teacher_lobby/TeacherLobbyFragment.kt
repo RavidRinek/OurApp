@@ -72,6 +72,11 @@ class TeacherLobbyFragment :
                     println("teacherLobbyResponseLiveData: emitType: NONE")
                 }
 
+                EmitType.TEACHER_INFO -> {
+                    println("teacherLobbyResponseLiveData: emitType: TEACHER_ORDERS")
+                    binding.tvTeacherName.text = it.uiState.teacherProfile?.teacherName
+                }
+
                 EmitType.TEACHER_ORDERS -> {
                     println("teacherLobbyResponseLiveData: emitType: TEACHER_ORDERS")
                     binding.rvTeacherLessons.adapter =

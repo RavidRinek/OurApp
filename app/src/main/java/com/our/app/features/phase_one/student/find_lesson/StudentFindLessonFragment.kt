@@ -28,6 +28,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatterBuilder
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -81,8 +82,13 @@ class StudentFindLessonFragment :
         binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
         binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
         binding.btnStudentFindLesson.setOnClickListener {
-            val a = fullDate as String
-            println("FULLDATE: $a")
+            val currentTimestamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+            val pickedTimeAndDateTimestamp = fullDate.toString().toLong()
+            if (currentTimestamp > pickedTimeAndDateTimestamp) {
+                Toast.makeText(requireContext(), "Can't pick time from past", Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
             val selectedItemLevels = binding.subjectSpinnerMain.getSelectedItemLevels().ifEmpty {
                 ArrayList<Int>().apply {
                     add(4)
@@ -98,7 +104,7 @@ class StudentFindLessonFragment :
                         SELECTED_SUBJECT_LEVELS_IDS,
                         selectedItemLevels
                     )
-                    putLong(SELECTED_LESSON_TIME_STAMP, 5984736L)
+                    putLong(SELECTED_LESSON_TIME_STAMP, pickedTimeAndDateTimestamp)
                     putInt(SELECTED_LESSON_MAX_PRICE, binding.cvLessonPrice.pickedPrice)
                 }
             )
@@ -138,7 +144,7 @@ class StudentFindLessonFragment :
 
                 binding.layoutLessonTime.tvLessonDate.text = this.time
                 println(this.fullDate);
-                Log.d("test",this.fullDate.toString())
+                Log.d("test", this.fullDate.toString())
             },
             hour,
             minute,
@@ -146,9 +152,9 @@ class StudentFindLessonFragment :
         )
 
         timePickerDialog.show()
-        timePickerDialog.setOnDismissListener(){
+        timePickerDialog.setOnDismissListener() {
             formatDateFinal();
-            Log.d("test",this.fullDate.toString())
+            Log.d("test", this.fullDate.toString())
         }
     }
 
@@ -162,9 +168,9 @@ class StudentFindLessonFragment :
                 val selectedDate = formatDate(year, month, dayOfMonth)
                 binding.layoutLessonDate.tvLessonDate.text = selectedDate
 
-                if(month <= 9 && month >= 0){
+                if (month <= 9 && month >= 0) {
                     this.date = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
-                }else{
+                } else {
                     this.date = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
                 }
             },
@@ -175,7 +181,7 @@ class StudentFindLessonFragment :
         datePickerDialog.show()
         datePickerDialog.setOnDismissListener() {
             formatDateFinal();
-            Log.d("test",this.fullDate.toString())
+            Log.d("test", this.fullDate.toString())
         }
     }
 
@@ -207,12 +213,13 @@ class StudentFindLessonFragment :
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun formatDateFinal(){
+    private fun formatDateFinal() {
         if (this.date != "" && this.time != "") {
             fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
                 .toEpochSecond(ZoneOffset.UTC).toString()
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

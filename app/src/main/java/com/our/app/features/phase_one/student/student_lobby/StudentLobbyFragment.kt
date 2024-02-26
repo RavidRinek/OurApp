@@ -2,7 +2,10 @@ package com.our.app.features.phase_one.student.student_lobby
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,10 +22,19 @@ class StudentLobbyFragment : BaseFragment<StudentLobbyViewModel>(R.layout.fragme
 
     override val viewModel: StudentLobbyViewModel by viewModels<StudentLobbyViewModelImpl>()
     private val binding by viewBinding(FragmentStudentLobbyBinding::bind)
+    private var allowBackPress: Boolean = false
 
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            requireActivity().moveTaskToBack(true)
+            if (allowBackPress) {
+                requireActivity().moveTaskToBack(true)
+            } else {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    allowBackPress = false
+                }, 1_500)
+                Toast.makeText(requireContext(), "Press again to exit.", Toast.LENGTH_SHORT).show()
+            }
+            allowBackPress = true
         }
     }
 
