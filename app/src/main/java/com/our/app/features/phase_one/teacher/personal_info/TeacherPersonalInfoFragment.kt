@@ -32,6 +32,7 @@ class TeacherPersonalInfoFragment :
     private val binding get() = _binding!!
 
     private val teachInfoHashMap = HashMap<String, String>()
+    private var isbtnTeacherCreateInfoClickable = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +50,14 @@ class TeacherPersonalInfoFragment :
     private fun initViews() {
         updateCreateInfoBtnState()
         binding.btnTeacherCreateInfo.setOnClickListener {
-            val filledInfo = getTeachInfo()
-            if (filledInfo.entries.first().value.isNotEmpty()) {
-                viewModel.postTeacherCreateInfo(filledInfo)
-                viewLifecycleOwner.lifecycleScope.launch {
-                    delay(1_500)
-                    findNavController().navigate(R.id.action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment)
+            if (isbtnTeacherCreateInfoClickable) {
+                val filledInfo = getTeachInfo()
+                if (filledInfo.entries.first().value.isNotEmpty()) {
+                    viewModel.postTeacherCreateInfo(filledInfo)
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        delay(1_500)
+                        findNavController().navigate(R.id.action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment)
+                    }
                 }
             }
         }
@@ -79,12 +82,12 @@ class TeacherPersonalInfoFragment :
             ) {
                 btnTeacherCreateInfo.apply {
                     setBackgroundResource(R.drawable.rec_767676_rad_12)
-                    isEnabled = false
+                    isbtnTeacherCreateInfoClickable = false
                 }
             } else {
                 btnTeacherCreateInfo.apply {
                     setBackgroundResource(R.drawable.rec_ff3817_rad_12)
-                    isEnabled = true
+                    isbtnTeacherCreateInfoClickable = true
                 }
             }
         }
