@@ -51,6 +51,7 @@ class TeacherPersonalInfoFragment :
         updateCreateInfoBtnState()
         binding.btnTeacherCreateInfo.setOnClickListener {
             if (isbtnTeacherCreateInfoClickable) {
+                binding.etBd.setText("435534543")
                 val filledInfo = getTeachInfo()
                 if (filledInfo.entries.first().value.isNotEmpty()) {
                     viewModel.postTeacherCreateInfo(filledInfo)
