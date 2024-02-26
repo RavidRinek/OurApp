@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 abstract class StudentFindLessonResultViewModel : BaseViewModelImpl() {
     abstract val studentLobbyResponseLiveData: LiveData<GotStudentResponseSealed>
-    abstract fun getLessons(levels: List<Int>, price: Int)
+    abstract fun getLessons(levels: List<Int>, price: Int, timestamp: Long)
 }
 
 @HiltViewModel
@@ -22,7 +22,7 @@ class StudentFindLessonResultViewModelImpl @Inject constructor(
 
     override val studentLobbyResponseLiveData = MutableLiveData<GotStudentResponseSealed>()
 
-    override fun getLessons(levels: List<Int>, price: Int) {
+    override fun getLessons(levels: List<Int>, price: Int, timestamp: Long) {
         launch {
             var txt = ""
             levels.forEach {
@@ -33,7 +33,8 @@ class StudentFindLessonResultViewModelImpl @Inject constructor(
                 getLessonsUseCase.invoke(
                     GetLessonsUseCase.GetLessonModel(
                         txt,
-                        price.toDouble()
+                        price.toDouble(),
+                        timestamp
                     )
                 )
             )

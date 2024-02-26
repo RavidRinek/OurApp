@@ -27,6 +27,7 @@ class OrderLessonFragment :
     override val viewModel: OrderLessonViewModel by viewModels<OrderLessonViewModelImpl>()
     private val binding by viewBinding(FragmentOrderLessonBinding::bind)
     private var lessonId: Int = 0
+    private var timestamp: Long = 0
 
     @Inject
     lateinit var prefs: Prefs
@@ -41,6 +42,7 @@ class OrderLessonFragment :
 
         (arguments?.getParcelable(K_LESSON_INFO) as? OrderLessonUi)?.let {
             lessonId = it.lessonId
+            timestamp = it.time
             binding.apply {
                 levelOfClass.text = it.lessonId.toString()
                 lessonPrice.text = it.price.toString()
@@ -97,7 +99,8 @@ class OrderLessonFragment :
             viewModel.orderLesson(
                 PostOrderLessonUseCase.OrderInfo(
                     studentId = prefs.getInt(Prefs.STUDENT_ID),
-                    lessonId = lessonId
+                    lessonId = lessonId,
+                    lessonTimestamp = timestamp
                 )
             )
         }

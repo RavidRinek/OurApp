@@ -14,7 +14,11 @@ class GetLessonsUseCase @Inject constructor(
 
     override suspend fun invoke(getLessonModel: GetLessonModel): GotStudentResponseSealed =
         when (val res =
-            phaseOneRepository.getLessons(getLessonModel.levels, getLessonModel.price)) {
+            phaseOneRepository.getLessons(
+                getLessonModel.levels,
+                getLessonModel.price,
+                getLessonModel.timestamp
+            )) {
             is Result.Success -> {
                 if (res.data.isEmpty()) {
                     GotStudentError
@@ -26,5 +30,5 @@ class GetLessonsUseCase @Inject constructor(
             is Result.Error -> GotStudentError
         }
 
-    data class GetLessonModel(val levels: String, val price: Double)
+    data class GetLessonModel(val levels: String, val price: Double, val timestamp: Long)
 }
