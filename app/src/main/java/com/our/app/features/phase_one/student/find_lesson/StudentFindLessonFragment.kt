@@ -184,6 +184,9 @@ class StudentFindLessonFragment :
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
+
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+
         datePickerDialog.show()
         datePickerDialog.setOnDismissListener() {
             formatDateFinal();
