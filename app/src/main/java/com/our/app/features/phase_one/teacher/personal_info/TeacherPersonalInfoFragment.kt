@@ -39,13 +39,7 @@ class TeacherPersonalInfoFragment :
     private var _binding: FragmentTeacherPersonalInfoBinding? = null
     private val binding get() = _binding!!
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    val formatter = DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd").toFormatter()
-
-//    private var date = ""
     private var fullDate: String = ""
-
-    private val teachInfoHashMap = HashMap<String, String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,27 +72,8 @@ class TeacherPersonalInfoFragment :
         binding.etBd.setOnClickListener {
             showDatePicker()
         }
-
-//        binding.etBd.text = 'pick date';
-//        binding.etBd.text = "בחר תאריך";
     }
-    //
-//    private fun showDatePickerDialog() {
-//        val calendar = Calendar.getInstance()
-//        val year = calendar.get(Calendar.YEAR)
-//        val month = calendar.get(Calendar.MONTH)
-//        val day = calendar.get(Calendar.DAY_OF_MONTH)
-//
-//        val datePickerDialog = DatePickerDialog(requireContext(),
-//            { _, selectedYear, selectedMonth, selectedDay ->
-//                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-//                binding.etBd.setText(selectedDate)
-//            }, year, month, day)
-//
-//        datePickerDialog.show()
-//
-//
-//    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
@@ -110,10 +85,10 @@ class TeacherPersonalInfoFragment :
 
                 binding.etBd.hint = selectedDate;
 
-                if(month <= 9 && month >= 0){
-                    this.fullDate = "${year}" + "-" + "0" + "${month + 1}" + "-" + "${dayOfMonth}"
+                if(month in 0..9){
+                    this.fullDate = "$year" + "-" + "0" + "${month + 1}" + "-" + "$dayOfMonth"
                 }else{
-                    this.fullDate = "${year}" + "-" + "${month + 1}" + "-" + "${dayOfMonth}"
+                    this.fullDate = "$year" + "-" + "${month + 1}" + "-" + "$dayOfMonth"
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -121,10 +96,7 @@ class TeacherPersonalInfoFragment :
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
-        datePickerDialog.setOnDismissListener() {
-            formatDateFinal();
-            Log.d("test",this.fullDate.toString())
-        }
+        datePickerDialog.setOnDismissListener { formatDateFinal() }
     }
 
     private fun formatDate(year: Int, month: Int, day: Int): String {
@@ -144,7 +116,6 @@ class TeacherPersonalInfoFragment :
             } catch (e: ParseException) {
                 // handle exception here !
             }
-            val dateFormat = android.text.format.DateFormat.getDateFormat(context)
             val s = date?.time.toString();
             Log.d("test", s);
         }
