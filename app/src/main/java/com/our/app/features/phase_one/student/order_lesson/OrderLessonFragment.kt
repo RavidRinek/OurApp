@@ -3,6 +3,7 @@ package com.our.app.features.phase_one.student.order_lesson
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
@@ -32,6 +33,7 @@ class OrderLessonFragment :
     @Inject
     lateinit var prefs: Prefs
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (prefs.getInt(Prefs.STUDENT_ID) > 0) {
@@ -49,6 +51,20 @@ class OrderLessonFragment :
                 teachersName.text = it.name
                 lessonDate.text = it.time.toString()
 
+                etName.addTextChangedListener {
+                    updateReserveButtonState()
+                }
+                etPhone.addTextChangedListener {
+                    updateReserveButtonState()
+                }
+                etMail.addTextChangedListener {
+                    updateReserveButtonState()
+                }
+                agreement.setOnCheckedChangeListener { compoundButton, b ->
+                    updateReserveButtonState()
+                }
+
+                reserveButton
                 reserveButton.setOnClickListener {
                     if (prefs.getInt(Prefs.STUDENT_ID) > 0) {
                         orderLesson()
@@ -64,6 +80,13 @@ class OrderLessonFragment :
                 }
             }
         }
+    }
+
+    private fun updateReserveButtonState() {
+        binding.reserveButton.isEnabled = !(binding.etName.text.isEmpty()
+                || binding.etMail.text.isEmpty()
+                || binding.etPhone.text.isEmpty()
+                || !binding.agreement.isChecked)
     }
 
     override fun observeData() {

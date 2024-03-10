@@ -243,12 +243,17 @@
         android:buttonTint="#ff3817"
         android:text="אני מאשר שהכנסתי את פרטיי הנכונים" />
 
-    <Button
+    <TextView
         android:id="@+id/reserveButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="6dp"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/ourColor"
+        android:layout_height="47dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:enabled="false"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/main_btn_sel"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
         android:text="הזמן שיעור!" />
 </LinearLayout>

@@ -85,9 +85,9 @@ class TeacherPersonalInfoFragment :
 
                 binding.etBd.hint = selectedDate;
 
-                if(month in 0..9){
+                if (month in 0..9) {
                     this.fullDate = "$year" + "-" + "0" + "${month + 1}" + "-" + "$dayOfMonth"
-                }else{
+                } else {
                     this.fullDate = "$year" + "-" + "${month + 1}" + "-" + "$dayOfMonth"
                 }
             },
@@ -107,7 +107,7 @@ class TeacherPersonalInfoFragment :
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun formatDateFinal(){
+    private fun formatDateFinal() {
         if (this.fullDate != "") {
             val sdf = SimpleDateFormat("yyyy-MM-dd")
             var date: Date? = null
@@ -144,14 +144,14 @@ class TeacherPersonalInfoFragment :
             editText?.let {
                 val tagString = it.tag as? String
                 var txt = it.text.toString()
-                txt = if (txt.isEmpty()) {
+                txt = txt.ifEmpty {
                     when (tagString) {
                         "teacherPhone" -> System.currentTimeMillis().toString().take(10)
                         "teacherMail" -> "$txt@gmail.com"
                         "teacherBirthday" -> (2000..3000).random().toString()
                         else -> "Unit"
                     }
-                } else txt
+                }
                 teachInfoHashMap[tagString ?: ""] = txt
             }
         }

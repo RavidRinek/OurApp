@@ -23,15 +23,9 @@ class StudentContainerFragment :
     BaseFragment<StudentContainerViewModel>(R.layout.fragment_student_container) {
 
     override val viewModel: StudentContainerViewModel by viewModels<StudentContainerViewModelImpl>()
-    private val binding by viewBinding(FragmentStudentContainerBinding::bind)
 
     @Inject
     lateinit var prefs: Prefs
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

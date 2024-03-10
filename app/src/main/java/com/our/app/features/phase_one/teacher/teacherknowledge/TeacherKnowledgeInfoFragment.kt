@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -60,15 +61,24 @@ class TeacherKnowledgeInfoFragment :
                 cvTeacherDegreeInfo.dismissContainer()
             }
 
+            cvTeacherSubjectKnowledge.setListener(object :
+                TeacherSubjectKnowledgeCustomView.Listener {
+                override fun updateSelectedState(idsListEmpty: Boolean) {
+
+                }
+            })
             btnCreateAccount.setOnClickListener {
                 var selectedItemLevels = cvTeacherSubjectKnowledge.getSelectedItemLevels()
                 var lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
                 var degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
 
                 if (selectedItemLevels.isEmpty()) {
-                    selectedItemLevels = getMockLevelIds()
-                    lessonInfo = getMockLessonInfoData()
-                    degreeInfo = getMockTeacherDegreeDataInfo()
+                    if (showReasonForDisabledBtn()){
+                        return@setOnClickListener
+                    }
+//                    selectedItemLevels = getMockLevelIds()
+//                    lessonInfo = getMockLessonInfoData()
+//                    degreeInfo = getMockTeacherDegreeDataInfo()
                 }
 
                 val teacherInfo = prepTeacherKnowledgeToPostServer(
@@ -79,6 +89,24 @@ class TeacherKnowledgeInfoFragment :
 
                 viewModel.completeTeacherFullRegistration(teacherInfo)
             }
+        }
+    }
+
+    private fun showReasonForDisabledBtn(): Boolean {
+        val lessonData = binding.cvTeacherLessonInfo.getLessonInfoData()
+        val reason = when {
+            binding.cvTeacherSubjectKnowledge.getSelectedItemLevels()
+                .isEmpty() -> "Must pick at least one Subject"
+
+            lessonData.pricePer60m == 0 -> "Set a price for 60m lesson"
+            lessonData.pricePer40m == 0 -> "Set a price for 40m lesson"
+            else -> ""
+        }
+        if (reason.isNotEmpty()) {
+            Toast.makeText(requireContext(), reason, Toast.LENGTH_LONG).show()
+            return true
+        } else {
+            return false
         }
     }
 
