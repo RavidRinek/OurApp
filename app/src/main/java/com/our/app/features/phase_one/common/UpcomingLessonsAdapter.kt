@@ -2,14 +2,16 @@ package com.our.app.features.phase_one.common
 
 import android.content.Intent
 import android.net.Uri
-import android.text.format.DateFormat
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.our.app.MainActivity
 import com.our.app.R
 import com.our.app.databinding.ItemTeacherClassInfoBinding
+import com.our.app.utilities.extensions.activity
 import com.our.app.utilities.extensions.loadImage
 import com.our.domain.features.phase_one.models.remote.Oreder
 import java.util.Calendar
@@ -44,12 +46,20 @@ class UpcomingLessonsAdapter(val orders: List<Oreder>) :
                 tvDuration.text = " ${order.lesson.durationInMin} דקות "
 
                 tvLinkToMeeting.apply {
+
                     movementMethod = LinkMovementMethod.getInstance()
                     setOnClickListener {
-                        val url = order.videoUrl
-                        val i = Intent(Intent.ACTION_VIEW)
-                        i.data = Uri.parse(url)
-                        startActivity(itemView.context, i, null)
+                        if (order.videoUrl.isEmpty()) {
+                            (itemView.context.activity() as? MainActivity)?.apply {
+                                Toast.makeText(this, "Cant join meeting", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        } else {
+                            val url = order.videoUrl
+                            val i = Intent(Intent.ACTION_VIEW)
+                            i.data = Uri.parse(url)
+                            startActivity(itemView.context, i, null)
+                        }
                     }
 //                    text = order.lesson.durationInMin.toString()
                 }
