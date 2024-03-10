@@ -25,6 +25,9 @@ class LogoHeaderUtilCustomView(context: Context?, attrs: AttributeSet?) :
         )
         viewBinding.tvCaption.text =
             typedArray?.getString(R.styleable.LogoHeaderUtilCustomView_caption)
+        if (viewBinding.tvCaption.text.isEmpty()){
+            viewBinding.tvCaption.visibility = View.GONE
+        }
         typedArray?.recycle()
     }
 }

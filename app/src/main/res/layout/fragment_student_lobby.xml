@@ -5,15 +5,13 @@
     android:id="@+id/clContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E5E5E5"
     tools:context=".features.phase_one.student.student_lobby.StudentLobbyFragment">
 
     <com.our.app.features.phase_one.common.LogoHeaderUtilCustomView
         android:id="@+id/cvLogoHeaderUtil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        app:caption="@string/student_lobby_header_caption"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +20,6 @@
         android:id="@+id/rvStudentLessons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
