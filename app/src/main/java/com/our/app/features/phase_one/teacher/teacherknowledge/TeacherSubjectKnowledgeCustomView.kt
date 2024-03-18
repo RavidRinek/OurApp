@@ -35,10 +35,10 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
 
     init {
         viewBinding.clSubjectsSpinner.setOnClickListener {
-            isViewShown = true
             it.isSelected = !it.isSelected
             viewBinding.rvSubjectsSpinner.isVisible = it.isSelected
             viewBinding.ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
+            isViewShown = it.isSelected
         }
     }
 

@@ -17,16 +17,17 @@ class TeacherDegreeInfoCustomView(context: Context?, attrs: AttributeSet?) :
     private val viewBinding = CvTeacherDegreeInfoBinding.bind(view)
 
     data class TeacherDegreeDataInfo(val schoolName: String, val degreeName: String)
+
     var isViewShown: Boolean = false
 
 
     init {
         viewBinding.apply {
             clSubjectsSpinner.setOnClickListener {
-                isViewShown = true
                 it.isSelected = !it.isSelected
                 llInfoContainer.isVisible = it.isSelected
                 ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
+                isViewShown = it.isSelected
             }
         }
     }

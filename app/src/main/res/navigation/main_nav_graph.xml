@@ -114,7 +114,7 @@
         android:id="@+id/teacherLobbyFragment"
         android:name="com.our.app.features.phase_one.teacher.teacher_lobby.TeacherLobbyFragment"
         android:label="fragment_teacher_lobby"
-        tools:layout="@layout/fragment_teacher_lobby"/>
+        tools:layout="@layout/fragment_teacher_lobby" />
 
 
     <fragment
@@ -134,7 +134,7 @@
         android:id="@+id/teacherPersonalInfoFragment"
         android:name="com.our.app.features.phase_one.teacher.personal_info.TeacherPersonalInfoFragment"
         android:label="fragment_teacher_personal_info"
-        tools:layout="@layout/fragment_teacher_personal_info" >
+        tools:layout="@layout/fragment_teacher_personal_info">
         <action
             android:id="@+id/action_teacherPersonalInfoFragment_to_teacherKnowlageInfoFragment"
             app:destination="@id/teacherKnowlageInfoFragment" />
@@ -143,7 +143,7 @@
         android:id="@+id/studentContainerFragment"
         android:name="com.our.app.features.phase_one.student.container.StudentContainerFragment"
         android:label="fragment_student_container"
-        tools:layout="@layout/fragment_student_container" >
+        tools:layout="@layout/fragment_student_container">
         <action
             android:id="@+id/action_studentContainerFragment_to_studentFindLessonFragment"
             app:destination="@id/studentFindLessonFragment" />
@@ -155,7 +155,7 @@
         android:id="@+id/studentFindLessonFragment"
         android:name="com.our.app.features.phase_one.student.find_lesson.StudentFindLessonFragment"
         android:label="fragment_student_find_lesson"
-        tools:layout="@layout/fragment_student_find_lesson" >
+        tools:layout="@layout/fragment_student_find_lesson">
         <action
             android:id="@+id/action_studentFindLessonFragment_to_studentFindLessonResultFragment"
             app:destination="@id/studentFindLessonResultFragment" />

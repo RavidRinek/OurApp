@@ -22,7 +22,10 @@ class StudentFindLessonResultAdapter(
             lessonId: Int
         )
 
-        fun orderALessonBtnClicked()
+        fun orderALessonBtnClicked(
+            teacherId: Int,
+            lessonId: Int
+        )
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LessonResultViewHolder =
@@ -50,10 +53,14 @@ class StudentFindLessonResultAdapter(
                         rounded = true
                     )
                     tvTeacherNameVal.text = lessonRes.teacherProfile.teacherName
-                    tvTeacherPriceVal.text = lessonRes.lesson.price.toString()
+                    tvTeacherPriceVal.text = lessonRes.lessonInfo.pricePer60m.toString()
                     tvLessonDateVal.text = lessonRes.lesson.time
                     rbLessonRatingVal.rating = lessonRes.lesson.ratingInPercentage.toFloat()
-                    tvDuringInMin.text = " דק׳${lessonRes.lesson.durationInMin}"
+                    if (layoutPosition % 3 == 0) {
+                        tvDuringInMin.text = "60דק׳"
+                    } else {
+                        tvDuringInMin.text = "40דק׳"
+                    }
                     tvTeacherProfile.setOnClickListener {
                         listener.showTeacherProfilerBtnClicked(
                             lesson.teacherId,
@@ -63,7 +70,12 @@ class StudentFindLessonResultAdapter(
                     tvOrderLesson.apply {
                         if (alreadyRegistered) {
                             visibility = View.VISIBLE
-                            setOnClickListener { listener.orderALessonBtnClicked() }
+                            setOnClickListener {
+                                listener.orderALessonBtnClicked(
+                                    lesson.teacherId,
+                                    lesson.id
+                                )
+                            }
                         }
                     }
                 }

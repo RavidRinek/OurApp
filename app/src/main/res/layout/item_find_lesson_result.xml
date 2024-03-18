@@ -178,6 +178,7 @@
             android:background="@drawable/rec_ff3817_rad_6"
             android:gravity="center"
             android:paddingHorizontal="7dp"
+            android:text="40 דק׳"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/rbLessonRatingVal"
@@ -185,8 +186,7 @@
             app:layout_constraintHorizontal_bias="0.202"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rbLessonRatingVal"
-            app:layout_constraintVertical_bias="0.666"
-            tools:text="40 דק׳" />
+            app:layout_constraintVertical_bias="0.666" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

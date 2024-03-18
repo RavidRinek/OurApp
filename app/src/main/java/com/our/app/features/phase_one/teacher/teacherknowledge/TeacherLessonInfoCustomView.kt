@@ -28,10 +28,10 @@ class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
     init {
         viewBinding.apply {
             clSubjectsSpinner.setOnClickListener {
-                isViewShown = true
                 it.isSelected = !it.isSelected
                 layoutTeacherPriceInfo.llInfoContainer.isVisible = it.isSelected
                 ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
+                isViewShown = it.isSelected
             }
         }
     }

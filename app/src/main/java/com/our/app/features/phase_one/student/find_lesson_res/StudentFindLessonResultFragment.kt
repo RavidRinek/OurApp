@@ -13,6 +13,8 @@ import com.our.app.features.phase_one.student.find_lesson.StudentFindLessonFragm
 import com.our.app.utilities.bindingDelegates.viewBinding
 import com.our.data.base.datasources.Prefs
 import com.our.domain.features.phase_one.models.local.GotLessons
+import com.our.domain.features.phase_one.models.local.GotOrderedLesson
+import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -85,11 +87,31 @@ class StudentFindLessonResultFragment :
                                 )
                             }
 
-                            override fun orderALessonBtnClicked() {}
+                            override fun orderALessonBtnClicked(
+                                teacherId: Int,
+                                lessonId: Int
+                            ) {
+                                binding.layoutFullPb.flPb.visibility = View.VISIBLE
+                                arguments?.apply {
+                                    viewModel.orderLesson(
+                                        PostOrderLessonUseCase.OrderInfo(
+                                            studentId = prefs.getInt(Prefs.STUDENT_ID),
+                                            lessonId = lessonId,
+                                            lessonTimestamp = timestamp
+                                        )
+                                    )
+                                }
+                            }
                         })
                 }
 
-                else -> Unit
+                is GotOrderedLesson -> {
+                    findNavController().navigate(R.id.action_studentFindLessonResultFragment_to_studentLobbyFragment)
+                }
+
+                else -> {
+                    binding.layoutFullPb.flPb.visibility = View.GONE
+                }
             }
         }
     }
