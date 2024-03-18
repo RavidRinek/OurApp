@@ -25,6 +25,7 @@ import com.our.domain.features.phase_one.models.remote.BaseSubject
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatterBuilder
 import java.util.Calendar
@@ -226,8 +227,8 @@ class StudentFindLessonFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     private fun formatDateFinal() {
         if (this.date != "" && this.time != "") {
-            fullDate = LocalDateTime.parse(this.date + " " + this.time, formatter)
-                .toEpochSecond(ZoneOffset.UTC).toString()
+            val localDateTime = LocalDateTime.parse(this.date + " " + this.time, formatter)
+            fullDate = localDateTime.atZone(ZoneId.systemDefault()).toEpochSecond().toString()
         }
     }
 

@@ -95,6 +95,13 @@ class TeacherPersonalInfoFragment :
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
+
+//        datePickerDialog.datePicker.maxDate = System.currentTimeMillis() + 1000
+        val maxDate = Calendar.getInstance()
+        maxDate.add(Calendar.YEAR, -12) // Adding 10 years to the current date
+        val maxDateTimestamp = maxDate.timeInMillis
+        datePickerDialog.datePicker.maxDate = maxDateTimestamp
+
         datePickerDialog.show()
         datePickerDialog.setOnDismissListener { formatDateFinal() }
     }

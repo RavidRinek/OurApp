@@ -85,6 +85,8 @@
         android:text="מתמטיקה"
         android:textColor="#000"
         android:textStyle="bold"
+        android:singleLine="true"
+        android:width="90dp"
         app:drawableEndCompat="@drawable/ic_student_subjects_main" />
 
 </LinearLayout>
