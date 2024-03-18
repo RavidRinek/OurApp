@@ -92,6 +92,9 @@ class TeacherLobbyFragment :
                     println("teacherLobbyResponseLiveData: emitType: TEACHER_ORDERS")
                     binding.rvTeacherLessons.adapter =
                         UpcomingLessonsAdapter(it.uiState.teacherOrders)
+                    if (it.uiState.teacherOrders.isEmpty()) {
+                        binding.tvNoLessonsTitle.visibility = View.VISIBLE
+                    }
                 }
             }
         }

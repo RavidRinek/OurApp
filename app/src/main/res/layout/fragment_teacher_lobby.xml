@@ -84,7 +84,9 @@
         android:text="אין שיעורים קרובים :)"
         android:textColor="#000"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTeacherLessons"
