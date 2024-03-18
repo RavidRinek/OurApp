@@ -23,6 +23,8 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
 
     private lateinit var listener: Listener
 
+    var isViewShown: Boolean = false
+
     interface Listener {
         fun updateSelectedState(idsListEmpty: Boolean)
     }
@@ -33,6 +35,7 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
 
     init {
         viewBinding.clSubjectsSpinner.setOnClickListener {
+            isViewShown = true
             it.isSelected = !it.isSelected
             viewBinding.rvSubjectsSpinner.isVisible = it.isSelected
             viewBinding.ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
@@ -56,6 +59,7 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
     }
 
     fun dismissRvSubjectsVisibility() {
+        isViewShown = false
         viewBinding.clSubjectsSpinner.isSelected = false
         viewBinding.ivArrow.setImageResource(R.drawable.ic_arrow_orange_down)
         viewBinding.rvSubjectsSpinner.isVisible = viewBinding.clSubjectsSpinner.isSelected

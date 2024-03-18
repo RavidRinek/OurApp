@@ -12,6 +12,7 @@ import com.our.app.databinding.CvTeacherLessonInfoBinding
 class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
     LinearLayout(context, attrs) {
 
+
     data class LessonInfoData(
         val pricePer40m: Int = 0,
         val pricePer60m: Int = 0,
@@ -22,10 +23,12 @@ class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
     private val view: View = LayoutInflater.from(context)
         .inflate(R.layout.cv_teacher_lesson_info, this, true)
     private val viewBinding = CvTeacherLessonInfoBinding.bind(view)
+    var isViewShown: Boolean = false
 
     init {
         viewBinding.apply {
             clSubjectsSpinner.setOnClickListener {
+                isViewShown = true
                 it.isSelected = !it.isSelected
                 layoutTeacherPriceInfo.llInfoContainer.isVisible = it.isSelected
                 ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
@@ -34,6 +37,7 @@ class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
     }
 
     fun dismissContainer() {
+        isViewShown = false
         viewBinding.clSubjectsSpinner.isSelected = false
         viewBinding.ivArrow.setImageResource(R.drawable.ic_arrow_orange_down)
         viewBinding.layoutTeacherPriceInfo.llInfoContainer.isVisible =
@@ -41,9 +45,11 @@ class TeacherLessonInfoCustomView(context: Context?, attrs: AttributeSet?) :
     }
 
     fun getLessonInfoData(): LessonInfoData {
-        val priceFor40m = viewBinding.layoutTeacherPriceInfo.etPricePer40m.text.toString().ifEmpty { "80" }
-        val pricePer60m = viewBinding.layoutTeacherPriceInfo.etPricePer60m.text.toString().ifEmpty { "120" }
-       return LessonInfoData(
+        val priceFor40m =
+            viewBinding.layoutTeacherPriceInfo.etPricePer40m.text.toString().ifEmpty { "80" }
+        val pricePer60m =
+            viewBinding.layoutTeacherPriceInfo.etPricePer60m.text.toString().ifEmpty { "120" }
+        return LessonInfoData(
             pricePer40m = priceFor40m.toInt(),
             pricePer60m = pricePer60m.toInt(),
             allowFreeFirstLesson = viewBinding.layoutTeacherPriceInfo.cbFreeFirstLesson.isChecked,
