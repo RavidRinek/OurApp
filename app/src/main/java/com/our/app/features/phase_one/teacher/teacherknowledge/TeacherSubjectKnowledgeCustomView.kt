@@ -21,6 +21,16 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
 
     private var idsList = ArrayList<Int>()
 
+    private lateinit var listener: Listener
+
+    interface Listener {
+        fun updateSelectedState(idsListEmpty: Boolean)
+    }
+
+    fun setListener(listener: Listener) {
+        this.listener = listener
+    }
+
     init {
         viewBinding.clSubjectsSpinner.setOnClickListener {
             it.isSelected = !it.isSelected
@@ -39,6 +49,7 @@ class TeacherSubjectKnowledgeCustomView(context: Context, attrs: AttributeSet?) 
                         val a = ArrayList<Int>()
                         a.addAll(ids)
                         idsList = tahat.getIdsArray(a)
+                        listener.updateSelectedState(idsList.isEmpty())
                     }
                 })
         }

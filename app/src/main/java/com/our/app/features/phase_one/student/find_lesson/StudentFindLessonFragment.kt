@@ -83,13 +83,15 @@ class StudentFindLessonFragment :
         binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
         binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
         binding.btnStudentFindLesson.setOnClickListener {
-            val currentTimestamp = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
-            val pickedTimeAndDateTimestamp = fullDate.toString().toLong()
-            if (currentTimestamp > pickedTimeAndDateTimestamp) {
-                Toast.makeText(requireContext(), "Can't pick time from past", Toast.LENGTH_LONG)
+            var pickedTimeAndDateTimestamp: Long = 0
+            try {
+                pickedTimeAndDateTimestamp = fullDate.toString().toLong()
+            }catch (e: NumberFormatException){
+                Toast.makeText(requireContext(), "Must pick a date", Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
+
             val selectedItemLevels = binding.subjectSpinnerMain.getSelectedItemLevels().ifEmpty {
                 ArrayList<Int>().apply {
                     add(4)

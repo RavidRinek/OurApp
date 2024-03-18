@@ -6,5 +6,6 @@ data class Oreder(
     val lesson: Lesson,
     val teacher: TeacherProfile,
     val subject: Subject,
-    val videoUrl: String
+    val videoUrl: String,
+    val lessonTimestamp:Long,
 ) : java.io.Serializable
