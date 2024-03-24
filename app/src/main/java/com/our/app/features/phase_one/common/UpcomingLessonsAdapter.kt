@@ -66,13 +66,21 @@ class UpcomingLessonsAdapter(val orders: List<Oreder>) :
             }
         }
 
-        fun getDate(timestamp: Long): String {
+        private fun getDate(timestamp: Long): String {
             val calendar = Calendar.getInstance(Locale.ENGLISH)
             calendar.timeInMillis = timestamp * 1000L
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            var hourInString = hour.toString()
+            if (hour < 10){
+                hourInString = "0$hour"
+            }
             val minutes = calendar.get(Calendar.MINUTE)
+            var minInString = minutes.toString()
+            if (minutes<10){
+                minInString = "0$minutes"
+            }
 //            val date = DateFormat.format("dd-MM-yyyy", calendar).toString()
-            return "$hour:$minutes"
+            return "$hourInString:$minInString"
         }
     }
 }

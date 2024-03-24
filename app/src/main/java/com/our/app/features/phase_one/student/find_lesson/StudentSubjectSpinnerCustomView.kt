@@ -21,7 +21,7 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
     private val viewBinding = CvStudentSubjectsSpinnerBinding.bind(view)
     private val tahat = Tahat()
     private var idsList = ArrayList<Int>()
-
+    var isViewShown: Boolean = false
 
     init {
         val typedArray: TypedArray? = context?.obtainStyledAttributes(
@@ -40,6 +40,7 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
             it.isSelected = !it.isSelected
             viewBinding.rvSubjectsSpinner.isVisible = it.isSelected
             viewBinding.ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
+            isViewShown = it.isSelected
         }
 
         typedArray?.recycle()
@@ -56,6 +57,7 @@ class StudentSubjectSpinnerCustomView(context: Context?, attrs: AttributeSet?) :
         viewBinding.clSubjectsSpinner.isSelected = false
         viewBinding.ivArrow.setImageResource(R.drawable.ic_arrow_orange_down)
         viewBinding.rvSubjectsSpinner.isVisible = viewBinding.clSubjectsSpinner.isSelected
+        isViewShown = false
     }
 
     fun setSubjectsItems(

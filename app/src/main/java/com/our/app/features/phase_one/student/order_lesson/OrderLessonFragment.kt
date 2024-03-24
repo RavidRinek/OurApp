@@ -2,6 +2,8 @@ package com.our.app.features.phase_one.student.order_lesson
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.format.DateFormat
+import android.text.format.DateUtils
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -18,6 +20,8 @@ import com.our.domain.features.phase_one.usecases.PostOrderLessonUseCase
 import com.our.domain.features.phase_one.usecases.PostStudentCreateUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -49,7 +53,7 @@ class OrderLessonFragment :
                 levelOfClass.text = it.lessonId.toString()
                 lessonPrice.text = it.price.toString()
                 teachersName.text = it.name
-                lessonDate.text = it.time.toString()
+                lessonDate.text = "${getDate(it.time)} ${getTime(it.time)}"
 
                 etName.addTextChangedListener {
                     updateReserveButtonState()
@@ -87,6 +91,29 @@ class OrderLessonFragment :
                 || binding.etMail.text.isEmpty()
                 || binding.etPhone.text.isEmpty()
                 || !binding.agreement.isChecked)
+    }
+
+    private fun getDate(time: Long): String {
+        val cal: Calendar = Calendar.getInstance(Locale.ENGLISH)
+        cal.setTimeInMillis(time * 1000)
+        return DateFormat.format("dd-MM-yyyy", cal).toString()
+    }
+
+    private fun getTime(timestamp: Long): String {
+        val calendar = Calendar.getInstance(Locale.ENGLISH)
+        calendar.timeInMillis = timestamp * 1000L
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        var hourInString = hour.toString()
+        if (hour < 10) {
+            hourInString = "0$hour"
+        }
+        val minutes = calendar.get(Calendar.MINUTE)
+        var minInString = minutes.toString()
+        if (minutes < 10) {
+            minInString = "0$minutes"
+        }
+//            val date = DateFormat.format("dd-MM-yyyy", calendar).toString()
+        return "$hourInString:$minInString"
     }
 
     override fun observeData() {

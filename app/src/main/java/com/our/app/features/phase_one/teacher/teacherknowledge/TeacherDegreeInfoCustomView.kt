@@ -18,17 +18,22 @@ class TeacherDegreeInfoCustomView(context: Context?, attrs: AttributeSet?) :
 
     data class TeacherDegreeDataInfo(val schoolName: String, val degreeName: String)
 
+    var isViewShown: Boolean = false
+
+
     init {
         viewBinding.apply {
             clSubjectsSpinner.setOnClickListener {
                 it.isSelected = !it.isSelected
                 llInfoContainer.isVisible = it.isSelected
                 ivArrow.setImageResource(if (it.isSelected) R.drawable.ic_arrow_orange_up else R.drawable.ic_arrow_orange_down)
+                isViewShown = it.isSelected
             }
         }
     }
 
     fun dismissContainer() {
+        isViewShown = false
         viewBinding.clSubjectsSpinner.isSelected = false
         viewBinding.ivArrow.setImageResource(R.drawable.ic_arrow_orange_down)
         viewBinding.llInfoContainer.isVisible = viewBinding.clSubjectsSpinner.isSelected

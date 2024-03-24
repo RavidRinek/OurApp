@@ -48,11 +48,23 @@ class StudentFindLessonFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     val formatter = DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd HH:mm").toFormatter()
 
+    var isDialogShown: Boolean = false
+
     @Inject
     lateinit var prefs: Prefs
 
+    var timePickerDialog: TimePickerDialog? = null
+     var datePickerDialog: DatePickerDialog? = null
+
     private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
+            if (binding.subjectSpinnerMain.isViewShown
+                || isDialogShown
+            ) {
+                binding.subjectSpinnerMain.dismissRvSubjectsVisibility()
+                timePickerDialog?.dismiss()
+                datePickerDialog?.dismiss()
+            }
         }
     }
 
@@ -80,13 +92,19 @@ class StudentFindLessonFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
         binding.clContainer.setOnClickListener { binding.subjectSpinnerMain.dismissRvSubjectsVisibility() }
-        binding.layoutLessonTime.tvLessonDate.setOnClickListener { showTimePickerDialog() }
-        binding.layoutLessonDate.tvLessonDate.setOnClickListener { showDatePicker() }
+        binding.layoutLessonTime.tvLessonDate.setOnClickListener {
+            showTimePickerDialog()
+            isDialogShown = true
+        }
+        binding.layoutLessonDate.tvLessonDate.setOnClickListener {
+            showDatePicker()
+            isDialogShown = true
+        }
         binding.btnStudentFindLesson.setOnClickListener {
             var pickedTimeAndDateTimestamp: Long = 0
             try {
                 pickedTimeAndDateTimestamp = fullDate.toString().toLong()
-            }catch (e: NumberFormatException){
+            } catch (e: NumberFormatException) {
                 Toast.makeText(requireContext(), "Must pick a date", Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
@@ -132,7 +150,7 @@ class StudentFindLessonFragment :
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
 
-        val timePickerDialog = TimePickerDialog(
+        timePickerDialog = TimePickerDialog(
             requireContext(),
 
             { _, hourOfDay, minute ->
@@ -154,8 +172,9 @@ class StudentFindLessonFragment :
             true // 24-hour format
         )
 
-        timePickerDialog.show()
-        timePickerDialog.setOnDismissListener() {
+        timePickerDialog?.show()
+        timePickerDialog?.setOnDismissListener() {
+            isDialogShown = false
             formatDateFinal();
             Log.d("test", this.fullDate.toString())
         }
@@ -164,7 +183,7 @@ class StudentFindLessonFragment :
     @RequiresApi(Build.VERSION_CODES.O)
     private fun showDatePicker() {
         val calendar = Calendar.getInstance()
-        val datePickerDialog = DatePickerDialog(
+        datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, year, month, dayOfMonth ->
                 this.date = ""
@@ -178,9 +197,9 @@ class StudentFindLessonFragment :
                 }
 
                 if (dayOfMonth <= 9 && dayOfMonth >= 0) {
-                    this.date = this.date +  "-" + "0" + "${dayOfMonth}"
+                    this.date = this.date + "-" + "0" + "${dayOfMonth}"
                 } else {
-                    this.date = this.date +  "-" + "${dayOfMonth}"
+                    this.date = this.date + "-" + "${dayOfMonth}"
                 }
             },
             calendar.get(Calendar.YEAR),
@@ -188,10 +207,11 @@ class StudentFindLessonFragment :
             calendar.get(Calendar.DAY_OF_MONTH)
         )
 
-        datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+        datePickerDialog?.datePicker?.minDate = System.currentTimeMillis() - 1000
 
-        datePickerDialog.show()
-        datePickerDialog.setOnDismissListener() {
+        datePickerDialog?.show()
+        datePickerDialog?.setOnDismissListener() {
+            isDialogShown = false
             formatDateFinal();
             Log.d("test", this.fullDate.toString())
         }

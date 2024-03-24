@@ -9,6 +9,7 @@ import android.view.WindowInsets
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -38,9 +39,14 @@ class TeacherKnowledgeInfoFragment :
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            findNavController().navigate(
-                R.id.action_teacherKnowlageInfoFragment_to_teacherPersonalInfoFragment
-            )
+            if (binding.cvTeacherSubjectKnowledge.isViewShown
+                || binding.cvTeacherLessonInfo.isViewShown
+                || binding.cvTeacherDegreeInfo.isViewShown
+            ) {
+                binding.cvTeacherSubjectKnowledge.dismissRvSubjectsVisibility()
+                binding.cvTeacherLessonInfo.dismissContainer()
+                binding.cvTeacherDegreeInfo.dismissContainer()
+            }
         }
     }
 
@@ -75,12 +81,12 @@ class TeacherKnowledgeInfoFragment :
                 }
             })
             btnCreateAccount.setOnClickListener {
-                var selectedItemLevels = cvTeacherSubjectKnowledge.getSelectedItemLevels()
-                var lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
-                var degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
+                val selectedItemLevels = cvTeacherSubjectKnowledge.getSelectedItemLevels()
+                val lessonInfo = cvTeacherLessonInfo.getLessonInfoData()
+                val degreeInfo = cvTeacherDegreeInfo.getTeacherDegreeDataInfo()
 
                 if (selectedItemLevels.isEmpty()) {
-                    if (showReasonForDisabledBtn()){
+                    if (showReasonForDisabledBtn()) {
                         return@setOnClickListener
                     }
 //                    selectedItemLevels = getMockLevelIds()
@@ -116,11 +122,11 @@ class TeacherKnowledgeInfoFragment :
             lessonData.pricePer40m == 0 -> "Set a price for 40m lesson"
             else -> ""
         }
-        if (reason.isNotEmpty()) {
+        return if (reason.isNotEmpty()) {
             Toast.makeText(requireContext(), reason, Toast.LENGTH_LONG).show()
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
