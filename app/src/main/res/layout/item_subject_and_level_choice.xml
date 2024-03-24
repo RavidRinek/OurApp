@@ -7,9 +7,8 @@
     android:background="@drawable/rec_white_rad_24_stroke_2a59fe"
     android:gravity="right"
     android:orientation="horizontal"
-    android:paddingStart="14dp"
     android:paddingTop="11dp"
-    android:paddingEnd="14dp"
+    android:paddingEnd="12dp"
     android:paddingBottom="11dp"
     android:weightSum="6">
 
@@ -17,6 +16,7 @@
         android:id="@+id/cbSelectAll"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginStart="-6dp"
         android:backgroundTint="#fff"
         android:buttonTint="#ff3817" />
 
@@ -47,7 +47,7 @@
             android:layout_width="44dp"
             android:layout_height="25dp"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="17dp"
+            android:layout_marginHorizontal="7dp"
             android:layout_marginVertical="7dp"
             android:layout_weight="1"
             android:background="@drawable/edit_text_style"
@@ -64,7 +64,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_marginVertical="7dp"
-            android:layout_marginRight="17dp"
+            android:layout_marginRight="7dp"
             android:layout_weight="1"
             android:background="@drawable/edit_text_style"
             android:gravity="center"
@@ -80,13 +80,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:width="90dp"
         android:drawablePadding="12dp"
         android:gravity="center"
+        android:singleLine="true"
         android:text="מתמטיקה"
         android:textColor="#000"
         android:textStyle="bold"
-        android:singleLine="true"
-        android:width="90dp"
         app:drawableEndCompat="@drawable/ic_student_subjects_main" />
 
 </LinearLayout>
