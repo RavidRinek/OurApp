@@ -1,12 +1,16 @@
 package com.our.app.features.phase_one.teacher.teacherknowledge
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.our.app.R
 import com.our.app.base.BaseFragment
@@ -16,6 +20,8 @@ import com.our.domain.features.phase_one.models.local.GotCompletedFullRegistrati
 import com.our.domain.features.phase_one.models.local.GotSubjectLevelsForTeacherKnowledgeInfo
 import com.our.domain.features.phase_one.usecases.PostTeacherInfoUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,7 +29,7 @@ class TeacherKnowledgeInfoFragment :
     BaseFragment<TeacherKnowledgeViewModel>(R.layout.fragment_teacher_knowlage_info) {
 
     override val viewModel: TeacherKnowledgeViewModel by viewModels<TeacherKnowledgeViewModelImpl>()
-
+    lateinit var editText: EditText
     private var _binding: FragmentTeacherKnowlageInfoBinding? = null
     private val binding get() = _binding!!
 
@@ -49,6 +55,7 @@ class TeacherKnowledgeInfoFragment :
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTeacherKnowlageInfoBinding.inflate(inflater, container, false)
+        editText=  binding.root.findViewById<EditText>(R.id.etSchoolName)
         return binding.root
     }
 
@@ -88,6 +95,13 @@ class TeacherKnowledgeInfoFragment :
                 )
 
                 viewModel.completeTeacherFullRegistration(teacherInfo)
+            }
+
+            editText.setOnClickListener {
+               viewLifecycleOwner.lifecycleScope.launch {
+                   delay(100)
+                   scrollView.fullScroll(View.FOCUS_DOWN)
+               }
             }
         }
     }

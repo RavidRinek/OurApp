@@ -26,6 +26,7 @@
             android:launchMode="singleTask"
             android:taskAffinity=""
             android:excludeFromRecents="true"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
