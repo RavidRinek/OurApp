@@ -101,6 +101,11 @@ class StudentFindLessonFragment :
             isDialogShown = true
         }
         binding.btnStudentFindLesson.setOnClickListener {
+            if (binding.subjectSpinnerMain.getSelectedItemLevels().isEmpty()){
+                Toast.makeText(requireContext(), "Must pick at least one subject", Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
             var pickedTimeAndDateTimestamp: Long = 0
             try {
                 pickedTimeAndDateTimestamp = fullDate.toString().toLong()

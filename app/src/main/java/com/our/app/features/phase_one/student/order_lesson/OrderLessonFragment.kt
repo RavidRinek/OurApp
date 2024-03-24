@@ -50,8 +50,8 @@ class OrderLessonFragment :
             lessonId = it.lessonId
             timestamp = it.time
             binding.apply {
-                levelOfClass.text = it.lessonId.toString()
-                lessonPrice.text = it.price.toString()
+                levelOfClass.text = "תיכונית"
+                lessonPrice.text = "100"//it.price.toString()
                 teachersName.text = it.name
                 lessonDate.text = "${getDate(it.time)} ${getTime(it.time)}"
 
