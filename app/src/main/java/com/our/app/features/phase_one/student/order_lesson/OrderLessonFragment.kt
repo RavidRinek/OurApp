@@ -77,7 +77,8 @@ class OrderLessonFragment :
                             PostStudentCreateUseCase.CreateStudent(
                                 studentName = etName.text.toString(),
                                 studentLastName = etMail.text.toString(),
-                                studentPhone = etPhone.text.toString()
+                                studentPhone = etPhone.text.toString(),
+                                studentMail = etMail.text.toString()
                             )
                         )
                     }

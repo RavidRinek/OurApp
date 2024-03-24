@@ -21,6 +21,7 @@ class PostStudentCreateUseCase @Inject constructor(
     data class CreateStudent(
         val studentName: String,
         val studentLastName: String,
-        val studentPhone: String
+        val studentPhone: String,
+        val studentMail: String
     )
 }
